@@ -1074,6 +1074,17 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
 .knowledge-group-lines.is-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .knowledge-group-lines p { margin: 0; font-size: 19px; line-height: 1.6; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif; }
 .knowledge-group-lines.is-pair p { font-size: 20px; }
+.current-knowledge[data-frame-id="AM-01"] .knowledge-groups { margin-inline: auto; max-width: 340px; gap: 34px; }
+.current-knowledge[data-frame-id="AM-01"] .knowledge-groups h3 {
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 22px;
+  font-weight: 650;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.current-knowledge[data-frame-id="AM-01"] .knowledge-group-lines { margin-left: 2em; font-size: 20px; text-align: left; gap: 10px; }
+.current-knowledge[data-frame-id="AM-01"] .knowledge-group-lines p { font-size: 20px; line-height: 1.65; }
 .medical-emphasis { font-weight: 750; }
 .knowledge-history p { font-size: 12px; font-weight: 450; opacity: .38; }
 @media (max-width: 370px) {
@@ -3394,16 +3405,15 @@ window.COURSE_PRESENTATION = {
         "layout": "grouped",
         "groups": [
           {
-            "title": "分布",
-            "columns": 2,
-            "lines": ["**全身性沉积**", "**局灶性沉积**"]
+            "title": "全身性淀粉样变",
+            "lines": ["可见于**结核病**", "可见于**多发性骨髓瘤**"]
           },
           {
-            "title": "相关疾病",
-            "lines": ["可见于**结核病**", "可见于**浆细胞相关疾病**"]
+            "title": "局限性淀粉样变",
+            "lines": ["沉积局限于某一器官或组织"]
           }
         ],
-        "history_label": "淀粉样变｜全身性或局灶性，可见于结核病和浆细胞相关疾病",
+        "history_label": "全身性淀粉样变可见于结核病、多发性骨髓瘤；局限性淀粉样变局限于某一器官或组织",
         "support": false
       }
     ],
