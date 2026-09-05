@@ -1,0 +1,4807 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fbf8f0">
+  <meta name="description" content="病理学第一章：细胞和组织的适应与损伤互动课程">
+  <title>细胞和组织的适应与损伤｜互动课程</title>
+  <style>
+:root {
+  --canvas: #e8e7e1;
+  --paper: #fbf8f0;
+  --paper-2: #f4f0e6;
+  --ink: #20332d;
+  --muted: #6f7c75;
+  --faint: #9aa39e;
+  --line: #cbd1cc;
+  --green: #275b4b;
+  --green-soft: #dce9e2;
+  --green-pale: #edf4f0;
+  --amber: #9b6a2b;
+  --amber-soft: #f3eadc;
+  --shadow: rgba(36, 50, 44, .13);
+}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; background: var(--canvas); color: var(--ink); }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 12% 5%, rgba(255,255,255,.76), transparent 34rem),
+    var(--canvas);
+  font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+button { font: inherit; }
+button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3px; }
+
+.course-shell {
+  display: grid;
+  grid-template-columns: minmax(300px, 470px) 420px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(50px, 8vw, 140px);
+  min-height: 100dvh;
+  padding: 24px 40px;
+}
+
+.course-desktop-intro { align-self: center; max-width: 470px; }
+.course-desktop-intro > p {
+  margin: 0 0 18px;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.course-desktop-intro h1 {
+  margin: 0;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1.16;
+  letter-spacing: -.035em;
+}
+.course-desktop-intro > span {
+  display: block;
+  max-width: 420px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+.course-desktop-intro dl {
+  display: flex;
+  gap: 28px;
+  margin: 42px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(71,86,78,.22);
+}
+.course-desktop-intro dl div { display: grid; gap: 4px; }
+.course-desktop-intro dt { color: var(--muted); font-size: 12px; }
+.course-desktop-intro dd { margin: 0; color: var(--green); font-family: Georgia, serif; font-size: 30px; }
+
+.course-phone {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: 420px;
+  height: min(890px, calc(100dvh - 48px));
+  min-height: 680px;
+  overflow: hidden;
+  border: 1px solid rgba(43,66,56,.13);
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 18%),
+    var(--paper);
+  box-shadow: 0 28px 78px var(--shadow), 0 2px 8px rgba(36,50,44,.06);
+}
+
+.course-header {
+  position: relative;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 92px;
+  padding: 20px 22px 15px;
+  background: linear-gradient(180deg, rgba(251,248,240,.98), rgba(251,248,240,.9));
+}
+.course-header > button,
+.course-header-actions > button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--green);
+  cursor: pointer;
+}
+.course-header svg { width: 20px; height: 20px; }
+.course-header > div:nth-child(2) { min-width: 0; }
+.course-header small {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+.course-header strong {
+  display: block;
+  overflow: hidden;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 15px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.course-header-actions { display: flex; align-items: center; gap: 3px; }
+.course-header-actions > span { color: var(--faint); font-family: Georgia, serif; font-size: 12px; }
+
+.course-viewport {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.course-footer {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 54px;
+  padding: 10px 20px 14px;
+  background: linear-gradient(0deg, rgba(251,248,240,.99), rgba(251,248,240,.86));
+}
+.course-footer > span { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+.course-footer p { margin: 0; color: var(--muted); font-size: 11px; }
+
+.stage-enter { animation: stage-enter .32s cubic-bezier(.2,.72,.24,1) both; }
+@keyframes stage-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Directory layer */
+.directory-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 26px 30px 18px 34px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.directory-page::-webkit-scrollbar { display: none; }
+.directory-heading { flex: 0 0 auto; }
+.directory-heading > small {
+  display: block;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+.directory-heading h1 {
+  margin: 9px 0 0;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 30px;
+  line-height: 1.28;
+  letter-spacing: -.02em;
+}
+.directory-heading > p:not(.previous-section-note) { margin: 11px 0 0; color: var(--muted); font-size: 12px; }
+.previous-section-note {
+  width: fit-content;
+  margin: 0 0 18px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: var(--green-pale);
+  color: var(--green);
+  font-size: 10px;
+  line-height: 1.4;
+}
+.chapter-tree,
+.section-item-tree {
+  position: relative;
+  display: grid;
+  align-content: center;
+  flex: 1 0 auto;
+  min-height: 350px;
+  margin-top: 20px;
+}
+.directory-rail {
+  position: absolute;
+  top: 34px;
+  bottom: 34px;
+  left: 7px;
+  width: 1px;
+  background: var(--line);
+}
+.chapter-section-row,
+.section-item-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 15px;
+  min-height: 70px;
+  padding: 7px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.chapter-section-row:disabled { cursor: default; opacity: .42; }
+.chapter-section-row > span:nth-child(2),
+.section-item-row > span:nth-child(2) { min-width: 0; }
+.chapter-section-row > span:nth-child(2) > small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.2;
+}
+.chapter-section-row strong,
+.section-item-row strong {
+  display: block;
+  margin-top: 3px;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 17px;
+  line-height: 1.35;
+}
+.chapter-section-row em,
+.section-item-row small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+}
+.chapter-section-row > svg,
+.section-item-row > svg { width: 16px; color: var(--faint); opacity: .55; }
+.chapter-section-row.is-active strong,
+.section-item-row.is-active strong { color: var(--green); font-size: 19px; }
+.chapter-section-row.is-active > svg,
+.section-item-row.is-active > svg { color: var(--green); opacity: 1; }
+
+.course-progress-dot {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #91a098;
+  border-radius: 50%;
+  background: var(--paper);
+}
+.course-progress-dot.is-started { background: linear-gradient(90deg, var(--green) 50%, var(--paper) 50%); border-color: var(--green); }
+.course-progress-dot.is-complete { border-color: var(--green); background: var(--green); }
+.course-progress-dot.is-pending { width: 12px; height: 12px; border-color: var(--green); }
+.course-progress-dot.is-pending::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--green); }
+.course-progress-dot.is-review { width: 12px; height: 12px; border-color: var(--amber); }
+.course-progress-dot.is-review::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--amber); }
+.course-progress-dot.is-unavailable { border-style: dashed; background: var(--paper-2); }
+.course-progress-dot.is-active { width: 14px; height: 14px; margin-left: -2px; border-color: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
+.course-progress-dot.is-active.is-unread { background: var(--paper); }
+.course-progress-dot.is-active.is-started { background: linear-gradient(90deg, var(--green) 50%, var(--paper) 50%); }
+.course-progress-dot.is-active.is-complete { background: var(--green); }
+
+.directory-primary-actions { display: grid; justify-items: center; gap: 10px; flex: 0 0 auto; padding-top: 14px; }
+.primary-course-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 50px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 750;
+  cursor: pointer;
+}
+.primary-course-button svg { width: 17px; }
+.text-course-button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* Knowledge layer */
+.knowledge-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 24px 30px 22px 42px;
+  overflow: hidden;
+}
+.knowledge-path {
+  position: absolute;
+  top: 8px;
+  left: 42px;
+  z-index: 3;
+  margin: 0;
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+.knowledge-history {
+  position: absolute;
+  top: 42px;
+  right: 34px;
+  left: 42px;
+  z-index: 1;
+  display: grid;
+  gap: 9px;
+  max-height: 132px;
+  overflow: hidden;
+}
+.knowledge-history p {
+  margin: 0;
+  color: var(--muted);
+  font-size: calc(13.5px - (var(--history-depth) - 1) * .8px);
+  line-height: 1.45;
+  opacity: calc(.66 - (var(--history-depth) - 1) * .18);
+  transform: scale(calc(1 - (var(--history-depth) - 1) * .05));
+  transform-origin: left top;
+}
+.current-knowledge {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  left: 42px;
+  z-index: 2;
+  max-height: 62%;
+  padding: 8px 4px 18px 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overscroll-behavior: contain;
+  transform: translateY(-47%);
+  user-select: text;
+  -webkit-user-select: text;
+}
+.current-knowledge > small,
+.question-heading > small {
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .1em;
+}
+.current-knowledge h2,
+.question-heading h2 {
+  margin: 10px 0 0;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 25px;
+  line-height: 1.35;
+  letter-spacing: -.015em;
+}
+.approved-prose-body,
+.approved-relation-body,
+.approved-comparison-body { margin-top: 24px; }
+.approved-prose-body p {
+  margin: 0 0 13px;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.72;
+}
+.approved-relation-body { display: grid; gap: 18px; }
+.approved-relation-body > div {
+  position: relative;
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
+  gap: 13px;
+  align-items: start;
+}
+.approved-relation-body > div > span {
+  width: 9px;
+  height: 9px;
+  margin-top: 9px;
+  border: 1.5px solid var(--green);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.approved-relation-body > div:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 19px;
+  bottom: -17px;
+  left: 4px;
+  width: 1px;
+  background: var(--line);
+}
+.approved-relation-body p,
+.approved-comparison-body p {
+  margin: 0;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.68;
+}
+.approved-comparison-body { display: grid; gap: 13px; }
+.approved-comparison-body p {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.approved-comparison-body p:last-child { border-bottom: 1px solid var(--line); }
+.support-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  margin-top: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.support-entry svg { width: 16px; }
+
+/* Question layer */
+.question-stage {
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  left: 42px;
+  z-index: 2;
+  max-height: 72%;
+  padding: 8px 5px 22px 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overscroll-behavior: contain;
+  transform: translateY(-46%);
+  user-select: none;
+}
+.question-heading h2 { font-size: 21px; line-height: 1.48; }
+.question-heading > p { margin: 11px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.question-target-list,
+.single-choice-list,
+.comparison-answer-grid { display: grid; gap: 9px; margin-top: 22px; }
+.question-target,
+.single-choice-list > button {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 18px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 55px;
+  padding: 10px 13px;
+  border: 1px solid rgba(75,93,84,.18);
+  border-radius: 14px;
+  background: rgba(255,255,255,.46);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.question-target > span { color: var(--muted); font-size: 11px; line-height: 1.35; }
+.question-target > strong { max-width: 155px; color: var(--green); font-size: 12px; line-height: 1.4; text-align: right; }
+.question-target > svg { width: 15px; color: var(--faint); }
+.question-target.is-filled { border-color: rgba(39,91,75,.42); background: var(--green-pale); }
+.question-target.is-correct { border-color: var(--green); }
+.question-target.is-review { border-color: rgba(155,106,43,.55); background: var(--amber-soft); }
+.comparison-answer-grid { gap: 13px; }
+.comparison-answer-grid article {
+  padding: 13px 12px 4px;
+  border-top: 1px solid var(--line);
+}
+.comparison-answer-grid h3 {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 15px;
+}
+.comparison-answer-grid .question-target { margin-bottom: 8px; }
+.single-choice-list > button { grid-template-columns: 30px minmax(0, 1fr) 18px; }
+.single-choice-list > button > span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  font-family: Georgia, serif;
+  font-size: 12px;
+}
+.single-choice-list > button > strong { font-size: 13px; line-height: 1.45; }
+.single-choice-list > button > svg { width: 17px; color: var(--green); }
+.single-choice-list > button.is-selected { border-color: var(--green); background: var(--green-pale); }
+.single-choice-list > button.is-answer > span { border-color: var(--green); background: var(--green); color: #fff; }
+.question-actions { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+.question-submit {
+  flex: 1;
+  min-height: 46px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--green);
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.question-submit:disabled { cursor: default; opacity: .32; }
+.question-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 40px;
+  padding: 0 7px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10px;
+  cursor: pointer;
+}
+.question-reset svg { width: 14px; }
+.question-feedback {
+  margin-top: 14px;
+  padding: 14px 15px;
+  border-left: 3px solid var(--green);
+  border-radius: 4px 12px 12px 4px;
+  background: var(--green-pale);
+}
+.question-feedback.is-review { border-left-color: var(--amber); background: var(--amber-soft); }
+.question-feedback > strong { color: var(--green); font-size: 11px; }
+.question-feedback.is-review > strong { color: var(--amber); }
+.question-feedback p { margin: 7px 0 0; color: #52635b; font-size: 12px; line-height: 1.6; }
+.question-feedback .answer-line { color: var(--ink); font-weight: 750; }
+
+/* Completion */
+.completion-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 38px 38px 30px;
+  text-align: center;
+}
+.completion-orbit {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 19px;
+  border: 1px solid var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px var(--green-soft);
+}
+.completion-orbit span { width: 13px; height: 13px; border-radius: 50%; background: var(--green); }
+.completion-spark { width: 42px; height: 42px; margin-bottom: 18px; color: var(--green); }
+.completion-page > small { color: var(--green); font-size: 10px; font-weight: 850; letter-spacing: .12em; }
+.completion-page h1 { margin: 12px 0 0; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif; font-size: 28px; }
+.completion-page > p { max-width: 300px; margin: 13px 0 0; color: var(--muted); font-size: 13px; line-height: 1.72; }
+.completion-page dl { display: flex; gap: 40px; margin: 30px 0 26px; }
+.completion-page dl div { display: grid; gap: 5px; }
+.completion-page dt { color: var(--muted); font-size: 10px; }
+.completion-page dd { margin: 0; color: var(--green); font-family: Georgia, serif; font-size: 25px; }
+.completion-page .primary-course-button { max-width: 290px; }
+.completion-page .text-course-button { margin-top: 8px; }
+
+/* Bottom sheets */
+.course-sheet-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.course-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: rgba(31,47,40,.22);
+  backdrop-filter: blur(2px);
+}
+.course-sheet {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-height: 78%;
+  padding: 18px 20px max(22px, env(safe-area-inset-bottom));
+  border-radius: 24px 24px 0 0;
+  background: #fdfaf2;
+  box-shadow: 0 -18px 50px rgba(35,50,43,.18);
+  animation: sheet-enter .26s ease both;
+}
+@keyframes sheet-enter { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.course-sheet header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 38px;
+  align-items: start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.course-sheet header small { color: var(--green); font-size: 10px; font-weight: 800; }
+.course-sheet header h3 { margin: 5px 0 0; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif; font-size: 19px; line-height: 1.35; }
+.course-sheet header > button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--green);
+  cursor: pointer;
+}
+.course-sheet header svg { width: 18px; }
+.course-option-list {
+  display: grid;
+  gap: 8px;
+  max-height: 430px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.course-option-list button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 1px solid rgba(69,87,78,.16);
+  border-radius: 14px;
+  background: #fffdf8;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.course-option-list button.is-selected { border-color: var(--green); background: var(--green-pale); color: var(--green); font-weight: 750; }
+.course-option-list svg { width: 17px; flex: 0 0 auto; }
+.support-sheet-content { max-height: 480px; overflow-y: auto; overscroll-behavior: contain; user-select: text; }
+.support-sheet-content article { padding: 16px 0; border-top: 1px solid var(--line); }
+.support-sheet-content h4 { margin: 0; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif; font-size: 17px; }
+.support-sheet-content p { margin: 9px 0 0; color: #52635b; font-size: 14px; line-height: 1.72; }
+.settings-actions { display: grid; gap: 4px; }
+.settings-actions > button {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  padding: 12px 8px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.settings-actions > button:hover { background: var(--green-pale); }
+.settings-actions > button > svg { width: 17px; margin-top: 2px; color: var(--green); }
+.settings-actions strong { display: block; font-size: 13px; }
+.settings-actions small { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.45; }
+.settings-actions .is-destructive { color: #7a4038; }
+.settings-actions .is-destructive svg { color: #7a4038; }
+
+.course-step-controls {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  z-index: 12;
+  display: flex;
+  gap: 6px;
+}
+.course-step-controls button {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  padding: 0;
+  border: 1px solid rgba(39,91,75,.14);
+  border-radius: 50%;
+  background: rgba(255,253,247,.88);
+  color: var(--green);
+  box-shadow: 0 5px 18px rgba(39,55,47,.08);
+  cursor: pointer;
+}
+.course-step-controls svg { width: 16px; }
+
+@media (max-width: 820px) {
+  body { overflow: hidden; background: var(--paper); }
+  .course-shell { display: block; min-height: 100dvh; padding: 0; }
+  .course-desktop-intro { display: none; }
+  .course-phone {
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 821px) {
+  .course-phone { height: calc(100dvh - 20px); min-height: 620px; }
+  .course-shell { padding-block: 10px; }
+}
+
+@media (max-width: 370px) {
+  .course-header { padding-inline: 16px; }
+  .directory-page { padding-inline: 25px 22px; }
+  .knowledge-page { padding-inline: 34px 24px; }
+  .knowledge-path, .knowledge-history { left: 34px; }
+  .current-knowledge, .question-stage { left: 34px; right: 24px; }
+  .current-knowledge h2 { font-size: 23px; }
+  .approved-prose-body p, .approved-relation-body p, .approved-comparison-body p { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
+
+/* Gate C v2: visible content, explicit hierarchy, restored continuous motion */
+.stage-enter { animation: none; }
+.directory-page.motion-forward,
+.completion-page.motion-forward,
+.review-page.motion-forward { animation: page-enter-forward .52s cubic-bezier(.18,.72,.22,1) both; }
+.directory-page.motion-backward,
+.completion-page.motion-backward,
+.review-page.motion-backward { animation: page-enter-backward .46s cubic-bezier(.18,.72,.22,1) both; }
+.knowledge-page.motion-forward .current-knowledge,
+.knowledge-page.motion-forward .question-stage { animation: knowledge-current-enter-forward .58s cubic-bezier(.18,.76,.2,1) both; }
+.knowledge-page.motion-backward .current-knowledge,
+.knowledge-page.motion-backward .question-stage { animation: knowledge-current-enter-backward .5s cubic-bezier(.18,.72,.22,1) both; }
+.knowledge-page.motion-forward .knowledge-history p {
+  --history-scale: calc(1 - (var(--history-depth) - 1) * .05);
+  --history-opacity: calc(.68 - (var(--history-depth) - 1) * .18);
+  animation: knowledge-history-rise .58s cubic-bezier(.18,.76,.2,1) both;
+  animation-delay: calc(var(--history-order) * 28ms);
+}
+.knowledge-page.motion-backward .knowledge-history p {
+  --history-scale: calc(1 - (var(--history-depth) - 1) * .05);
+  --history-opacity: calc(.68 - (var(--history-depth) - 1) * .18);
+  animation: knowledge-history-return .48s cubic-bezier(.18,.72,.22,1) both;
+}
+
+@keyframes page-enter-forward {
+  from { opacity: 0; transform: translateY(42px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes page-enter-backward {
+  from { opacity: 0; transform: translateY(-34px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes knowledge-current-enter-forward {
+  from { opacity: 0; transform: translateY(calc(-47% + 92px)) scale(.985); }
+  to { opacity: 1; transform: translateY(-47%) scale(1); }
+}
+@keyframes knowledge-current-enter-backward {
+  from { opacity: 0; transform: translateY(calc(-47% - 66px)) scale(.985); }
+  to { opacity: 1; transform: translateY(-47%) scale(1); }
+}
+@keyframes knowledge-history-rise {
+  from { opacity: .96; transform: translateY(118px) scale(1.02); }
+  to { opacity: var(--history-opacity); transform: translateY(0) scale(var(--history-scale)); }
+}
+@keyframes knowledge-history-return {
+  from { opacity: 0; transform: translateY(-24px) scale(var(--history-scale)); }
+  to { opacity: var(--history-opacity); transform: translateY(0) scale(var(--history-scale)); }
+}
+
+.knowledge-history {
+  top: 34px;
+  max-height: 146px;
+  gap: 10px;
+}
+.knowledge-history p {
+  overflow: hidden;
+  color: #607169;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.current-knowledge {
+  top: 52%;
+  max-height: 68%;
+  padding-right: 4px;
+  transform: translateY(-47%);
+}
+.current-knowledge.is-support > small {
+  color: var(--amber);
+}
+.current-knowledge h2 {
+  font-size: 27px;
+  line-height: 1.32;
+}
+.medical-emphasis {
+  color: var(--green);
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: rgba(39,91,75,.25);
+  text-decoration-thickness: .12em;
+  text-underline-offset: .16em;
+}
+
+.knowledge-prose,
+.knowledge-relation,
+.knowledge-sequence,
+.knowledge-facts,
+.knowledge-examples,
+.knowledge-comparison { margin-top: 25px; }
+
+.knowledge-prose { display: grid; gap: 14px; }
+.knowledge-prose p,
+.knowledge-note {
+  margin: 0;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.72;
+}
+.knowledge-note {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: #52645b;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.knowledge-relation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+.knowledge-relation > p {
+  margin: 0;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.55;
+}
+.relation-step-arrow,
+.example-arrow {
+  display: block;
+  margin-left: .35em;
+  color: #8aa097;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  line-height: 1;
+}
+.relation-result,
+.example-result {
+  margin-top: 2px;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 23px;
+  font-weight: 850;
+  line-height: 1.45;
+}
+
+.knowledge-sequence { display: grid; gap: 6px; }
+.sequence-step { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.sequence-step p {
+  margin: 0;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1.55;
+}
+.sequence-step > span {
+  margin-left: .35em;
+  color: #8aa097;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.knowledge-facts { display: grid; }
+.knowledge-facts p {
+  position: relative;
+  margin: 0;
+  padding: 12px 0 12px 19px;
+  border-bottom: 1px solid rgba(105,123,114,.18);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.48;
+}
+.knowledge-facts p::before {
+  content: "";
+  position: absolute;
+  top: 1.28em;
+  left: 1px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.knowledge-examples { display: grid; justify-items: start; gap: 10px; }
+.example-lead {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .04em;
+}
+.example-lines { display: grid; gap: 0; width: 100%; }
+.example-lines p {
+  margin: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(105,123,114,.18);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1.48;
+}
+.example-result { margin-top: 1px; }
+
+.knowledge-comparison { display: grid; gap: 24px; }
+.knowledge-comparison section {
+  padding: 0 0 18px;
+  border-bottom: 1px solid var(--line);
+}
+.knowledge-comparison h3 {
+  margin: 0 0 10px;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 22px;
+  line-height: 1.35;
+}
+.knowledge-comparison p {
+  margin: 7px 0 0;
+  color: #3f5048;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* Support content is now part of the normal swipe sequence. */
+.support-entry,
+.support-sheet { display: none !important; }
+
+@media (max-width: 370px) {
+  .current-knowledge h2 { font-size: 24px; }
+  .knowledge-prose p, .knowledge-relation > p, .knowledge-facts p { font-size: 18px; }
+  .sequence-step p, .example-lines p { font-size: 17px; }
+  .relation-result, .example-result, .knowledge-comparison h3 { font-size: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-enter,
+  .current-knowledge,
+  .question-stage,
+  .knowledge-history p { animation: none !important; }
+}
+
+</style>
+</head>
+<body>
+  <div id="app" aria-live="polite"></div>
+  <script>
+window.COURSE_CONTENT = {
+  "schema_version": "0.2.0",
+  "structure_ref": "pathology-ch01-course-structure-gate-a-approved.json",
+  "chapter_directory": {
+    "chapter_title": "第一章 细胞和组织的适应与损伤",
+    "sections": [
+      {
+        "section_id": "CH01-S01",
+        "number": "第一节",
+        "title": "适应"
+      },
+      {
+        "section_id": "CH01-S02",
+        "number": "第二节",
+        "title": "细胞和组织损伤的原因和机制"
+      },
+      {
+        "section_id": "CH01-S03",
+        "number": "第三节",
+        "title": "细胞可逆性损伤"
+      },
+      {
+        "section_id": "CH01-S04",
+        "number": "第四节",
+        "title": "细胞不可逆性损伤（细胞死亡）"
+      }
+    ]
+  },
+  "section_directories": [
+    {
+      "section_id": "CH01-S01",
+      "section_title": "第一节 适应",
+      "items": [
+        {
+          "directory_item_id": "CH01-S01-I01",
+          "title": "萎缩"
+        },
+        {
+          "directory_item_id": "CH01-S01-I02",
+          "title": "肥大"
+        },
+        {
+          "directory_item_id": "CH01-S01-I03",
+          "title": "增生"
+        },
+        {
+          "directory_item_id": "CH01-S01-I04",
+          "title": "化生"
+        }
+      ]
+    },
+    {
+      "section_id": "CH01-S03",
+      "section_title": "第三节 细胞可逆性损伤",
+      "items": [
+        {
+          "directory_item_id": "CH01-S03-I01",
+          "title": "细胞水肿"
+        },
+        {
+          "directory_item_id": "CH01-S03-I02",
+          "title": "脂肪变"
+        },
+        {
+          "directory_item_id": "CH01-S03-I03",
+          "title": "玻璃样变"
+        },
+        {
+          "directory_item_id": "CH01-S03-I04",
+          "title": "淀粉样变"
+        },
+        {
+          "directory_item_id": "CH01-S03-I06",
+          "title": "病理性色素沉着"
+        },
+        {
+          "directory_item_id": "CH01-S03-I07",
+          "title": "病理性钙化"
+        }
+      ],
+      "previous_section_note": "第一节已浏览；第二节本轮暂不展开。"
+    },
+    {
+      "section_id": "CH01-S04",
+      "section_title": "第四节 细胞不可逆性损伤（细胞死亡）",
+      "items": [
+        {
+          "directory_item_id": "CH01-S04-I01",
+          "title": "坏死"
+        },
+        {
+          "directory_item_id": "CH01-S04-I02",
+          "title": "凋亡"
+        }
+      ],
+      "previous_section_note": "第三节已浏览。"
+    }
+  ],
+  "knowledge_items": [
+    {
+      "directory_item_id": "CH01-S01-I01",
+      "path_label": "第一节 适应 · 萎缩",
+      "states": [
+        {
+          "id": "AT-01",
+          "step_id": "AT-C01",
+          "kind": "knowledge",
+          "title": "萎缩的基本改变",
+          "body": "萎缩是已发育正常的细胞、组织或器官体积缩小，并伴功能下降。细胞层面首先表现为细胞器减少。",
+          "history_label": "萎缩｜体积缩小、功能下降，细胞器减少",
+          "source_rows": [
+            "R5",
+            "R12"
+          ],
+          "template": "基础结论"
+        },
+        {
+          "id": "AT-02",
+          "step_id": "AT-C02",
+          "kind": "knowledge",
+          "title": "失用性萎缩与去神经性萎缩",
+          "body": "长期制动使组织负荷减少，可引起失用性萎缩。神经营养丧失可使所支配的肌肉发生去神经性萎缩。",
+          "history_label": "萎缩｜长期制动→失用性；神经营养丧失→去神经性",
+          "source_rows": [
+            "R6",
+            "R7",
+            "R8",
+            "R9",
+            "R10",
+            "R17"
+          ],
+          "template": "纵向对应"
+        },
+        {
+          "id": "AT-03",
+          "step_id": "AT-C02",
+          "kind": "knowledge",
+          "title": "内分泌性、营养不良性与压迫性萎缩",
+          "body": "激素刺激减少可使靶器官发生内分泌性萎缩；全身营养不良时，脂肪组织通常最早发生萎缩；持续压迫可使受压组织发生压迫性萎缩。",
+          "history_label": "萎缩｜激素减少、营养不良、持续压迫对应三类萎缩",
+          "source_rows": [
+            "R6",
+            "R7",
+            "R8",
+            "R9",
+            "R10",
+            "R17"
+          ],
+          "template": "纵向对应"
+        },
+        {
+          "id": "AT-04",
+          "step_id": "AT-C03",
+          "kind": "knowledge",
+          "title": "脑萎缩的大体表现",
+          "body": "脑萎缩时脑体积减小，脑回变窄、脑沟增宽，脑室可扩大。",
+          "history_label": "萎缩｜脑回变窄、脑沟增宽、脑室扩大",
+          "source_rows": [
+            "UD-001"
+          ],
+          "template": "器官形态"
+        },
+        {
+          "id": "AT-05",
+          "step_id": "AT-C04",
+          "kind": "knowledge",
+          "title": "心肌褐色萎缩",
+          "body": "心肌褐色萎缩时，心脏体积缩小而外形大致不变，表面冠状动脉呈蛇形弯曲；萎缩的心肌细胞内可见脂褐素沉积。",
+          "history_label": "萎缩｜心脏缩小、冠状动脉弯曲、脂褐素沉积",
+          "source_rows": [
+            "R11",
+            "R13"
+          ],
+          "template": "器官形态"
+        }
+      ],
+      "support_items": [
+        {
+          "id": "AT-S01",
+          "title": "肾盂积水中的压迫性萎缩",
+          "body": "肾盂积水时，受压的肾实质可发生压迫性萎缩；积水本身可使肾脏总体积增大。",
+          "source_rows": [
+            "R10"
+          ]
+        },
+        {
+          "id": "AT-S02",
+          "title": "假性肥大",
+          "body": "假性肥大由实质细胞萎缩伴间质脂肪增生形成，器官总体积可因此增大。",
+          "source_rows": [
+            "R16"
+          ]
+        },
+        {
+          "id": "AT-S03",
+          "title": "萎缩细胞的自噬",
+          "body": "萎缩细胞自噬增强，自噬小体可增多。",
+          "source_rows": [
+            "R14"
+          ]
+        }
+      ],
+      "extraction": {
+        "id": "EX-AT",
+        "target_count": 1,
+        "prompt": "将病因与萎缩类型对应：①骨折固定后患肢变细；②运动神经元损伤后肌肉萎缩；③肾盂积水压迫肾实质。",
+        "interaction": "classification_completion",
+        "options": [
+          "失用性萎缩",
+          "去神经性萎缩",
+          "压迫性萎缩",
+          "内分泌性萎缩"
+        ],
+        "answer": "①失用性萎缩；②去神经性萎缩；③压迫性萎缩。",
+        "feedback": "萎缩分型依据是持续作用于组织的原因：长期制动对应失用性萎缩，神经营养丧失对应去神经性萎缩，持续压迫对应压迫性萎缩。",
+        "source_rows": [
+          "R6",
+          "R9",
+          "R10"
+        ]
+      },
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S01-I02",
+      "path_label": "第一节 适应 · 肥大",
+      "states": [
+        {
+          "id": "HY-01",
+          "step_id": "HY-C01",
+          "kind": "knowledge",
+          "title": "肥大的细胞学基础",
+          "body": "高血压性心肌肥大和运动员骨骼肌肥大，主要由实质细胞体积增大形成。",
+          "history_label": "肥大｜实质细胞体积增大",
+          "source_rows": [
+            "R18"
+          ],
+          "template": "基础结论"
+        },
+        {
+          "id": "HY-02",
+          "step_id": "HY-C02",
+          "kind": "knowledge",
+          "title": "肥大的典型实例",
+          "body": "高血压性心肌肥大属于病理性适应；运动员骨骼肌肥大属于生理性适应。两者均以细胞体积增大为主。",
+          "history_label": "肥大｜高血压心肌为病理性，运动员骨骼肌为生理性",
+          "source_rows": [
+            "R18"
+          ],
+          "template": "实例对应"
+        }
+      ],
+      "support_items": [
+        {
+          "id": "HY-S01",
+          "title": "肥大与增生并存的补充实例",
+          "body": "佝偻病长骨骨端可出现软骨细胞肥大与增生，并伴骨样组织堆积；完整实例在“增生”中展开。",
+          "source_rows": [
+            "R20",
+            "R21"
+          ]
+        }
+      ],
+      "extraction": null,
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S01-I03",
+      "path_label": "第一节 适应 · 增生",
+      "states": [
+        {
+          "id": "HP-01",
+          "step_id": "HP-C01",
+          "kind": "knowledge",
+          "title": "增生的发生背景",
+          "body": "激素或生长因子刺激可使具有增殖能力的细胞数量增加。",
+          "history_label": "增生｜激素或生长因子刺激→细胞数量增加",
+          "source_rows": [
+            "R19"
+          ],
+          "template": "机制结论"
+        },
+        {
+          "id": "HP-02",
+          "step_id": "HP-C02",
+          "kind": "knowledge",
+          "title": "肥大与增生可以并存",
+          "body": "妊娠期子宫和哺乳期乳腺可同时发生细胞肥大和增生。",
+          "history_label": "增生｜妊娠期子宫、哺乳期乳腺：肥大与增生并存",
+          "source_rows": [
+            "R21"
+          ],
+          "template": "实例对应"
+        },
+        {
+          "id": "HP-03",
+          "step_id": "HP-M03",
+          "kind": "comparison",
+          "title": "肥大与增生的区别",
+          "body": "肥大以细胞体积增大为主；增生以细胞数量增加为主。具有增殖能力的细胞可同时发生两种适应性改变。",
+          "history_label": "增生｜肥大看体积，增生看数量",
+          "source_rows": [
+            "R18",
+            "R19",
+            "R20",
+            "R21"
+          ],
+          "template": "同维度比较"
+        }
+      ],
+      "support_items": [
+        {
+          "id": "HP-S01",
+          "title": "佝偻病长骨骨端改变",
+          "body": "佝偻病长骨骨端可出现软骨细胞增生、肥大，并伴骨样组织堆积。",
+          "source_rows": [
+            "R20",
+            "R21"
+          ]
+        }
+      ],
+      "extraction": {
+        "id": "EX-HP",
+        "target_count": 1,
+        "prompt": "下列哪组适应性改变与生理场景对应正确？",
+        "interaction": "single_choice",
+        "options": [
+          "运动员骨骼肌—增生",
+          "妊娠期子宫—肥大与增生并存",
+          "哺乳期乳腺—仅肥大",
+          "高血压性心肌—增生"
+        ],
+        "answer": "妊娠期子宫—肥大与增生并存。",
+        "feedback": "妊娠期子宫和哺乳期乳腺可同时发生肥大与增生；运动员骨骼肌和高血压性心肌主要表现为细胞肥大。",
+        "source_rows": [
+          "R18",
+          "R19",
+          "R21"
+        ]
+      },
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S01-I04",
+      "path_label": "第一节 适应 · 化生",
+      "states": [
+        {
+          "id": "ME-01",
+          "step_id": "ME-C01",
+          "kind": "knowledge",
+          "title": "化生的本质与细胞基础",
+          "body": "化生是一种已分化组织被另一种分化组织取代的适应性改变，其基础是局部干细胞或未分化间充质细胞重新编程并分化。",
+          "history_label": "化生｜已分化组织替代，基础为细胞重新编程",
+          "source_rows": [
+            "R22",
+            "R23"
+          ],
+          "template": "基础结论"
+        },
+        {
+          "id": "ME-02",
+          "step_id": "ME-C02",
+          "kind": "knowledge",
+          "title": "鳞状上皮化生",
+          "body": "慢性刺激下，支气管或气管的纤毛柱状上皮可被鳞状上皮取代。",
+          "history_label": "化生｜支气管或气管纤毛柱状上皮→鳞状上皮",
+          "source_rows": [
+            "R25"
+          ],
+          "template": "纵向对应"
+        },
+        {
+          "id": "ME-03",
+          "step_id": "ME-C03",
+          "kind": "knowledge",
+          "title": "腺上皮及肠上皮化生",
+          "body": "慢性萎缩性胃炎可出现假幽门腺化生和肠上皮化生；Barrett食管表现为食管下段鳞状上皮被柱状或肠型上皮取代。",
+          "history_label": "化生｜萎缩性胃炎与Barrett食管的化生方向",
+          "source_rows": [
+            "R27",
+            "R28",
+            "R33",
+            "R34"
+          ],
+          "template": "实例对应"
+        },
+        {
+          "id": "ME-04",
+          "step_id": "ME-C04",
+          "kind": "knowledge",
+          "title": "间叶性化生",
+          "body": "纤维结缔组织可形成软骨或骨组织，骨化性肌炎中的异位骨组织属于间叶性化生。",
+          "history_label": "化生｜纤维结缔组织→软骨或骨",
+          "source_rows": [
+            "R26"
+          ],
+          "template": "纵向对应"
+        },
+        {
+          "id": "ME-05",
+          "step_id": "ME-C05",
+          "kind": "knowledge",
+          "title": "鳞状化生与肿瘤风险",
+          "body": "支气管、膀胱和子宫内膜的鳞状化生，分别与相应部位的鳞状细胞癌风险增加有关。",
+          "history_label": "化生｜鳞状化生与相应部位鳞状细胞癌风险",
+          "source_rows": [
+            "R30",
+            "R31",
+            "R32",
+            "R33",
+            "R34"
+          ],
+          "template": "风险对应"
+        },
+        {
+          "id": "ME-06",
+          "step_id": "ME-C05",
+          "kind": "knowledge",
+          "title": "肠型化生与腺癌风险",
+          "body": "Barrett食管与食管腺癌风险增加有关；胃肠上皮化生与肠型胃癌风险增加有关。",
+          "history_label": "化生｜Barrett食管→食管腺癌风险；胃肠上皮化生→肠型胃癌风险",
+          "source_rows": [
+            "R30",
+            "R31",
+            "R32",
+            "R33",
+            "R34"
+          ],
+          "template": "风险对应"
+        }
+      ],
+      "support_items": [
+        {
+          "id": "ME-S01",
+          "title": "化生的适应意义",
+          "body": "化生通常发生于同源细胞之间，并可增强局部组织对持续刺激的耐受性。",
+          "source_rows": [
+            "R22",
+            "R23"
+          ]
+        }
+      ],
+      "extraction": {
+        "id": "EX-ME",
+        "target_count": 1,
+        "prompt": "将组织或部位与主要化生方向对应：①慢性刺激下的支气管；②Barrett食管；③纤维结缔组织。",
+        "interaction": "site_matching",
+        "options": [
+          "鳞状上皮化生",
+          "柱状或肠型上皮化生",
+          "软骨或骨组织形成",
+          "脂肪变"
+        ],
+        "answer": "①鳞状上皮化生；②柱状或肠型上皮化生；③软骨或骨组织形成。",
+        "feedback": "支气管常发生鳞状上皮化生；Barrett食管表现为柱状或肠型上皮化生；纤维结缔组织可发生间叶性化生并形成软骨或骨。",
+        "source_rows": [
+          "R25",
+          "R26",
+          "R27",
+          "R28"
+        ]
+      },
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S03-I01",
+      "path_label": "第三节 细胞可逆性损伤 · 细胞水肿",
+      "states": [
+        {
+          "id": "CW-01",
+          "step_id": "CW-C01",
+          "kind": "knowledge",
+          "title": "可逆性损伤的基本形态",
+          "body": "可逆性损伤可表现为细胞内出现异常物质，或正常物质异常增多。",
+          "history_label": "细胞水肿｜可逆性损伤的基本形态",
+          "source_rows": [
+            "R35"
+          ],
+          "template": "基础结论"
+        },
+        {
+          "id": "CW-02",
+          "step_id": "CW-C02",
+          "kind": "knowledge",
+          "title": "细胞水肿与气球样变",
+          "body": "肝细胞气球样变属于重度细胞水肿；早期可见线粒体肿胀，随后可累及内质网。",
+          "history_label": "细胞水肿｜气球样变为重度水肿，先累及线粒体",
+          "source_rows": [
+            "R36",
+            "R37"
+          ],
+          "template": "程度与细胞器"
+        }
+      ],
+      "support_items": [],
+      "extraction": null,
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S03-I02",
+      "path_label": "第三节 细胞可逆性损伤 · 脂肪变",
+      "states": [
+        {
+          "id": "FC-01",
+          "step_id": "FC-C01",
+          "kind": "knowledge",
+          "title": "脂肪变的定义与发生部位",
+          "body": "脂肪变是非脂肪细胞胞质内出现甘油三酯脂滴，可发生于肝细胞、肾近曲小管上皮细胞和心肌细胞。",
+          "history_label": "脂肪变｜非脂肪细胞内出现甘油三酯脂滴",
+          "source_rows": [
+            "R38",
+            "R42"
+          ],
+          "template": "定义与定位"
+        },
+        {
+          "id": "FC-02",
+          "step_id": "FC-C02",
+          "kind": "knowledge",
+          "title": "肝脂肪变的原因与形成环节",
+          "body": "四氯化碳可通过影响脂蛋白合成，使脂质输出受阻而引起肝脂肪变；过量脂肪摄入也可以导致肝脂肪变性。",
+          "history_label": "脂肪变｜脂蛋白合成障碍与过量脂肪摄入",
+          "source_rows": [
+            "R39",
+            "UD-004"
+          ],
+          "template": "机制链"
+        },
+        {
+          "id": "FC-03",
+          "step_id": "FC-C03",
+          "kind": "knowledge",
+          "title": "心肌脂肪变的细胞内形态",
+          "body": "严重贫血可引起心肌脂肪变，脂滴在心肌细胞内呈串珠状排列。",
+          "history_label": "脂肪变｜严重贫血→心肌细胞内串珠状脂滴",
+          "source_rows": [
+            "R43",
+            "R44"
+          ],
+          "template": "病因与形态"
+        },
+        {
+          "id": "FC-04",
+          "step_id": "FC-C03",
+          "kind": "knowledge",
+          "title": "虎斑心的部位与大体表现",
+          "body": "病变常累及左心室内膜下和乳头肌；黄色脂肪变区域与暗红色正常心肌相间，可形成虎斑心。",
+          "history_label": "脂肪变｜左心室内膜下及乳头肌→虎斑心",
+          "source_rows": [
+            "R43",
+            "R44"
+          ],
+          "template": "部位与形态"
+        },
+        {
+          "id": "FC-05",
+          "step_id": "FC-C04",
+          "kind": "knowledge",
+          "title": "心肌脂肪浸润",
+          "body": "心肌脂肪浸润表现为脂肪细胞进入心肌间质，常偏于右心室和心尖。",
+          "history_label": "脂肪变｜脂肪浸润位于心肌间质，常偏右心室和心尖",
+          "source_rows": [
+            "R45",
+            "R46"
+          ],
+          "template": "基础结论"
+        },
+        {
+          "id": "FC-06",
+          "step_id": "FC-M05",
+          "kind": "comparison",
+          "title": "心肌脂肪变与脂肪浸润",
+          "body": "心肌脂肪变的脂滴位于心肌细胞内，常累及左心室内膜下和乳头肌；心肌脂肪浸润表现为脂肪细胞进入心肌间质，常偏于右心室和心尖。",
+          "history_label": "脂肪变｜细胞内脂滴 vs 间质内脂肪细胞",
+          "source_rows": [
+            "R38",
+            "R43",
+            "R44",
+            "R45",
+            "R46"
+          ],
+          "template": "同维度比较"
+        }
+      ],
+      "support_items": [
+        {
+          "id": "FC-S01",
+          "title": "肝脂肪变的其他常见病因",
+          "body": "缺氧、饥饿、败血症、糖尿病、化学毒物及白喉外毒素等可参与肝脂肪变的发生。",
+          "source_rows": [
+            "R38",
+            "R39",
+            "R40",
+            "R41"
+          ]
+        },
+        {
+          "id": "FC-S02",
+          "title": "肾脏脂肪变",
+          "body": "肾脏脂肪变常见于近曲小管上皮。",
+          "source_rows": [
+            "R42"
+          ]
+        }
+      ],
+      "extraction": {
+        "id": "EX-FC",
+        "target_count": 2,
+        "prompt": "补全心肌脂肪变与心肌脂肪浸润的比较：①脂肪所在位置；②常见部位。",
+        "interaction": "two_object_comparison",
+        "options": [
+          "心肌细胞内脂滴",
+          "心肌间质内脂肪细胞",
+          "左心室内膜下及乳头肌",
+          "右心室及心尖"
+        ],
+        "answer": "心肌脂肪变：心肌细胞内脂滴，常见于左心室内膜下及乳头肌；心肌脂肪浸润：心肌间质内脂肪细胞，常偏于右心室及心尖。",
+        "feedback": "鉴别关键是脂肪位于心肌细胞内，还是以脂肪细胞形式进入心肌间质；典型部位分别偏左心室内膜下及乳头肌、右心室及心尖。",
+        "source_rows": [
+          "R43",
+          "R44",
+          "R45",
+          "R46"
+        ],
+        "exception_approval": "Gate B已批准：同一组比较需要同时恢复脂肪位置和常见部位两个紧密维度。"
+      },
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S03-I03",
+      "path_label": "第三节 细胞可逆性损伤 · 玻璃样变",
+      "states": [
+        {
+          "id": "HG-01",
+          "step_id": "HG-C01",
+          "kind": "knowledge",
+          "title": "玻璃样变的共同形态与分类",
+          "body": "蛋白质异常蓄积可形成均质、红染、半透明样物质；按发生位置分为细胞内、纤维结缔组织和细小动脉壁玻璃样变。",
+          "history_label": "玻璃样变｜均质、红染、半透明；三类定位",
+          "source_rows": [
+            "R47"
+          ],
+          "template": "共同形态与分类"
+        },
+        {
+          "id": "HG-02",
+          "step_id": "HG-C02",
+          "kind": "knowledge",
+          "title": "细小动脉壁玻璃样变",
+          "body": "原发性高血压时，细小动脉及肾小球入球小动脉可出现玻璃样变，表现为管壁增厚、管腔狭窄。",
+          "history_label": "玻璃样变｜高血压细小动脉：管壁增厚、管腔狭窄",
+          "source_rows": [
+            "R48"
+          ],
+          "template": "部位与形态"
+        },
+        {
+          "id": "HG-03",
+          "step_id": "HG-C03",
+          "kind": "knowledge",
+          "title": "纤维结缔组织玻璃样变",
+          "body": "纤维结缔组织玻璃样变时，胶原纤维增粗、融合并伴蛋白性物质蓄积，常见于瘢痕、机化组织和动脉粥样硬化纤维帽。",
+          "history_label": "玻璃样变｜胶原纤维增粗、融合",
+          "source_rows": [
+            "R49",
+            "R50"
+          ],
+          "template": "部位与形态"
+        },
+        {
+          "id": "HG-04",
+          "step_id": "HG-C04",
+          "kind": "knowledge",
+          "title": "玻璃样小滴与Mallory小体",
+          "body": "肾近曲小管上皮细胞内的玻璃样小滴来自重吸收蛋白蓄积；肝细胞内的Mallory小体由中间丝聚集形成。",
+          "history_label": "玻璃样变｜玻璃样小滴：重吸收蛋白；Mallory小体：中间丝",
+          "source_rows": [
+            "R51",
+            "R52",
+            "R53"
+          ],
+          "template": "实例对应"
+        },
+        {
+          "id": "HG-05",
+          "step_id": "HG-C04",
+          "kind": "knowledge",
+          "title": "Russell小体",
+          "body": "浆细胞内的Russell小体由粗面内质网内免疫球蛋白蓄积形成。",
+          "history_label": "玻璃样变｜Russell小体：浆细胞内免疫球蛋白蓄积",
+          "source_rows": [
+            "R51",
+            "R52",
+            "R53"
+          ],
+          "template": "实例对应"
+        }
+      ],
+      "support_items": [
+        {
+          "id": "HG-S01",
+          "title": "Negri小体",
+          "body": "Negri小体属于细胞内玻璃样变性；其他病毒包涵体按具体类型判断。",
+          "source_rows": [
+            "UD-003"
+          ]
+        }
+      ],
+      "extraction": {
+        "id": "EX-HG",
+        "target_count": 1,
+        "prompt": "将细胞、结构与主要蓄积物对应：①肾近曲小管上皮；②肝细胞；③浆细胞。",
+        "interaction": "site_matching",
+        "options": [
+          "玻璃样小滴—重吸收蛋白",
+          "Mallory小体—中间丝",
+          "Russell小体—免疫球蛋白",
+          "含铁血黄素—血红蛋白降解产物"
+        ],
+        "answer": "①玻璃样小滴—重吸收蛋白；②Mallory小体—中间丝；③Russell小体—免疫球蛋白。",
+        "feedback": "细胞内玻璃样变的识别要同时确定细胞定位、结构名称和主要蓄积物。",
+        "source_rows": [
+          "R51",
+          "R52",
+          "R53"
+        ]
+      },
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S03-I04",
+      "path_label": "第三节 细胞可逆性损伤 · 淀粉样变",
+      "states": [
+        {
+          "id": "AM-01",
+          "step_id": "AM-C01",
+          "kind": "knowledge",
+          "title": "淀粉样变的分布与疾病联系",
+          "body": "淀粉样变可呈全身性或局灶性沉积，可见于结核病和浆细胞相关疾病。",
+          "history_label": "淀粉样变｜全身性或局灶性；结核病和浆细胞相关疾病",
+          "source_rows": [
+            "R56"
+          ],
+          "template": "分布与联系"
+        }
+      ],
+      "support_items": [],
+      "extraction": null,
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S03-I06",
+      "path_label": "第三节 细胞可逆性损伤 · 病理性色素沉着",
+      "states": [
+        {
+          "id": "PG-01",
+          "step_id": "PG-C01",
+          "kind": "knowledge",
+          "title": "含铁血黄素的形成",
+          "body": "巨噬细胞吞噬红细胞并降解血红蛋白后，可形成含铁血黄素。",
+          "history_label": "病理性色素沉着｜红细胞被巨噬细胞吞噬→含铁血黄素",
+          "source_rows": [
+            "R58"
+          ],
+          "template": "机制链"
+        },
+        {
+          "id": "PG-02",
+          "step_id": "PG-C02",
+          "kind": "knowledge",
+          "title": "含铁血黄素与心衰细胞",
+          "body": "慢性左心衰导致肺淤血时，红细胞可漏出至肺泡并被肺泡巨噬细胞吞噬；含含铁血黄素的肺泡巨噬细胞称为心衰细胞。",
+          "history_label": "病理性色素沉着｜慢性肺淤血→含铁血黄素→心衰细胞",
+          "source_rows": [
+            "R59"
+          ],
+          "template": "机制链"
+        }
+      ],
+      "support_items": [],
+      "extraction": {
+        "id": "EX-PG",
+        "target_count": 1,
+        "prompt": "慢性左心衰导致肺淤血时，肺泡巨噬细胞吞噬红细胞后形成哪种色素？该细胞称为什么？",
+        "interaction": "keyword_completion",
+        "options": [
+          "含铁血黄素",
+          "胆红素",
+          "脂褐素",
+          "心衰细胞",
+          "泡沫细胞"
+        ],
+        "answer": "含铁血黄素；心衰细胞。",
+        "feedback": "慢性肺淤血时，红细胞漏出并被肺泡巨噬细胞吞噬，血红蛋白降解形成含铁血黄素；含该色素的肺泡巨噬细胞称为心衰细胞。",
+        "source_rows": [
+          "R58",
+          "R59"
+        ]
+      },
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S03-I07",
+      "path_label": "第三节 细胞可逆性损伤 · 病理性钙化",
+      "states": [
+        {
+          "id": "CA-01",
+          "step_id": "CA-C01",
+          "kind": "knowledge",
+          "title": "营养不良性钙化",
+          "body": "营养不良性钙化多发生于血钙正常的变性、坏死组织或坏死虫卵等局部病灶。",
+          "history_label": "病理性钙化｜血钙正常的变性或坏死组织",
+          "source_rows": [
+            "R60",
+            "R61"
+          ],
+          "template": "基础结论"
+        },
+        {
+          "id": "CA-02",
+          "step_id": "CA-C02",
+          "kind": "knowledge",
+          "title": "转移性钙化",
+          "body": "转移性钙化与高钙血症或钙磷代谢异常有关，可沉积于肾、肺和胃黏膜等相对正常组织。",
+          "history_label": "病理性钙化｜高钙血症或钙磷代谢异常→相对正常组织",
+          "source_rows": [
+            "R60",
+            "R62"
+          ],
+          "template": "基础结论"
+        },
+        {
+          "id": "CA-03",
+          "step_id": "CA-C03",
+          "kind": "knowledge",
+          "title": "病理性钙化的HE形态",
+          "body": "HE染色切片中，钙盐常呈蓝色颗粒状沉积。",
+          "history_label": "病理性钙化｜HE下蓝色颗粒状沉积",
+          "source_rows": [
+            "R63"
+          ],
+          "template": "镜下形态"
+        },
+        {
+          "id": "CA-04",
+          "step_id": "CA-M04",
+          "kind": "comparison",
+          "title": "营养不良性钙化与转移性钙化",
+          "body": "营养不良性钙化通常在血钙正常背景下沉积于变性或坏死组织；转移性钙化常伴高钙血症或钙磷代谢异常，并沉积于肾、肺、胃黏膜等相对正常组织。",
+          "history_label": "病理性钙化｜血钙背景与沉积组织状态的比较",
+          "source_rows": [
+            "R60",
+            "R61",
+            "R62",
+            "R63"
+          ],
+          "template": "同维度比较"
+        }
+      ],
+      "support_items": [],
+      "extraction": {
+        "id": "EX-CA",
+        "target_count": 2,
+        "prompt": "补全两类病理性钙化的比较：①血钙背景；②沉积组织状态。",
+        "interaction": "two_object_comparison",
+        "options": [
+          "血钙通常正常",
+          "高钙血症或钙磷代谢异常",
+          "变性或坏死组织",
+          "相对正常组织"
+        ],
+        "answer": "营养不良性钙化：血钙通常正常，沉积于变性或坏死组织；转移性钙化：常伴高钙血症或钙磷代谢异常，沉积于相对正常组织。",
+        "feedback": "两类钙化的核心区别是血钙背景和沉积组织状态。",
+        "source_rows": [
+          "R60",
+          "R61",
+          "R62"
+        ],
+        "exception_approval": "Gate B已批准：两类钙化需同时恢复血钙背景与沉积组织状态两个紧密维度。"
+      },
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S04-I01",
+      "path_label": "第四节 细胞不可逆性损伤（细胞死亡） · 坏死",
+      "states": [
+        {
+          "id": "NC-01",
+          "step_id": "NC-C01",
+          "kind": "knowledge",
+          "title": "坏死细胞的核改变",
+          "body": "坏死细胞可出现核固缩、核碎裂和核溶解，三种改变均提示不可逆性损伤。",
+          "history_label": "坏死｜核固缩、核碎裂、核溶解",
+          "source_rows": [
+            "R64"
+          ],
+          "template": "核改变"
+        },
+        {
+          "id": "NC-02",
+          "step_id": "NC-C02",
+          "kind": "knowledge",
+          "title": "凝固性坏死",
+          "body": "凝固性坏死以蛋白质变性占优势、溶酶体水解相对较弱；坏死灶常呈灰黄、干燥、质实，原有组织轮廓可暂时保留。心肌、肾和脾梗死是典型实例。",
+          "history_label": "坏死｜凝固性坏死：质实、轮廓暂存，常见于心肌肾脾梗死",
+          "source_rows": [
+            "R65",
+            "R66",
+            "R67",
+            "R68",
+            "R69"
+          ],
+          "template": "机制、形态与实例"
+        },
+        {
+          "id": "NC-03",
+          "step_id": "NC-C03",
+          "kind": "knowledge",
+          "title": "液化性坏死",
+          "body": "液化性坏死以水解酶消化占优势，组织被分解为液态物。脑组织坏死、化脓性脓肿和阿米巴肝脓肿是典型实例。",
+          "history_label": "坏死｜液化性坏死：酶性消化、组织液化",
+          "source_rows": [
+            "R70",
+            "R71",
+            "R72",
+            "R73",
+            "R74"
+          ],
+          "template": "机制、形态与实例"
+        },
+        {
+          "id": "NC-04",
+          "step_id": "NC-M04",
+          "kind": "comparison",
+          "title": "凝固性坏死与液化性坏死",
+          "body": "凝固性坏死以蛋白质变性为主，组织较质实并可暂时保留轮廓；液化性坏死以水解酶消化为主，坏死组织发生液化。",
+          "history_label": "坏死｜凝固性：变性与质实；液化性：消化与液化",
+          "source_rows": [
+            "R65",
+            "R66",
+            "R67",
+            "R68",
+            "R69",
+            "R70",
+            "R71",
+            "R72",
+            "R73",
+            "R74"
+          ],
+          "template": "同维度比较"
+        },
+        {
+          "id": "NC-05",
+          "step_id": "NC-C05",
+          "kind": "knowledge",
+          "title": "纤维素样坏死的部位与机制",
+          "body": "纤维素样坏死主要发生于结缔组织和小血管壁；免疫复合物沉积及补体激活可参与血管壁损伤。",
+          "history_label": "坏死｜纤维素样坏死：结缔组织和小血管壁",
+          "source_rows": [
+            "R76",
+            "R77"
+          ],
+          "template": "部位与机制"
+        },
+        {
+          "id": "NC-06",
+          "step_id": "NC-C06",
+          "kind": "knowledge",
+          "title": "纤维素样坏死的典型实例",
+          "body": "结节性多动脉炎、急进性高血压、系统性红斑狼疮和风湿性心肌炎等病变中可见纤维素样坏死。",
+          "history_label": "坏死｜纤维素样坏死的典型疾病背景",
+          "source_rows": [
+            "R78",
+            "R79",
+            "R80"
+          ],
+          "template": "实例归类"
+        },
+        {
+          "id": "NC-07",
+          "step_id": "NC-C07",
+          "kind": "knowledge",
+          "title": "干酪样坏死",
+          "body": "干酪样坏死属于特殊的凝固性坏死，镜下原有组织轮廓消失，呈无结构的嗜酸性颗粒状物。",
+          "history_label": "坏死｜干酪样坏死：无结构嗜酸性颗粒状物",
+          "source_rows": [
+            "R81"
+          ],
+          "template": "分类与形态"
+        },
+        {
+          "id": "NC-08",
+          "step_id": "NC-C08",
+          "kind": "knowledge",
+          "title": "脂肪坏死",
+          "body": "急性胰腺炎可发生酶解性脂肪坏死，脂肪酸与钙结合可形成钙皂；乳房外伤可发生外伤性脂肪坏死。",
+          "history_label": "坏死｜急性胰腺炎→酶解性；乳房外伤→外伤性脂肪坏死",
+          "source_rows": [
+            "R82",
+            "R83"
+          ],
+          "template": "实例对应"
+        },
+        {
+          "id": "NC-09",
+          "step_id": "NC-C09",
+          "kind": "knowledge",
+          "title": "干性坏疽",
+          "body": "肢端动脉闭塞而静脉回流尚通畅时，坏死组织水分较少，可形成干性坏疽，表现为干燥皱缩、黑褐、分界清楚。",
+          "history_label": "坏死｜干性坏疽：肢端、干燥皱缩、分界清楚",
+          "source_rows": [
+            "R84",
+            "R85",
+            "R86",
+            "R87",
+            "R88"
+          ],
+          "template": "条件与形态"
+        },
+        {
+          "id": "NC-10",
+          "step_id": "NC-C09",
+          "kind": "knowledge",
+          "title": "湿性坏疽与气性坏疽",
+          "body": "动脉供血和静脉回流均受阻并伴腐败菌感染时，可形成湿性坏疽，表现为湿软、肿胀、有臭味、分界不清。深部开放性创伤合并产气厌氧菌感染时，可形成气性坏疽，组织内气泡可产生捻发音。",
+          "history_label": "坏死｜湿性坏疽与气性坏疽的形成条件和形态",
+          "source_rows": [
+            "R84",
+            "R85",
+            "R86",
+            "R87",
+            "R88"
+          ],
+          "template": "条件与形态"
+        },
+        {
+          "id": "NC-11",
+          "step_id": "NC-C10",
+          "kind": "knowledge",
+          "title": "坏死的主要结局",
+          "body": "坏死组织可发生溶解吸收、分离排出、机化、包裹和钙化。肉芽组织取代坏死灶的过程称为机化。",
+          "history_label": "坏死｜溶解吸收、分离排出、机化、包裹、钙化",
+          "source_rows": [
+            "R89",
+            "R90",
+            "R91",
+            "R92",
+            "R93"
+          ],
+          "template": "结局分类"
+        },
+        {
+          "id": "NC-12",
+          "step_id": "NC-C10",
+          "kind": "knowledge",
+          "title": "分离排出后的形态",
+          "body": "皮肤或黏膜浅表缺损称为糜烂，较深缺损称为溃疡；肺、肾等器官经自然管道排出坏死物后可形成空洞；单端通向体表称为窦道，两端相通称为瘘管。",
+          "history_label": "坏死｜糜烂、溃疡、空洞、窦道、瘘管",
+          "source_rows": [
+            "R89",
+            "R90",
+            "R91",
+            "R92",
+            "R93"
+          ],
+          "template": "结局辨析"
+        }
+      ],
+      "support_items": [
+        {
+          "id": "NC-S01",
+          "title": "病毒性肝炎中的坏死类型",
+          "body": "病毒性肝炎可出现溶解性（液化性）坏死和凝固性坏死。",
+          "source_rows": [
+            "R70",
+            "R74"
+          ]
+        }
+      ],
+      "extraction": {
+        "id": "EX-NC",
+        "target_count": 2,
+        "prompt": "补全凝固性坏死与液化性坏死的核心比较：①主导机制；②典型病变。",
+        "interaction": "two_object_comparison",
+        "options": [
+          "蛋白质变性占优势",
+          "水解酶消化占优势",
+          "心肌、肾和脾梗死",
+          "脑组织坏死和脓肿"
+        ],
+        "answer": "凝固性坏死：蛋白质变性占优势，典型见于心肌、肾和脾梗死；液化性坏死：水解酶消化占优势，典型见于脑组织坏死和脓肿。",
+        "feedback": "凝固性坏死以蛋白质变性和组织质实为主；液化性坏死以酶性消化和组织液化为主。",
+        "source_rows": [
+          "R65",
+          "R66",
+          "R67",
+          "R68",
+          "R69",
+          "R70",
+          "R71",
+          "R72",
+          "R73",
+          "R74"
+        ],
+        "exception_approval": "Gate B已批准：同一组坏死类型比较需要同时恢复主导机制与典型病变两个紧密维度。"
+      },
+      "return_to_section_directory": true
+    },
+    {
+      "directory_item_id": "CH01-S04-I02",
+      "path_label": "第四节 细胞不可逆性损伤（细胞死亡） · 凋亡",
+      "states": [
+        {
+          "id": "AP-01",
+          "step_id": "AP-C01",
+          "kind": "knowledge",
+          "title": "凋亡的基本过程",
+          "body": "凋亡是活体内单个或小团细胞发生的主动程序性死亡，受基因调控、依赖能量并伴新蛋白合成。",
+          "history_label": "凋亡｜受基因调控、依赖能量的主动程序性死亡",
+          "source_rows": [
+            "R94",
+            "R95"
+          ],
+          "template": "基本过程"
+        },
+        {
+          "id": "AP-02",
+          "step_id": "AP-C02",
+          "kind": "knowledge",
+          "title": "凋亡的形态与凋亡小体",
+          "body": "凋亡细胞固缩，细胞膜保持完整并发泡、出芽，形成由细胞膜包被的凋亡小体。",
+          "history_label": "凋亡｜细胞固缩、膜完整、形成凋亡小体",
+          "source_rows": [
+            "R96"
+          ],
+          "template": "形态过程"
+        },
+        {
+          "id": "AP-03",
+          "step_id": "AP-C03",
+          "kind": "knowledge",
+          "title": "凋亡小体的清除与组织反应",
+          "body": "凋亡小体可包含核碎片、胞质和细胞器成分，并由巨噬细胞或邻近实质细胞迅速吞噬；周围组织反应通常轻微。",
+          "history_label": "凋亡｜凋亡小体被迅速吞噬，组织反应轻微",
+          "source_rows": [
+            "R99",
+            "R100",
+            "R102"
+          ],
+          "template": "组成与清除"
+        },
+        {
+          "id": "AP-04",
+          "step_id": "AP-C04",
+          "kind": "knowledge",
+          "title": "凋亡的典型识别依据",
+          "body": "病毒性肝炎中的Councilman小体属于凋亡小体；DNA发生规律性片段化时，琼脂糖凝胶电泳可呈梯状带。",
+          "history_label": "凋亡｜Councilman小体与DNA梯状带",
+          "source_rows": [
+            "R55",
+            "R97",
+            "R98",
+            "UD-002"
+          ],
+          "template": "典型识别"
+        },
+        {
+          "id": "AP-05",
+          "step_id": "AP-M05",
+          "kind": "comparison",
+          "title": "凋亡与坏死",
+          "body": "凋亡多累及单个或小团细胞，细胞固缩，细胞膜保持完整，内容物被包裹于凋亡小体内，周围组织反应通常轻微；坏死可累及成片细胞，细胞膜破坏，内容物外溢并可引起炎症反应。",
+          "history_label": "凋亡｜单个、膜完整、反应轻微；坏死｜成片、膜破坏、炎症",
+          "source_rows": [
+            "R75",
+            "R94",
+            "R95",
+            "R96",
+            "R99",
+            "R100",
+            "R102"
+          ],
+          "template": "同维度比较"
+        }
+      ],
+      "support_items": [
+        {
+          "id": "AP-S01",
+          "title": "凋亡的历史旧称",
+          "body": "“固缩坏死”是凋亡的历史旧称。",
+          "source_rows": [
+            "R94",
+            "R95"
+          ]
+        }
+      ],
+      "extraction": {
+        "id": "EX-AP",
+        "target_count": 1,
+        "prompt": "补全凋亡细胞的形成与清除：细胞固缩，细胞膜保持____并出芽，形成____；随后由邻近实质细胞或巨噬细胞吞噬。",
+        "interaction": "keyword_completion",
+        "options": [
+          "完整",
+          "破裂",
+          "凋亡小体",
+          "坏死灶",
+          "脂滴"
+        ],
+        "answer": "完整；凋亡小体。",
+        "feedback": "凋亡细胞膜保持完整并形成凋亡小体，随后由邻近实质细胞或巨噬细胞迅速吞噬，周围组织反应通常轻微。",
+        "source_rows": [
+          "R96",
+          "R99",
+          "R100",
+          "R102"
+        ]
+      },
+      "return_to_section_directory": true
+    }
+  ],
+  "chapter_review": {
+    "mode": "selected",
+    "items": [
+      {
+        "id": "CR-01",
+        "type": "reuse",
+        "source_extraction_id": "EX-AT",
+        "reason": "萎缩病因与类型是本节的结构性对应关系。"
+      },
+      {
+        "id": "CR-02",
+        "type": "reuse",
+        "source_extraction_id": "EX-ME",
+        "reason": "化生的原组织、替代组织与部位容易混淆。"
+      },
+      {
+        "id": "CR-03",
+        "type": "reuse",
+        "source_extraction_id": "EX-FC",
+        "reason": "心肌脂肪变与脂肪浸润需要按定位和部位稳定辨析。"
+      },
+      {
+        "id": "CR-04",
+        "type": "reuse",
+        "source_extraction_id": "EX-HG",
+        "reason": "细胞内玻璃样变的三个典型实例是高频对应关系。"
+      },
+      {
+        "id": "CR-05",
+        "type": "reuse",
+        "source_extraction_id": "EX-CA",
+        "reason": "两类病理性钙化的血钙背景和组织状态是核心鉴别。"
+      },
+      {
+        "id": "CR-06",
+        "type": "integrated",
+        "source_step_ids": [
+          "NC-C05",
+          "NC-C07",
+          "NC-C08",
+          "NC-C09"
+        ],
+        "reason": "特殊坏死类型需要通过典型病变背景完成综合归类。",
+        "prompt": "将病变背景与坏死类型对应：①结核病灶；②结节性多动脉炎的小血管壁；③急性胰腺炎中的脂肪组织；④深部开放性创伤合并产气厌氧菌感染。",
+        "interaction": "classification_completion",
+        "options": [
+          "干酪样坏死",
+          "纤维素样坏死",
+          "酶解性脂肪坏死",
+          "气性坏疽",
+          "凝固性坏死"
+        ],
+        "answer": "①干酪样坏死；②纤维素样坏死；③酶解性脂肪坏死；④气性坏疽。",
+        "feedback": "典型病变背景有助于稳定识别特殊坏死类型：结核病灶、免疫性小血管壁损伤、胰酶作用和产气厌氧菌感染分别对应四种病变。"
+      },
+      {
+        "id": "CR-07",
+        "type": "integrated",
+        "source_step_ids": [
+          "AP-C02",
+          "AP-C03",
+          "AP-M05"
+        ],
+        "reason": "凋亡与坏死需要按同一维度综合比较。",
+        "prompt": "补全凋亡与坏死的比较：细胞膜状态、细胞内容物去向和周围组织反应。",
+        "interaction": "two_object_comparison",
+        "options": [
+          "细胞膜保持完整",
+          "细胞膜破坏",
+          "内容物被包裹于凋亡小体内",
+          "内容物外溢",
+          "周围组织反应通常轻微",
+          "可引起炎症反应"
+        ],
+        "answer": "凋亡：细胞膜保持完整，内容物被包裹于凋亡小体内，周围组织反应通常轻微；坏死：细胞膜破坏，内容物外溢，可引起炎症反应。",
+        "feedback": "凋亡通过膜包被和迅速吞噬限制内容物暴露；坏死时细胞膜破坏和内容物外溢更容易引起炎症反应。"
+      }
+    ]
+  },
+  "status_model": {
+    "reading_state": [
+      "not_started",
+      "in_progress",
+      "viewed"
+    ],
+    "practice_state": [
+      "not_attempted",
+      "attempted",
+      "redo_needed"
+    ],
+    "mastery_state": [
+      "unknown",
+      "review_needed",
+      "stable"
+    ]
+  },
+  "counts": {
+    "directory_items": 12,
+    "main_flow_states": 53,
+    "support_items": 11,
+    "extractions": 9,
+    "chapter_review_items": 7
+  },
+  "approval": {
+    "gate_b": "approved",
+    "record": "2026-09-04：用户回复“批准”，Gate B学生端正文、53个知识显示状态、11项支持内容、9次即时提取及7道章末精选复习正式冻结，允许进入Gate C实现。"
+  }
+};
+
+window.QUESTION_BLUEPRINTS = {
+  "EX-AT": {
+    "layout": "mapping",
+    "targets": [
+      {
+        "label": "骨折固定后患肢变细",
+        "answer": "失用性萎缩"
+      },
+      {
+        "label": "运动神经元损伤后肌肉萎缩",
+        "answer": "去神经性萎缩"
+      },
+      {
+        "label": "肾盂积水压迫肾实质",
+        "answer": "压迫性萎缩"
+      }
+    ]
+  },
+  "EX-HP": {
+    "layout": "single",
+    "targets": [
+      {
+        "label": "选择正确对应",
+        "answer": "妊娠期子宫—肥大与增生并存"
+      }
+    ]
+  },
+  "EX-ME": {
+    "layout": "mapping",
+    "targets": [
+      {
+        "label": "慢性刺激下的支气管",
+        "answer": "鳞状上皮化生"
+      },
+      {
+        "label": "Barrett食管",
+        "answer": "柱状或肠型上皮化生"
+      },
+      {
+        "label": "纤维结缔组织",
+        "answer": "软骨或骨组织形成"
+      }
+    ]
+  },
+  "EX-FC": {
+    "layout": "comparison",
+    "targets": [
+      {
+        "group": "心肌脂肪变",
+        "label": "脂肪所在位置",
+        "answer": "心肌细胞内脂滴"
+      },
+      {
+        "group": "心肌脂肪变",
+        "label": "常见部位",
+        "answer": "左心室内膜下及乳头肌"
+      },
+      {
+        "group": "心肌脂肪浸润",
+        "label": "脂肪所在位置",
+        "answer": "心肌间质内脂肪细胞"
+      },
+      {
+        "group": "心肌脂肪浸润",
+        "label": "常见部位",
+        "answer": "右心室及心尖"
+      }
+    ]
+  },
+  "EX-HG": {
+    "layout": "mapping",
+    "targets": [
+      {
+        "label": "肾近曲小管上皮",
+        "answer": "玻璃样小滴—重吸收蛋白"
+      },
+      {
+        "label": "肝细胞",
+        "answer": "Mallory小体—中间丝"
+      },
+      {
+        "label": "浆细胞",
+        "answer": "Russell小体—免疫球蛋白"
+      }
+    ]
+  },
+  "EX-PG": {
+    "layout": "keywords",
+    "targets": [
+      {
+        "label": "形成的色素",
+        "answer": "含铁血黄素"
+      },
+      {
+        "label": "该细胞的名称",
+        "answer": "心衰细胞"
+      }
+    ]
+  },
+  "EX-CA": {
+    "layout": "comparison",
+    "targets": [
+      {
+        "group": "营养不良性钙化",
+        "label": "血钙背景",
+        "answer": "血钙通常正常"
+      },
+      {
+        "group": "营养不良性钙化",
+        "label": "沉积组织",
+        "answer": "变性或坏死组织"
+      },
+      {
+        "group": "转移性钙化",
+        "label": "血钙背景",
+        "answer": "高钙血症或钙磷代谢异常"
+      },
+      {
+        "group": "转移性钙化",
+        "label": "沉积组织",
+        "answer": "相对正常组织"
+      }
+    ]
+  },
+  "EX-NC": {
+    "layout": "comparison",
+    "targets": [
+      {
+        "group": "凝固性坏死",
+        "label": "主导机制",
+        "answer": "蛋白质变性占优势"
+      },
+      {
+        "group": "凝固性坏死",
+        "label": "典型病变",
+        "answer": "心肌、肾和脾梗死"
+      },
+      {
+        "group": "液化性坏死",
+        "label": "主导机制",
+        "answer": "水解酶消化占优势"
+      },
+      {
+        "group": "液化性坏死",
+        "label": "典型病变",
+        "answer": "脑组织坏死和脓肿"
+      }
+    ]
+  },
+  "EX-AP": {
+    "layout": "keywords",
+    "targets": [
+      {
+        "label": "细胞膜状态",
+        "answer": "完整"
+      },
+      {
+        "label": "形成的结构",
+        "answer": "凋亡小体"
+      }
+    ]
+  },
+  "CR-06": {
+    "layout": "mapping",
+    "targets": [
+      {
+        "label": "结核病灶",
+        "answer": "干酪样坏死"
+      },
+      {
+        "label": "结节性多动脉炎的小血管壁",
+        "answer": "纤维素样坏死"
+      },
+      {
+        "label": "急性胰腺炎中的脂肪组织",
+        "answer": "酶解性脂肪坏死"
+      },
+      {
+        "label": "深部开放性创伤合并产气厌氧菌感染",
+        "answer": "气性坏疽"
+      }
+    ]
+  },
+  "CR-07": {
+    "layout": "comparison",
+    "targets": [
+      {
+        "group": "凋亡",
+        "label": "细胞膜状态",
+        "answer": "细胞膜保持完整"
+      },
+      {
+        "group": "凋亡",
+        "label": "内容物去向",
+        "answer": "内容物被包裹于凋亡小体内"
+      },
+      {
+        "group": "凋亡",
+        "label": "组织反应",
+        "answer": "周围组织反应通常轻微"
+      },
+      {
+        "group": "坏死",
+        "label": "细胞膜状态",
+        "answer": "细胞膜破坏"
+      },
+      {
+        "group": "坏死",
+        "label": "内容物去向",
+        "answer": "内容物外溢"
+      },
+      {
+        "group": "坏死",
+        "label": "组织反应",
+        "answer": "可引起炎症反应"
+      }
+    ]
+  }
+};
+
+</script>
+  <script>
+window.COURSE_PRESENTATION = {
+  "schema_version": "1.0.0",
+  "baseline": "Gate B approved content; Gate C presentation refinement",
+  "principles": {
+    "supports_inline": true,
+    "category_split": true,
+    "examples_line_by_line": true,
+    "emphasis_markup": "**term**"
+  },
+  "items": {
+    "CH01-S01-I01": [
+      {
+        "id": "AT-01",
+        "source_ref": "AT-01",
+        "title": "萎缩的基本改变",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "萎缩是已发育正常的细胞、组织或器官**体积缩小**，并伴**功能下降**。",
+          "细胞层面首先表现为**细胞器减少**。"
+        ],
+        "history_label": "萎缩｜体积缩小、功能下降，细胞器减少",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "AT-S03",
+        "source_ref": "AT-S03",
+        "title": "萎缩细胞的自噬",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "萎缩细胞**自噬增强**，自噬小体可增多。"
+        ],
+        "history_label": "萎缩｜自噬增强，自噬小体增多",
+        "eyebrow": "补充内容",
+        "support": true
+      },
+      {
+        "id": "AT-02A",
+        "source_ref": "AT-02",
+        "title": "失用性萎缩",
+        "template": "原因—类型",
+        "layout": "relation",
+        "source_lines": [
+          "**长期制动**",
+          "组织负荷减少"
+        ],
+        "result": "**失用性萎缩**",
+        "history_label": "萎缩｜长期制动 → 失用性萎缩",
+        "eyebrow": "原因—类型",
+        "support": false
+      },
+      {
+        "id": "AT-02B",
+        "source_ref": "AT-02",
+        "title": "去神经性萎缩",
+        "template": "原因—类型",
+        "layout": "relation",
+        "source_lines": [
+          "**神经营养丧失**",
+          "所支配的肌肉"
+        ],
+        "result": "**去神经性萎缩**",
+        "history_label": "萎缩｜神经营养丧失 → 去神经性萎缩",
+        "eyebrow": "原因—类型",
+        "support": false
+      },
+      {
+        "id": "AT-03A",
+        "source_ref": "AT-03",
+        "title": "内分泌性萎缩",
+        "template": "原因—类型",
+        "layout": "relation",
+        "source_lines": [
+          "**激素刺激减少**",
+          "靶器官"
+        ],
+        "result": "**内分泌性萎缩**",
+        "history_label": "萎缩｜激素刺激减少 → 内分泌性萎缩",
+        "eyebrow": "原因—类型",
+        "support": false
+      },
+      {
+        "id": "AT-03B",
+        "source_ref": "AT-03",
+        "title": "营养不良性萎缩",
+        "template": "原因—类型",
+        "layout": "relation",
+        "source_lines": [
+          "**全身营养不良**",
+          "脂肪组织通常最早发生萎缩"
+        ],
+        "result": "**营养不良性萎缩**",
+        "history_label": "萎缩｜全身营养不良 → 营养不良性萎缩",
+        "eyebrow": "原因—类型",
+        "support": false
+      },
+      {
+        "id": "AT-03C",
+        "source_ref": "AT-03",
+        "title": "压迫性萎缩",
+        "template": "原因—类型",
+        "layout": "relation",
+        "source_lines": [
+          "**持续压迫**",
+          "受压组织"
+        ],
+        "result": "**压迫性萎缩**",
+        "history_label": "萎缩｜持续压迫 → 压迫性萎缩",
+        "eyebrow": "原因—类型",
+        "support": false
+      },
+      {
+        "id": "AT-S01",
+        "source_ref": "AT-S01",
+        "title": "肾盂积水中的压迫性萎缩",
+        "template": "原因—类型",
+        "layout": "relation",
+        "source_lines": [
+          "**肾盂积水**",
+          "受压的肾实质"
+        ],
+        "result": "**压迫性萎缩**",
+        "history_label": "萎缩｜肾盂积水 → 肾实质压迫性萎缩",
+        "eyebrow": "补充内容",
+        "support": true,
+        "note": "积水本身可使**肾脏总体积增大**。"
+      },
+      {
+        "id": "AT-04",
+        "source_ref": "AT-04",
+        "title": "脑萎缩的大体表现",
+        "template": "形态要点",
+        "layout": "facts",
+        "lines": [
+          "**脑体积减小**",
+          "**脑回变窄**",
+          "**脑沟增宽**",
+          "**脑室可扩大**"
+        ],
+        "history_label": "萎缩｜脑回变窄、脑沟增宽、脑室扩大",
+        "eyebrow": "形态要点",
+        "support": false
+      },
+      {
+        "id": "AT-05",
+        "source_ref": "AT-05",
+        "title": "心肌褐色萎缩",
+        "template": "形态要点",
+        "layout": "facts",
+        "lines": [
+          "**心脏体积缩小**",
+          "外形大致不变",
+          "表面冠状动脉呈**蛇形弯曲**",
+          "心肌细胞内可见**脂褐素沉积**"
+        ],
+        "history_label": "萎缩｜心脏缩小、冠状动脉弯曲、脂褐素沉积",
+        "eyebrow": "形态要点",
+        "support": false
+      },
+      {
+        "id": "AT-S02",
+        "source_ref": "AT-S02",
+        "title": "假性肥大",
+        "template": "机制链",
+        "layout": "sequence",
+        "steps": [
+          "**实质细胞萎缩**",
+          "间质脂肪增生",
+          "器官总体积可增大",
+          "**假性肥大**"
+        ],
+        "history_label": "萎缩｜实质萎缩伴间质增生 → 假性肥大",
+        "eyebrow": "补充内容",
+        "support": true
+      }
+    ],
+    "CH01-S01-I02": [
+      {
+        "id": "HY-01",
+        "source_ref": "HY-01",
+        "title": "肥大的细胞学基础",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "肥大主要表现为实质细胞**体积增大**。"
+        ],
+        "history_label": "肥大｜细胞体积增大",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "HY-02A",
+        "source_ref": "HY-02",
+        "title": "高血压性心肌肥大",
+        "template": "实例归类",
+        "layout": "relation",
+        "source_lines": [
+          "**高血压性心肌肥大**",
+          "实质细胞体积增大"
+        ],
+        "result": "**病理性适应**",
+        "history_label": "肥大｜高血压性心肌肥大 → 病理性适应",
+        "eyebrow": "实例归类",
+        "support": false
+      },
+      {
+        "id": "HY-02B",
+        "source_ref": "HY-02",
+        "title": "运动员骨骼肌肥大",
+        "template": "实例归类",
+        "layout": "relation",
+        "source_lines": [
+          "**运动员骨骼肌肥大**",
+          "实质细胞体积增大"
+        ],
+        "result": "**生理性适应**",
+        "history_label": "肥大｜运动员骨骼肌肥大 → 生理性适应",
+        "eyebrow": "实例归类",
+        "support": false,
+        "note": "肥大也可与增生同时出现，相关实例在“增生”中直接展示。"
+      }
+    ],
+    "CH01-S01-I03": [
+      {
+        "id": "HP-01",
+        "source_ref": "HP-01",
+        "title": "增生的发生背景",
+        "template": "机制链",
+        "layout": "sequence",
+        "steps": [
+          "**激素或生长因子刺激**",
+          "具有增殖能力的细胞",
+          "**细胞数量增加**"
+        ],
+        "history_label": "增生｜激素或生长因子刺激 → 细胞数量增加",
+        "eyebrow": "机制链",
+        "support": false
+      },
+      {
+        "id": "HP-02",
+        "source_ref": "HP-02",
+        "title": "肥大与增生可以并存",
+        "template": "典型实例",
+        "layout": "examples",
+        "examples": [
+          "**妊娠期子宫**",
+          "**哺乳期乳腺**"
+        ],
+        "lead": "以下生理状态中可同时发生",
+        "result": "**细胞肥大与增生并存**",
+        "history_label": "增生｜妊娠期子宫、哺乳期乳腺：肥大与增生并存",
+        "eyebrow": "典型实例",
+        "support": false
+      },
+      {
+        "id": "HP-S01",
+        "source_ref": "HP-S01",
+        "title": "佝偻病长骨骨端改变",
+        "template": "形态要点",
+        "layout": "facts",
+        "lines": [
+          "软骨细胞**增生**",
+          "软骨细胞**肥大**",
+          "骨样组织**堆积**"
+        ],
+        "history_label": "增生｜佝偻病骨端：增生、肥大、骨样组织堆积",
+        "eyebrow": "补充内容",
+        "support": true,
+        "note": "这些改变共同形成骨端肿胀。",
+        "also_covers": [
+          "HY-S01"
+        ]
+      },
+      {
+        "id": "HP-03",
+        "source_ref": "HP-03",
+        "title": "肥大与增生的区别",
+        "template": "同维度比较",
+        "layout": "compare",
+        "groups": [
+          {
+            "title": "**肥大**",
+            "lines": [
+              "以细胞**体积增大**为主"
+            ]
+          },
+          {
+            "title": "**增生**",
+            "lines": [
+              "以细胞**数量增加**为主"
+            ]
+          }
+        ],
+        "history_label": "肥大与增生｜体积增大 vs 数量增加",
+        "eyebrow": "同维度比较",
+        "support": false,
+        "note": "具有增殖能力的细胞可同时发生两种适应性改变。"
+      }
+    ],
+    "CH01-S01-I04": [
+      {
+        "id": "ME-01",
+        "source_ref": "ME-01",
+        "title": "化生的本质与细胞基础",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "化生是一种已分化组织被另一种**分化组织取代**的适应性改变。",
+          "其基础是局部干细胞或未分化间充质细胞**重新编程并分化**。"
+        ],
+        "history_label": "化生｜已分化组织被另一种分化组织取代",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "ME-S01",
+        "source_ref": "ME-S01",
+        "title": "化生的适应意义",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "化生通常发生于**同源细胞之间**。",
+          "化生可增强局部组织对持续刺激的**耐受性**。"
+        ],
+        "history_label": "化生｜同源细胞之间转变，可增强耐受性",
+        "eyebrow": "补充内容",
+        "support": true
+      },
+      {
+        "id": "ME-02",
+        "source_ref": "ME-02",
+        "title": "鳞状上皮化生",
+        "template": "原因—类型",
+        "layout": "relation",
+        "source_lines": [
+          "慢性刺激下的**支气管或气管**",
+          "纤毛柱状上皮"
+        ],
+        "result": "**鳞状上皮取代**",
+        "history_label": "化生｜支气管纤毛柱状上皮 → 鳞状上皮",
+        "eyebrow": "原因—类型",
+        "support": false
+      },
+      {
+        "id": "ME-03A",
+        "source_ref": "ME-03",
+        "title": "慢性萎缩性胃炎中的化生",
+        "template": "实例对应",
+        "layout": "relation",
+        "source_lines": [
+          "**慢性萎缩性胃炎**",
+          "胃黏膜"
+        ],
+        "result": "**假幽门腺化生和肠上皮化生**",
+        "history_label": "化生｜慢性萎缩性胃炎 → 假幽门腺化生、肠上皮化生",
+        "eyebrow": "实例对应",
+        "support": false
+      },
+      {
+        "id": "ME-03B",
+        "source_ref": "ME-03",
+        "title": "Barrett食管",
+        "template": "实例对应",
+        "layout": "relation",
+        "source_lines": [
+          "**食管下段鳞状上皮**"
+        ],
+        "result": "**柱状或肠型上皮取代**",
+        "history_label": "化生｜Barrett食管 → 柱状或肠型上皮取代",
+        "eyebrow": "实例对应",
+        "support": false
+      },
+      {
+        "id": "ME-04",
+        "source_ref": "ME-04",
+        "title": "间叶性化生",
+        "template": "原因—类型",
+        "layout": "relation",
+        "source_lines": [
+          "**纤维结缔组织**"
+        ],
+        "result": "**软骨或骨组织**",
+        "history_label": "化生｜纤维结缔组织 → 软骨或骨组织",
+        "eyebrow": "原因—类型",
+        "support": false,
+        "note": "骨化性肌炎中的异位骨组织属于**间叶性化生**。"
+      },
+      {
+        "id": "ME-05",
+        "source_ref": "ME-05",
+        "title": "鳞状化生与肿瘤风险",
+        "template": "风险对应",
+        "layout": "examples",
+        "examples": [
+          "**支气管鳞状化生** → 肺鳞状细胞癌风险增加",
+          "**膀胱鳞状化生** → 膀胱鳞状细胞癌风险增加",
+          "**子宫内膜鳞状化生** → 子宫内膜鳞状细胞癌风险增加"
+        ],
+        "lead": "以下对应关系应分别掌握",
+        "result": "**相应部位的鳞状细胞癌风险增加**",
+        "history_label": "化生｜鳞状化生与相应鳞癌风险增加",
+        "eyebrow": "风险对应",
+        "support": false
+      },
+      {
+        "id": "ME-06",
+        "source_ref": "ME-06",
+        "title": "肠型化生与腺癌风险",
+        "template": "风险对应",
+        "layout": "examples",
+        "examples": [
+          "**Barrett食管** → 食管腺癌风险增加",
+          "**胃肠上皮化生** → 肠型胃癌风险增加"
+        ],
+        "lead": "以下对应关系应分别掌握",
+        "result": "**腺癌风险增加**",
+        "history_label": "化生｜Barrett食管、胃肠上皮化生与腺癌风险",
+        "eyebrow": "风险对应",
+        "support": false
+      }
+    ],
+    "CH01-S03-I01": [
+      {
+        "id": "CW-01",
+        "source_ref": "CW-01",
+        "title": "可逆性损伤的基本形态",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "可逆性损伤可表现为细胞内出现**异常物质**，或正常物质**异常增多**。"
+        ],
+        "history_label": "细胞水肿｜可逆性损伤：异常物质或正常物质异常增多",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "CW-02A",
+        "source_ref": "CW-02",
+        "title": "气球样变",
+        "template": "程度判断",
+        "layout": "relation",
+        "source_lines": [
+          "**肝细胞气球样变**"
+        ],
+        "result": "**重度细胞水肿**",
+        "history_label": "细胞水肿｜气球样变 = 重度细胞水肿",
+        "eyebrow": "程度判断",
+        "support": false
+      },
+      {
+        "id": "CW-02B",
+        "source_ref": "CW-02",
+        "title": "细胞水肿的细胞器改变",
+        "template": "细胞器改变",
+        "layout": "sequence",
+        "steps": [
+          "早期出现**线粒体肿胀**",
+          "随后可累及**内质网**"
+        ],
+        "history_label": "细胞水肿｜线粒体肿胀 → 内质网受累",
+        "eyebrow": "细胞器改变",
+        "support": false
+      }
+    ],
+    "CH01-S03-I02": [
+      {
+        "id": "FC-01",
+        "source_ref": "FC-01",
+        "title": "脂肪变的定义与发生部位",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "脂肪变是**非脂肪细胞胞质内**出现**甘油三酯脂滴**。"
+        ],
+        "history_label": "脂肪变｜非脂肪细胞胞质内出现甘油三酯脂滴",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "FC-01B",
+        "source_ref": "FC-01",
+        "title": "脂肪变的常见细胞",
+        "template": "典型实例",
+        "layout": "examples",
+        "examples": [
+          "**肝细胞**",
+          "**肾近曲小管上皮细胞**",
+          "**心肌细胞**"
+        ],
+        "lead": "以下细胞均可发生",
+        "result": "**均可发生脂肪变**",
+        "history_label": "脂肪变｜肝细胞、近曲小管上皮、心肌细胞",
+        "eyebrow": "典型实例",
+        "support": false,
+        "also_covers": [
+          "FC-S02"
+        ]
+      },
+      {
+        "id": "FC-02A",
+        "source_ref": "FC-02",
+        "title": "四氯化碳引起肝脂肪变",
+        "template": "机制链",
+        "layout": "sequence",
+        "steps": [
+          "**四氯化碳损伤肝细胞**",
+          "脂蛋白合成受影响",
+          "脂质输出受阻",
+          "**肝脂肪变**"
+        ],
+        "history_label": "脂肪变｜四氯化碳 → 脂质输出受阻 → 肝脂肪变",
+        "eyebrow": "机制链",
+        "support": false
+      },
+      {
+        "id": "FC-02B",
+        "source_ref": "FC-02",
+        "title": "过量脂肪摄入",
+        "template": "病因对应",
+        "layout": "relation",
+        "source_lines": [
+          "**过量脂肪摄入**"
+        ],
+        "result": "**肝脂肪变性**",
+        "history_label": "脂肪变｜过量脂肪摄入可导致肝脂肪变性",
+        "eyebrow": "病因对应",
+        "support": false
+      },
+      {
+        "id": "FC-S01",
+        "source_ref": "FC-S01",
+        "title": "肝脂肪变的其他常见病因",
+        "template": "典型实例",
+        "layout": "examples",
+        "examples": [
+          "**缺氧**",
+          "**饥饿**",
+          "**败血症**",
+          "**糖尿病**",
+          "**化学毒物**",
+          "**白喉外毒素**"
+        ],
+        "lead": "以下因素可参与发生",
+        "result": "**肝脂肪变**",
+        "history_label": "脂肪变｜其他常见病因",
+        "eyebrow": "补充内容",
+        "support": true
+      },
+      {
+        "id": "FC-03",
+        "source_ref": "FC-03",
+        "title": "心肌脂肪变的细胞内形态",
+        "template": "病因与形态",
+        "layout": "sequence",
+        "steps": [
+          "**严重贫血**",
+          "心肌脂肪变",
+          "脂滴在心肌细胞内呈**串珠状排列**"
+        ],
+        "history_label": "脂肪变｜严重贫血 → 心肌细胞内串珠状脂滴",
+        "eyebrow": "病因与形态",
+        "support": false
+      },
+      {
+        "id": "FC-04",
+        "source_ref": "FC-04",
+        "title": "虎斑心的部位与大体表现",
+        "template": "形态要点",
+        "layout": "facts",
+        "lines": [
+          "**左心室内膜下**",
+          "**乳头肌**",
+          "黄色脂肪变区域与暗红色正常心肌相间",
+          "形成**虎斑心**"
+        ],
+        "history_label": "脂肪变｜左心室内膜下、乳头肌，可形成虎斑心",
+        "eyebrow": "形态要点",
+        "support": false
+      },
+      {
+        "id": "FC-05",
+        "source_ref": "FC-05",
+        "title": "心肌脂肪浸润",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "心肌脂肪浸润表现为**脂肪细胞进入心肌间质**。",
+          "常偏于**右心室和心尖**。"
+        ],
+        "history_label": "脂肪浸润｜脂肪细胞进入心肌间质，偏右心室和心尖",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "FC-06",
+        "source_ref": "FC-06",
+        "title": "心肌脂肪变与脂肪浸润",
+        "template": "同维度比较",
+        "layout": "compare",
+        "groups": [
+          {
+            "title": "**心肌脂肪变**",
+            "lines": [
+              "脂滴位于**心肌细胞内**",
+              "常累及**左心室内膜下和乳头肌**"
+            ]
+          },
+          {
+            "title": "**心肌脂肪浸润**",
+            "lines": [
+              "脂肪细胞进入**心肌间质**",
+              "常偏于**右心室和心尖**"
+            ]
+          }
+        ],
+        "history_label": "脂肪变与浸润｜细胞内 vs 间质内",
+        "eyebrow": "同维度比较",
+        "support": false
+      }
+    ],
+    "CH01-S03-I03": [
+      {
+        "id": "HG-01A",
+        "source_ref": "HG-01",
+        "title": "玻璃样变的共同形态",
+        "template": "共同形态",
+        "layout": "facts",
+        "lines": [
+          "**均质**",
+          "**红染**",
+          "**半透明样**"
+        ],
+        "history_label": "玻璃样变｜均质、红染、半透明样",
+        "eyebrow": "共同形态",
+        "support": false
+      },
+      {
+        "id": "HG-01B",
+        "source_ref": "HG-01",
+        "title": "玻璃样变的分类",
+        "template": "分类",
+        "layout": "examples",
+        "examples": [
+          "**细胞内玻璃样变**",
+          "**纤维结缔组织玻璃样变**",
+          "**细小动脉壁玻璃样变**"
+        ],
+        "lead": "按发生位置分为",
+        "result": "按发生位置分为三类",
+        "history_label": "玻璃样变｜细胞内、纤维结缔组织、细小动脉壁",
+        "eyebrow": "分类",
+        "support": false
+      },
+      {
+        "id": "HG-02",
+        "source_ref": "HG-02",
+        "title": "细小动脉壁玻璃样变",
+        "template": "部位与形态",
+        "layout": "relation",
+        "source_lines": [
+          "**原发性高血压**",
+          "细小动脉及肾小球入球小动脉"
+        ],
+        "result": "**管壁增厚、管腔狭窄**",
+        "history_label": "玻璃样变｜高血压小动脉：管壁增厚、管腔狭窄",
+        "eyebrow": "部位与形态",
+        "support": false
+      },
+      {
+        "id": "HG-03",
+        "source_ref": "HG-03",
+        "title": "纤维结缔组织玻璃样变",
+        "template": "部位与形态",
+        "layout": "examples",
+        "examples": [
+          "**瘢痕**",
+          "**机化组织**",
+          "**动脉粥样硬化纤维帽**"
+        ],
+        "lead": "常见于",
+        "result": "**胶原纤维增粗、融合，并伴蛋白性物质蓄积**",
+        "history_label": "玻璃样变｜纤维结缔组织：胶原增粗、融合",
+        "eyebrow": "部位与形态",
+        "support": false
+      },
+      {
+        "id": "HG-04A",
+        "source_ref": "HG-04",
+        "title": "玻璃样小滴",
+        "template": "实例对应",
+        "layout": "relation",
+        "source_lines": [
+          "**肾近曲小管上皮细胞内**",
+          "重吸收蛋白蓄积"
+        ],
+        "result": "**玻璃样小滴**",
+        "history_label": "玻璃样变｜近曲小管上皮 → 玻璃样小滴",
+        "eyebrow": "实例对应",
+        "support": false
+      },
+      {
+        "id": "HG-04B",
+        "source_ref": "HG-04",
+        "title": "Mallory小体",
+        "template": "实例对应",
+        "layout": "relation",
+        "source_lines": [
+          "**肝细胞内**",
+          "中间丝聚集"
+        ],
+        "result": "**Mallory小体**",
+        "history_label": "玻璃样变｜肝细胞中间丝聚集 → Mallory小体",
+        "eyebrow": "实例对应",
+        "support": false
+      },
+      {
+        "id": "HG-05",
+        "source_ref": "HG-05",
+        "title": "Russell小体",
+        "template": "实例对应",
+        "layout": "relation",
+        "source_lines": [
+          "**浆细胞内**",
+          "粗面内质网内免疫球蛋白蓄积"
+        ],
+        "result": "**Russell小体**",
+        "history_label": "玻璃样变｜浆细胞免疫球蛋白蓄积 → Russell小体",
+        "eyebrow": "实例对应",
+        "support": false
+      },
+      {
+        "id": "HG-S01",
+        "source_ref": "HG-S01",
+        "title": "Negri小体",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "**Negri小体**属于细胞内玻璃样变性。",
+          "病毒包涵体的归类需落实到**具体类型**。"
+        ],
+        "history_label": "玻璃样变｜Negri小体属于细胞内玻璃样变性",
+        "eyebrow": "补充内容",
+        "support": true
+      }
+    ],
+    "CH01-S03-I04": [
+      {
+        "id": "AM-01",
+        "source_ref": "AM-01",
+        "title": "淀粉样变的分布与疾病联系",
+        "template": "分布与联系",
+        "layout": "examples",
+        "examples": [
+          "**全身性沉积**",
+          "**局灶性沉积**",
+          "可见于**结核病**",
+          "可见于**浆细胞相关疾病**"
+        ],
+        "lead": "主要掌握以下范围",
+        "result": "**淀粉样物质沉积**",
+        "history_label": "淀粉样变｜全身性或局灶性，可见于结核病和浆细胞相关疾病",
+        "eyebrow": "分布与联系",
+        "support": false
+      }
+    ],
+    "CH01-S03-I06": [
+      {
+        "id": "PG-01",
+        "source_ref": "PG-01",
+        "title": "含铁血黄素的形成",
+        "template": "机制链",
+        "layout": "sequence",
+        "steps": [
+          "**巨噬细胞吞噬红细胞**",
+          "降解血红蛋白",
+          "形成**含铁血黄素**"
+        ],
+        "history_label": "色素沉着｜巨噬细胞吞噬红细胞 → 含铁血黄素",
+        "eyebrow": "机制链",
+        "support": false
+      },
+      {
+        "id": "PG-02",
+        "source_ref": "PG-02",
+        "title": "含铁血黄素与心衰细胞",
+        "template": "机制链",
+        "layout": "sequence",
+        "steps": [
+          "**慢性左心衰**",
+          "肺淤血",
+          "红细胞漏出至肺泡",
+          "肺泡巨噬细胞吞噬",
+          "形成含铁血黄素",
+          "**心衰细胞**"
+        ],
+        "history_label": "色素沉着｜慢性左心衰 → 肺淤血 → 心衰细胞",
+        "eyebrow": "机制链",
+        "support": false
+      }
+    ],
+    "CH01-S03-I07": [
+      {
+        "id": "CA-01",
+        "source_ref": "CA-01",
+        "title": "营养不良性钙化",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "营养不良性钙化多发生于**血钙正常**的变性、坏死组织或坏死虫卵等局部病灶。"
+        ],
+        "history_label": "钙化｜血钙正常，沉积于变性或坏死组织",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "CA-02",
+        "source_ref": "CA-02",
+        "title": "转移性钙化",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "转移性钙化与**高钙血症或钙磷代谢异常**有关。",
+          "可沉积于**肾、肺和胃黏膜**等相对正常组织。"
+        ],
+        "history_label": "钙化｜高钙或钙磷代谢异常，沉积于相对正常组织",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "CA-03",
+        "source_ref": "CA-03",
+        "title": "病理性钙化的HE形态",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "HE染色切片中，钙盐常呈**蓝色颗粒状沉积**。"
+        ],
+        "history_label": "钙化｜HE下呈蓝色颗粒状",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "CA-04",
+        "source_ref": "CA-04",
+        "title": "营养不良性钙化与转移性钙化",
+        "template": "同维度比较",
+        "layout": "compare",
+        "groups": [
+          {
+            "title": "**营养不良性钙化**",
+            "lines": [
+              "血钙通常**正常**",
+              "沉积于**变性或坏死组织**"
+            ]
+          },
+          {
+            "title": "**转移性钙化**",
+            "lines": [
+              "常伴**高钙血症或钙磷代谢异常**",
+              "沉积于**相对正常组织**"
+            ]
+          }
+        ],
+        "history_label": "钙化｜血钙背景与沉积组织不同",
+        "eyebrow": "同维度比较",
+        "support": false
+      }
+    ],
+    "CH01-S04-I01": [
+      {
+        "id": "NC-01",
+        "source_ref": "NC-01",
+        "title": "坏死细胞的核改变",
+        "template": "核改变",
+        "layout": "facts",
+        "lines": [
+          "**核固缩**",
+          "**核碎裂**",
+          "**核溶解**"
+        ],
+        "history_label": "坏死｜核固缩、核碎裂、核溶解",
+        "eyebrow": "核改变",
+        "support": false,
+        "note": "三种改变均提示不可逆性损伤。"
+      },
+      {
+        "id": "NC-02A",
+        "source_ref": "NC-02",
+        "title": "凝固性坏死的主导机制",
+        "template": "主导机制",
+        "layout": "prose",
+        "paragraphs": [
+          "凝固性坏死以**蛋白质变性占优势**，溶酶体水解相对较弱。"
+        ],
+        "history_label": "凝固性坏死｜蛋白质变性占优势",
+        "eyebrow": "主导机制",
+        "support": false
+      },
+      {
+        "id": "NC-02B",
+        "source_ref": "NC-02",
+        "title": "凝固性坏死的形态",
+        "template": "形态",
+        "layout": "facts",
+        "lines": [
+          "**灰黄**",
+          "**干燥**",
+          "**质实**",
+          "原有组织轮廓可暂时保留"
+        ],
+        "history_label": "凝固性坏死｜灰黄、干燥、质实，轮廓暂时保留",
+        "eyebrow": "形态",
+        "support": false
+      },
+      {
+        "id": "NC-02C",
+        "source_ref": "NC-02",
+        "title": "凝固性坏死的典型实例",
+        "template": "典型实例",
+        "layout": "examples",
+        "examples": [
+          "**心肌梗死**",
+          "**肾梗死**",
+          "**脾梗死**"
+        ],
+        "lead": "以下梗死通常属于",
+        "result": "**凝固性坏死**",
+        "history_label": "凝固性坏死｜心肌、肾、脾梗死",
+        "eyebrow": "典型实例",
+        "support": false
+      },
+      {
+        "id": "NC-03A",
+        "source_ref": "NC-03",
+        "title": "液化性坏死的主导机制",
+        "template": "主导机制",
+        "layout": "prose",
+        "paragraphs": [
+          "液化性坏死以**水解酶消化占优势**，组织被分解为液态物。"
+        ],
+        "history_label": "液化性坏死｜水解酶消化占优势，组织液化",
+        "eyebrow": "主导机制",
+        "support": false
+      },
+      {
+        "id": "NC-03B",
+        "source_ref": "NC-03",
+        "title": "液化性坏死的典型实例",
+        "template": "典型实例",
+        "layout": "examples",
+        "examples": [
+          "**脑组织坏死**",
+          "**化脓性脓肿**",
+          "**阿米巴肝脓肿**"
+        ],
+        "lead": "以下病变通常属于",
+        "result": "**液化性坏死**",
+        "history_label": "液化性坏死｜脑组织坏死、脓肿",
+        "eyebrow": "典型实例",
+        "support": false
+      },
+      {
+        "id": "NC-S01",
+        "source_ref": "NC-S01",
+        "title": "病毒性肝炎中的坏死类型",
+        "template": "典型实例",
+        "layout": "examples",
+        "examples": [
+          "**溶解性（液化性）坏死**",
+          "**凝固性坏死**"
+        ],
+        "lead": "病毒性肝炎可出现",
+        "result": "病毒性肝炎可出现以上类型",
+        "history_label": "坏死｜病毒性肝炎可见液化性和凝固性坏死",
+        "eyebrow": "补充内容",
+        "support": true
+      },
+      {
+        "id": "NC-04",
+        "source_ref": "NC-04",
+        "title": "凝固性坏死与液化性坏死",
+        "template": "同维度比较",
+        "layout": "compare",
+        "groups": [
+          {
+            "title": "**凝固性坏死**",
+            "lines": [
+              "以**蛋白质变性**为主",
+              "组织较质实",
+              "轮廓可暂时保留"
+            ]
+          },
+          {
+            "title": "**液化性坏死**",
+            "lines": [
+              "以**水解酶消化**为主",
+              "坏死组织发生液化"
+            ]
+          }
+        ],
+        "history_label": "坏死｜凝固性 vs 液化性",
+        "eyebrow": "同维度比较",
+        "support": false
+      },
+      {
+        "id": "NC-05",
+        "source_ref": "NC-05",
+        "title": "纤维素样坏死的部位与机制",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "纤维素样坏死主要发生于**结缔组织和小血管壁**。",
+          "**免疫复合物沉积及补体激活**可参与血管壁损伤。"
+        ],
+        "history_label": "纤维素样坏死｜结缔组织和小血管壁，免疫损伤参与",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "NC-06",
+        "source_ref": "NC-06",
+        "title": "纤维素样坏死的典型实例",
+        "template": "典型实例",
+        "layout": "examples",
+        "examples": [
+          "**结节性多动脉炎**",
+          "**急进性高血压**",
+          "**系统性红斑狼疮**",
+          "**风湿性心肌炎**"
+        ],
+        "lead": "以下病变中可见",
+        "result": "**纤维素样坏死**",
+        "history_label": "纤维素样坏死｜典型病变实例",
+        "eyebrow": "典型实例",
+        "support": false
+      },
+      {
+        "id": "NC-07",
+        "source_ref": "NC-07",
+        "title": "干酪样坏死",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "干酪样坏死属于特殊的**凝固性坏死**。",
+          "镜下原有组织轮廓消失，呈**无结构的嗜酸性颗粒状物**。"
+        ],
+        "history_label": "干酪样坏死｜特殊凝固性坏死，轮廓消失",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "NC-08A",
+        "source_ref": "NC-08",
+        "title": "酶解性脂肪坏死",
+        "template": "实例对应",
+        "layout": "sequence",
+        "steps": [
+          "**急性胰腺炎**",
+          "酶解性脂肪坏死",
+          "脂肪酸与钙结合",
+          "形成**钙皂**"
+        ],
+        "history_label": "脂肪坏死｜急性胰腺炎 → 酶解性坏死 → 钙皂",
+        "eyebrow": "实例对应",
+        "support": false
+      },
+      {
+        "id": "NC-08B",
+        "source_ref": "NC-08",
+        "title": "外伤性脂肪坏死",
+        "template": "实例对应",
+        "layout": "relation",
+        "source_lines": [
+          "**乳房外伤**"
+        ],
+        "result": "**外伤性脂肪坏死**",
+        "history_label": "脂肪坏死｜乳房外伤 → 外伤性脂肪坏死",
+        "eyebrow": "实例对应",
+        "support": false
+      },
+      {
+        "id": "NC-09",
+        "source_ref": "NC-09",
+        "title": "干性坏疽",
+        "template": "条件与形态",
+        "layout": "sequence",
+        "steps": [
+          "**肢端动脉闭塞**",
+          "静脉回流尚通畅",
+          "坏死组织水分较少",
+          "**干性坏疽**"
+        ],
+        "history_label": "坏疽｜动脉闭塞、静脉通畅 → 干性坏疽",
+        "eyebrow": "条件与形态",
+        "support": false,
+        "note": "表现为**干燥皱缩、黑褐、分界清楚**。"
+      },
+      {
+        "id": "NC-10A",
+        "source_ref": "NC-10",
+        "title": "湿性坏疽",
+        "template": "条件与形态",
+        "layout": "sequence",
+        "steps": [
+          "**动脉供血和静脉回流均受阻**",
+          "伴腐败菌感染",
+          "**湿性坏疽**"
+        ],
+        "history_label": "坏疽｜动静脉受阻、腐败菌感染 → 湿性坏疽",
+        "eyebrow": "条件与形态",
+        "support": false,
+        "note": "表现为**湿软、肿胀、有臭味、分界不清**。"
+      },
+      {
+        "id": "NC-10B",
+        "source_ref": "NC-10",
+        "title": "气性坏疽",
+        "template": "条件与形态",
+        "layout": "sequence",
+        "steps": [
+          "**深部开放性创伤**",
+          "产气厌氧菌感染",
+          "组织内形成气泡",
+          "**气性坏疽**"
+        ],
+        "history_label": "坏疽｜深部创伤、产气厌氧菌 → 气性坏疽",
+        "eyebrow": "条件与形态",
+        "support": false,
+        "note": "组织内气泡可产生**捻发音**。"
+      },
+      {
+        "id": "NC-11",
+        "source_ref": "NC-11",
+        "title": "坏死的主要结局",
+        "template": "结局分类",
+        "layout": "facts",
+        "lines": [
+          "**溶解吸收**",
+          "**分离排出**",
+          "**机化**",
+          "**包裹**",
+          "**钙化**"
+        ],
+        "history_label": "坏死结局｜吸收、排出、机化、包裹、钙化",
+        "eyebrow": "结局分类",
+        "support": false,
+        "note": "肉芽组织取代坏死灶的过程称为**机化**。"
+      },
+      {
+        "id": "NC-12A",
+        "source_ref": "NC-12",
+        "title": "糜烂与溃疡",
+        "template": "结局辨析",
+        "layout": "compare",
+        "groups": [
+          {
+            "title": "**糜烂**",
+            "lines": [
+              "皮肤或黏膜**浅表缺损**"
+            ]
+          },
+          {
+            "title": "**溃疡**",
+            "lines": [
+              "较深的组织缺损"
+            ]
+          }
+        ],
+        "history_label": "坏死结局｜浅表缺损为糜烂，较深缺损为溃疡",
+        "eyebrow": "结局辨析",
+        "support": false
+      },
+      {
+        "id": "NC-12B",
+        "source_ref": "NC-12",
+        "title": "空洞",
+        "template": "结局辨析",
+        "layout": "relation",
+        "source_lines": [
+          "**肺、肾等器官**",
+          "坏死物经自然管道排出"
+        ],
+        "result": "**空洞**",
+        "history_label": "坏死结局｜坏死物排出 → 空洞",
+        "eyebrow": "结局辨析",
+        "support": false
+      },
+      {
+        "id": "NC-12C",
+        "source_ref": "NC-12",
+        "title": "窦道与瘘管",
+        "template": "结局辨析",
+        "layout": "compare",
+        "groups": [
+          {
+            "title": "**窦道**",
+            "lines": [
+              "单端通向体表"
+            ]
+          },
+          {
+            "title": "**瘘管**",
+            "lines": [
+              "两端相通"
+            ]
+          }
+        ],
+        "history_label": "坏死结局｜单端窦道，两端瘘管",
+        "eyebrow": "结局辨析",
+        "support": false
+      }
+    ],
+    "CH01-S04-I02": [
+      {
+        "id": "AP-01",
+        "source_ref": "AP-01",
+        "title": "凋亡的基本过程",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "凋亡是活体内单个或小团细胞发生的**主动程序性死亡**。",
+          "该过程受**基因调控**、**依赖能量**并伴新蛋白合成。"
+        ],
+        "history_label": "凋亡｜主动程序性死亡，受基因调控、依赖能量",
+        "eyebrow": "基础结论",
+        "support": false
+      },
+      {
+        "id": "AP-S01",
+        "source_ref": "AP-S01",
+        "title": "凋亡的历史旧称",
+        "template": "基础结论",
+        "layout": "prose",
+        "paragraphs": [
+          "“**固缩坏死**”是凋亡的历史旧称。"
+        ],
+        "history_label": "凋亡｜历史旧称：固缩坏死",
+        "eyebrow": "补充内容",
+        "support": true
+      },
+      {
+        "id": "AP-02",
+        "source_ref": "AP-02",
+        "title": "凋亡的形态与凋亡小体",
+        "template": "形态过程",
+        "layout": "sequence",
+        "steps": [
+          "凋亡细胞**固缩**",
+          "细胞膜保持**完整**",
+          "细胞膜发泡、出芽",
+          "形成膜包被的**凋亡小体**"
+        ],
+        "history_label": "凋亡｜细胞固缩、膜完整、形成凋亡小体",
+        "eyebrow": "形态过程",
+        "support": false
+      },
+      {
+        "id": "AP-03A",
+        "source_ref": "AP-03",
+        "title": "凋亡小体的组成与清除",
+        "template": "组成与清除",
+        "layout": "prose",
+        "paragraphs": [
+          "凋亡小体可包含**核碎片、胞质和细胞器成分**。",
+          "凋亡小体由**巨噬细胞或邻近实质细胞**迅速吞噬。"
+        ],
+        "history_label": "凋亡｜凋亡小体被巨噬细胞或邻近实质细胞吞噬",
+        "eyebrow": "组成与清除",
+        "support": false
+      },
+      {
+        "id": "AP-03B",
+        "source_ref": "AP-03",
+        "title": "凋亡的组织反应",
+        "template": "组织反应",
+        "layout": "prose",
+        "paragraphs": [
+          "由于细胞内容物被包裹并迅速清除，周围组织反应通常**轻微**。"
+        ],
+        "history_label": "凋亡｜周围组织反应通常轻微",
+        "eyebrow": "组织反应",
+        "support": false
+      },
+      {
+        "id": "AP-04A",
+        "source_ref": "AP-04",
+        "title": "Councilman小体",
+        "template": "典型识别",
+        "layout": "relation",
+        "source_lines": [
+          "**病毒性肝炎**",
+          "肝细胞内嗜酸性小体"
+        ],
+        "result": "**Councilman小体，即凋亡小体**",
+        "history_label": "凋亡｜Councilman小体属于凋亡小体",
+        "eyebrow": "典型识别",
+        "support": false
+      },
+      {
+        "id": "AP-04B",
+        "source_ref": "AP-04",
+        "title": "DNA梯状带",
+        "template": "典型识别",
+        "layout": "relation",
+        "source_lines": [
+          "DNA发生**规律性片段化**",
+          "琼脂糖凝胶电泳"
+        ],
+        "result": "**梯状带**",
+        "history_label": "凋亡｜DNA规律性片段化 → 梯状带",
+        "eyebrow": "典型识别",
+        "support": false
+      },
+      {
+        "id": "AP-05",
+        "source_ref": "AP-05",
+        "title": "凋亡与坏死",
+        "template": "同维度比较",
+        "layout": "compare",
+        "groups": [
+          {
+            "title": "**凋亡**",
+            "lines": [
+              "多累及单个或小团细胞",
+              "细胞固缩",
+              "细胞膜保持完整",
+              "内容物被包裹于凋亡小体内",
+              "周围组织反应通常轻微"
+            ]
+          },
+          {
+            "title": "**坏死**",
+            "lines": [
+              "可累及成片细胞",
+              "细胞膜破坏",
+              "内容物外溢",
+              "可引起炎症反应"
+            ]
+          }
+        ],
+        "history_label": "凋亡与坏死｜膜完整性、内容物去向、组织反应不同",
+        "eyebrow": "同维度比较",
+        "support": false
+      }
+    ]
+  },
+  "counts": {
+    "presentation_frames": 81,
+    "items": 12
+  }
+};
+
+</script>
+  <script>
+(() => {
+  "use strict";
+
+  const content = window.COURSE_CONTENT;
+  const blueprints = window.QUESTION_BLUEPRINTS;
+  const presentation = window.COURSE_PRESENTATION;
+  if (!content || content.approval?.gate_b !== "approved") {
+    throw new Error("Gate B 未批准，已阻止课程实现。");
+  }
+  if (!presentation || presentation.principles?.supports_inline !== true) {
+    throw new Error("缺少已批准内容对应的 Gate C 展示编排。");
+  }
+
+  const STORAGE_KEY = "pathology-ch01-gate-c-2026-09-04-v2:progress";
+  const relationTemplates = new Set([
+    "纵向对应", "实例对应", "风险对应", "机制链", "部位与形态", "病因与形态",
+    "条件与形态", "实例归类", "结局分类", "结局辨析", "形态过程", "组成与清除",
+  ]);
+
+  const esc = (value) => String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+  const icon = (name, cls = "") => {
+    const paths = {
+      left: '<path d="m15 18-6-6 6-6"/><path d="M9 12h10"/>',
+      up: '<path d="m18 15-6-6-6 6"/>',
+      down: '<path d="m6 9 6 6 6-6"/>',
+      right: '<path d="m9 18 6-6-6-6"/>',
+      more: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+      close: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+      check: '<path d="m20 6-11 11-5-5"/>',
+      book: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+      reset: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
+      tree: '<path d="M3 3v18"/><circle cx="8" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="8" cy="18" r="2"/><path d="M10 6h11M10 12h11M10 18h11"/>',
+      spark: '<path d="m12 3-1.9 5.1L5 10l5.1 1.9L12 17l1.9-5.1L19 10l-5.1-1.9Z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/>',
+    };
+    return `<svg class="${esc(cls)}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || ""}</svg>`;
+  };
+
+  const formalSections = content.chapter_directory.sections;
+  const sectionMap = new Map(content.section_directories.map((section) => [section.section_id, section]));
+  const itemMap = new Map(content.knowledge_items.map((item) => [item.directory_item_id, item]));
+  const learningSections = formalSections.filter((section) => sectionMap.has(section.section_id));
+  const includedItemIds = learningSections.flatMap((section) => sectionMap.get(section.section_id).items.map((item) => item.directory_item_id));
+  const extractionMap = new Map();
+  for (const item of content.knowledge_items) if (item.extraction) extractionMap.set(item.extraction.id, item.extraction);
+  const extractionIds = [...extractionMap.keys()];
+
+  const getFormalSection = (sectionId) => {
+    const section = formalSections.find((entry) => entry.section_id === sectionId);
+    if (!section) throw new Error(`未知章节：${sectionId}`);
+    return section;
+  };
+  const getSection = (sectionId) => {
+    const section = sectionMap.get(sectionId);
+    if (!section) throw new Error(`当前生产未包含该节：${sectionId}`);
+    return section;
+  };
+  const getItem = (itemId) => {
+    const item = itemMap.get(itemId);
+    if (!item) throw new Error(`未知目录项：${itemId}`);
+    return item;
+  };
+  const getFrames = (itemId) => {
+    const frames = presentation.items?.[itemId];
+    if (!Array.isArray(frames) || !frames.length) throw new Error(`缺少展示编排：${itemId}`);
+    return frames;
+  };
+  const getItemTitle = (itemId) => {
+    for (const section of content.section_directories) {
+      const item = section.items.find((entry) => entry.directory_item_id === itemId);
+      if (item) return item.title;
+    }
+    return itemId;
+  };
+  const findSectionForItem = (itemId) => learningSections.find((section) => getSection(section.section_id).items.some((item) => item.directory_item_id === itemId));
+  const nextLearningSection = (sectionId) => {
+    const index = learningSections.findIndex((section) => section.section_id === sectionId);
+    return index >= 0 ? learningSections[index + 1] : undefined;
+  };
+
+  const buildQuestion = (extraction, id = extraction.id) => {
+    const blueprint = blueprints[extraction.id] || blueprints[id];
+    if (!blueprint) throw new Error(`缺少作答结构：${id}`);
+    return {
+      id,
+      prompt: extraction.prompt,
+      options: extraction.options,
+      answerText: extraction.answer,
+      feedback: extraction.feedback,
+      layout: blueprint.layout,
+      targets: blueprint.targets,
+    };
+  };
+
+  const getReviewQuestions = () => content.chapter_review.items.map((review) => {
+    if (review.type === "reuse") {
+      const source = extractionMap.get(review.source_extraction_id);
+      if (!source) throw new Error(`未知复用题：${review.source_extraction_id}`);
+      return buildQuestion(source, review.id);
+    }
+    const blueprint = blueprints[review.id];
+    if (!blueprint) throw new Error(`缺少章末题结构：${review.id}`);
+    return {
+      id: review.id,
+      prompt: review.prompt,
+      options: review.options,
+      answerText: review.answer,
+      feedback: review.feedback,
+      layout: blueprint.layout,
+      targets: blueprint.targets,
+    };
+  });
+  const reviewQuestions = getReviewQuestions();
+
+  class CourseApp {
+    constructor(root) {
+      this.root = root;
+      this.view = "chapter";
+      this.sectionId = learningSections[0].section_id;
+      this.itemId = getSection(this.sectionId).items[0].directory_item_id;
+      this.stageIndex = 0;
+      this.reviewIndex = 0;
+      this.startedItems = new Set();
+      this.readItems = new Set();
+      this.practices = {};
+      this.mastery = {};
+      this.resume = null;
+      this.supportOpen = false;
+      this.settingsOpen = false;
+      this.motionDirection = 1;
+      this.lastRenderKey = "";
+      this.activeOption = null;
+      this.drag = null;
+      this.suppressClick = false;
+      this.wheel = { lastAt: 0, amount: 0, stepped: false, scrolled: false, timer: null };
+      this.load();
+      this.bind();
+      this.render();
+    }
+
+    bind() {
+      this.root.addEventListener("click", (event) => this.handleClick(event));
+      this.root.addEventListener("pointerdown", (event) => this.handlePointerDown(event));
+      this.root.addEventListener("pointermove", (event) => this.handlePointerMove(event));
+      this.root.addEventListener("pointerup", (event) => this.handlePointerUp(event));
+      this.root.addEventListener("pointercancel", () => { this.drag = null; });
+      this.root.addEventListener("wheel", (event) => this.handleWheel(event), { passive: false });
+      this.root.addEventListener("keydown", (event) => this.handleKeydown(event));
+    }
+
+    load() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (sectionMap.has(saved.sectionId)) this.sectionId = saved.sectionId;
+        if (itemMap.has(saved.itemId)) this.itemId = saved.itemId;
+        if (["chapter", "section", "knowledge", "completion", "review", "reviewComplete"].includes(saved.view)) this.view = saved.view;
+        if (Number.isInteger(saved.stageIndex)) this.stageIndex = Math.max(0, saved.stageIndex);
+        if (Number.isInteger(saved.reviewIndex)) this.reviewIndex = Math.min(reviewQuestions.length - 1, Math.max(0, saved.reviewIndex));
+        this.startedItems = new Set((saved.startedItems || []).filter((id) => itemMap.has(id)));
+        this.readItems = new Set((saved.readItems || []).filter((id) => itemMap.has(id)));
+        this.practices = saved.practices || {};
+        this.mastery = saved.mastery || {};
+        if (saved.resume && itemMap.has(saved.resume.itemId) && sectionMap.has(saved.resume.sectionId)) this.resume = saved.resume;
+      } catch {
+        // 设备端旧记录损坏时，从安全初始状态继续。
+      }
+    }
+
+    save() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          view: this.view,
+          sectionId: this.sectionId,
+          itemId: this.itemId,
+          stageIndex: this.stageIndex,
+          reviewIndex: this.reviewIndex,
+          startedItems: [...this.startedItems],
+          readItems: [...this.readItems],
+          practices: this.practices,
+          mastery: this.mastery,
+          resume: this.resume,
+        }));
+      } catch {
+        // 存储不可用不应阻止学习。
+      }
+    }
+
+    firstUnreadInSection(sectionId) {
+      return getSection(sectionId).items.find((entry) => !this.readItems.has(entry.directory_item_id))?.directory_item_id;
+    }
+
+    firstUnreadLocation() {
+      for (const section of learningSections) {
+        const itemId = this.firstUnreadInSection(section.section_id);
+        if (itemId) return { sectionId: section.section_id, itemId };
+      }
+      return null;
+    }
+
+    allRead() {
+      return includedItemIds.every((id) => this.readItems.has(id));
+    }
+
+    chooseActiveItem(sectionId, preferred) {
+      const directory = getSection(sectionId);
+      if (preferred && directory.items.some((entry) => entry.directory_item_id === preferred)) return preferred;
+      return this.firstUnreadInSection(sectionId) || directory.items[0].directory_item_id;
+    }
+
+    openSection(sectionId, preferredItemId, direction = 1) {
+      this.motionDirection = direction;
+      this.sectionId = sectionId;
+      this.itemId = this.chooseActiveItem(sectionId, preferredItemId);
+      this.stageIndex = 0;
+      this.view = "section";
+      this.closeOverlays();
+      this.commit();
+    }
+
+    enterItem(itemId, requestedStage = 0, direction = 1) {
+      this.motionDirection = direction;
+      const section = findSectionForItem(itemId);
+      if (!section) return;
+      const item = getItem(itemId);
+      const frames = getFrames(itemId);
+      const maxStage = frames.length + (item.extraction ? 1 : 0) - 1;
+      const stage = Math.min(Math.max(0, requestedStage), Math.max(0, maxStage));
+      this.sectionId = section.section_id;
+      this.itemId = itemId;
+      this.stageIndex = stage;
+      this.startedItems.add(itemId);
+      this.resume = { sectionId: section.section_id, itemId, stageIndex: stage };
+      this.view = "knowledge";
+      this.closeOverlays();
+      this.commit();
+    }
+
+    markRead(itemId) {
+      this.readItems.add(itemId);
+      this.startedItems.add(itemId);
+    }
+
+    returnToSectionAfterItem(completedItemId) {
+      this.markRead(completedItemId);
+      const directory = getSection(this.sectionId);
+      const currentIndex = directory.items.findIndex((entry) => entry.directory_item_id === completedItemId);
+      const after = directory.items.slice(currentIndex + 1).find((entry) => !this.readItems.has(entry.directory_item_id));
+      const any = after || directory.items.find((entry) => !this.readItems.has(entry.directory_item_id) && entry.directory_item_id !== completedItemId);
+      this.itemId = any?.directory_item_id || completedItemId;
+      this.stageIndex = 0;
+      this.view = "section";
+      this.closeOverlays();
+      this.commit();
+    }
+
+    advanceFromSection() {
+      const unread = this.firstUnreadInSection(this.sectionId);
+      if (unread) return this.enterItem(unread);
+      const next = nextLearningSection(this.sectionId);
+      if (next) return this.openSection(next.section_id);
+      this.view = "completion";
+      this.commit();
+    }
+
+    continueCourse() {
+      if (this.allRead()) {
+        this.view = "completion";
+        return this.commit();
+      }
+      if (this.resume && !this.readItems.has(this.resume.itemId)) {
+        return this.enterItem(this.resume.itemId, this.resume.stageIndex);
+      }
+      const next = this.firstUnreadLocation();
+      if (next) this.openSection(next.sectionId, next.itemId);
+    }
+
+    step(direction) {
+      if (this.supportOpen || this.settingsOpen || this.activeOption) return;
+      this.motionDirection = direction;
+      if (this.view === "chapter") {
+        if (direction > 0) this.continueCourse();
+        return;
+      }
+      if (this.view === "section") {
+        if (direction < 0) { this.view = "chapter"; this.commit(); }
+        else this.advanceFromSection();
+        return;
+      }
+      if (this.view === "knowledge") {
+        const item = getItem(this.itemId);
+        const frames = getFrames(this.itemId);
+        const finalStage = frames.length + (item.extraction ? 1 : 0) - 1;
+        if (direction < 0) {
+          if (this.stageIndex > 0) {
+            this.stageIndex -= 1;
+            this.resume = { sectionId: this.sectionId, itemId: this.itemId, stageIndex: this.stageIndex };
+            this.commit();
+          } else this.openSection(this.sectionId, this.itemId);
+          return;
+        }
+        const lastKnowledge = frames.length - 1;
+        if (this.stageIndex < finalStage) {
+          if (this.stageIndex === lastKnowledge) this.markRead(this.itemId);
+          this.stageIndex += 1;
+          this.resume = { sectionId: this.sectionId, itemId: this.itemId, stageIndex: this.stageIndex };
+          this.commit();
+        } else this.returnToSectionAfterItem(this.itemId);
+        return;
+      }
+      if (this.view === "completion") {
+        if (direction < 0) this.openSection(learningSections.at(-1).section_id);
+        else { this.reviewIndex = 0; this.view = "review"; this.commit(); }
+        return;
+      }
+      if (this.view === "review") {
+        if (direction < 0) {
+          if (this.reviewIndex > 0) this.reviewIndex -= 1;
+          else this.view = "completion";
+        } else if (this.reviewIndex < reviewQuestions.length - 1) this.reviewIndex += 1;
+        else this.view = "reviewComplete";
+        this.commit();
+        return;
+      }
+      if (this.view === "reviewComplete") {
+        if (direction < 0) { this.reviewIndex = reviewQuestions.length - 1; this.view = "review"; }
+        else this.view = "chapter";
+        this.commit();
+      }
+    }
+
+    back() {
+      this.motionDirection = -1;
+      if (this.activeOption) { this.activeOption = null; return this.commit(); }
+      if (this.settingsOpen || this.supportOpen) { this.closeOverlays(); return this.commit(); }
+      if (this.view === "section") this.view = "chapter";
+      else if (this.view === "knowledge") return this.openSection(this.sectionId, this.itemId, -1);
+      else if (this.view === "completion") this.view = "chapter";
+      else if (this.view === "review") this.view = "completion";
+      else if (this.view === "reviewComplete") this.view = "chapter";
+      this.commit();
+    }
+
+    closeOverlays() {
+      this.supportOpen = false;
+      this.settingsOpen = false;
+      this.activeOption = null;
+    }
+
+    questionForCurrentExtraction() {
+      const extraction = getItem(this.itemId).extraction;
+      return extraction ? buildQuestion(extraction) : null;
+    }
+
+    currentQuestion() {
+      if (this.view === "review") return reviewQuestions[this.reviewIndex];
+      if (this.view === "knowledge") {
+        const item = getItem(this.itemId);
+        if (item.extraction && this.stageIndex === getFrames(this.itemId).length) return buildQuestion(item.extraction);
+      }
+      return null;
+    }
+
+    recordFor(question) {
+      return this.practices[question.id] || { values: question.targets.map(() => ""), submitted: false, correct: false };
+    }
+
+    selectQuestionValue(questionId, targetIndex, value) {
+      const question = this.findQuestion(questionId);
+      if (!question || !question.targets[targetIndex]) return;
+      const record = this.recordFor(question);
+      const values = [...record.values];
+      while (values.length < question.targets.length) values.push("");
+      values[targetIndex] = value;
+      this.practices[question.id] = { values, submitted: false, correct: false };
+      this.mastery[question.id] = "unknown";
+      this.activeOption = null;
+      this.commit();
+    }
+
+    submitQuestion(questionId) {
+      const question = this.findQuestion(questionId);
+      if (!question) return;
+      const record = this.recordFor(question);
+      if (record.values.length !== question.targets.length || record.values.some((value) => !value)) return;
+      const correct = question.targets.every((target, index) => record.values[index] === target.answer);
+      this.practices[question.id] = { values: record.values, submitted: true, correct };
+      this.mastery[question.id] = correct ? "stable" : "needs_review";
+      this.commit();
+    }
+
+    resetQuestion(questionId) {
+      const question = this.findQuestion(questionId);
+      if (!question) return;
+      delete this.practices[question.id];
+      delete this.mastery[question.id];
+      this.activeOption = null;
+      this.commit();
+    }
+
+    findQuestion(questionId) {
+      const extraction = extractionMap.get(questionId);
+      if (extraction) return buildQuestion(extraction);
+      return reviewQuestions.find((question) => question.id === questionId) || null;
+    }
+
+    resetItemPractice() {
+      const item = getItem(this.itemId);
+      if (!item.extraction) return;
+      delete this.practices[item.extraction.id];
+      delete this.mastery[item.extraction.id];
+      this.stageIndex = getFrames(this.itemId).length;
+      this.resume = { sectionId: this.sectionId, itemId: this.itemId, stageIndex: this.stageIndex };
+      this.view = "knowledge";
+      this.closeOverlays();
+      this.commit();
+    }
+
+    resetCurrentItem() {
+      const item = getItem(this.itemId);
+      this.readItems.delete(this.itemId);
+      this.startedItems.delete(this.itemId);
+      if (item.extraction) {
+        delete this.practices[item.extraction.id];
+        delete this.mastery[item.extraction.id];
+      }
+      this.resume = null;
+      this.closeOverlays();
+      this.openSection(this.sectionId, this.itemId);
+    }
+
+    resetReview() {
+      for (const question of reviewQuestions) {
+        delete this.practices[question.id];
+        delete this.mastery[question.id];
+      }
+      this.reviewIndex = 0;
+      this.view = "review";
+      this.closeOverlays();
+      this.commit();
+    }
+
+    resetChapter() {
+      this.startedItems = new Set();
+      this.readItems = new Set();
+      this.practices = {};
+      this.mastery = {};
+      this.resume = null;
+      this.sectionId = learningSections[0].section_id;
+      this.itemId = getSection(this.sectionId).items[0].directory_item_id;
+      this.stageIndex = 0;
+      this.reviewIndex = 0;
+      this.view = "chapter";
+      this.closeOverlays();
+      this.commit();
+    }
+
+    commit() {
+      this.save();
+      this.render();
+    }
+
+    itemStatus(itemId) {
+      const item = getItem(itemId);
+      const extractionId = item.extraction?.id;
+      const practice = extractionId ? this.practices[extractionId] : null;
+      if (this.readItems.has(itemId)) {
+        if (extractionId && !practice?.submitted) return "pending";
+        if (practice?.submitted && !practice.correct) return "review";
+        return "complete";
+      }
+      if (this.startedItems.has(itemId)) return "started";
+      return "unread";
+    }
+
+    sectionStatus(sectionId) {
+      const directory = sectionMap.get(sectionId);
+      if (!directory) return "unavailable";
+      const ids = directory.items.map((item) => item.directory_item_id);
+      const complete = ids.every((id) => this.readItems.has(id));
+      if (complete && ids.some((id) => this.itemStatus(id) === "pending")) return "pending";
+      if (complete && ids.some((id) => this.itemStatus(id) === "review")) return "review";
+      if (complete) return "complete";
+      if (ids.some((id) => this.startedItems.has(id))) return "started";
+      return "unread";
+    }
+
+    dot(status, active = false) {
+      return `<span class="course-progress-dot is-${esc(status)}${active ? " is-active" : ""}" aria-hidden="true"></span>`;
+    }
+
+    renderChapter() {
+      const readCount = includedItemIds.filter((id) => this.readItems.has(id)).length;
+      const rows = formalSections.map((section) => {
+        const directory = sectionMap.get(section.section_id);
+        const status = this.sectionStatus(section.section_id);
+        const active = section.section_id === this.sectionId;
+        let note = "";
+        if (!directory) note = "<em>本轮暂不展开</em>";
+        else if (status === "complete") note = "<em>已浏览</em>";
+        else if (status === "pending") note = "<em>已浏览 · 待提取</em>";
+        else if (status === "review") note = "<em>已浏览 · 需复习</em>";
+        else if (status === "started") note = "<em>学习中</em>";
+        return `<button type="button" class="chapter-section-row${active ? " is-active" : ""}" ${directory ? `data-action="select-section" data-section-id="${esc(section.section_id)}"` : "disabled"}>
+          ${this.dot(status, active)}
+          <span><small>${esc(section.number)}</small><strong>${esc(section.title)}</strong>${note}</span>
+          ${directory ? icon("right") : ""}
+        </button>`;
+      }).join("");
+      return `<section class="directory-page chapter-directory stage-enter" data-course-scrollable aria-label="本章目录">
+        <div class="directory-heading"><small>第一章</small><h1>细胞和组织的适应与损伤</h1><p>已浏览 ${readCount}/${includedItemIds.length} 个目录项</p></div>
+        <div class="chapter-tree"><span class="directory-rail" aria-hidden="true"></span>${rows}</div>
+        <div class="directory-primary-actions">
+          <button type="button" class="primary-course-button" data-action="continue-course">${this.allRead() ? "查看本章完成情况" : "继续学习"}${icon("down")}</button>
+          ${this.allRead() ? '<button type="button" class="text-course-button" data-action="start-review">进入章末精选复习</button>' : ""}
+        </div>
+      </section>`;
+    }
+
+    renderSection() {
+      const formal = getFormalSection(this.sectionId);
+      const directory = getSection(this.sectionId);
+      const allRead = directory.items.every((item) => this.readItems.has(item.directory_item_id));
+      const activeId = allRead ? this.itemId : this.firstUnreadInSection(this.sectionId) || this.itemId;
+      const rows = directory.items.map((entry) => {
+        const status = this.itemStatus(entry.directory_item_id);
+        const active = entry.directory_item_id === activeId;
+        let note = "";
+        if (active && !allRead) note = "接下来";
+        else if (status === "complete") note = "已浏览";
+        else if (status === "pending") note = "已浏览 · 待提取";
+        else if (status === "review") note = "已浏览 · 需复习";
+        else if (status === "started") note = "学习中";
+        return `<button type="button" class="section-item-row${active ? " is-active" : ""}" data-action="select-item" data-item-id="${esc(entry.directory_item_id)}">
+          ${this.dot(status, active)}
+          <span><strong>${esc(entry.title)}</strong>${note ? `<small>${esc(note)}</small>` : ""}</span>${icon("right")}
+        </button>`;
+      }).join("");
+      const next = nextLearningSection(this.sectionId);
+      const buttonText = allRead ? (next ? `进入${next.number}` : "查看本章完成情况") : `进入「${getItemTitle(activeId)}」`;
+      return `<section class="directory-page section-directory stage-enter" data-course-scrollable aria-label="${esc(directory.section_title)}目录">
+        <div class="directory-heading">
+          ${directory.previous_section_note ? `<p class="previous-section-note">${esc(directory.previous_section_note)}</p>` : ""}
+          <small>${esc(formal.number)}</small><h1>${esc(formal.title)}</h1><p>${allRead ? "本节目录已浏览" : "本节目录"}</p>
+        </div>
+        <div class="section-item-tree"><span class="directory-rail" aria-hidden="true"></span>${rows}</div>
+        <div class="directory-primary-actions"><button type="button" class="primary-course-button" data-action="continue-section">${esc(buttonText)}${icon("down")}</button></div>
+      </section>`;
+    }
+
+    renderInline(text) {
+      return String(text ?? "").split(/(\*\*.*?\*\*)/g).map((part) => {
+        if (part.startsWith("**") && part.endsWith("**")) return `<strong class="medical-emphasis">${esc(part.slice(2, -2))}</strong>`;
+        return esc(part);
+      }).join("");
+    }
+
+    renderFrameBody(frame) {
+      const inline = (text) => this.renderInline(text);
+      const note = frame.note ? `<p class="knowledge-note">${inline(frame.note)}</p>` : "";
+      if (frame.layout === "relation") {
+        return `<div class="knowledge-relation">${frame.source_lines.map((line) => `<p>${inline(line)}</p>`).join('<span class="relation-step-arrow" aria-hidden="true">↓</span>')}<span class="relation-step-arrow" aria-hidden="true">↓</span><div class="relation-result">${inline(frame.result)}</div></div>${note}`;
+      }
+      if (frame.layout === "sequence") {
+        return `<div class="knowledge-sequence">${frame.steps.map((step, index) => `<div class="sequence-step"><p>${inline(step)}</p>${index < frame.steps.length - 1 ? '<span aria-hidden="true">↓</span>' : ''}</div>`).join("")}</div>${note}`;
+      }
+      if (frame.layout === "facts") {
+        return `<div class="knowledge-facts">${frame.lines.map((line) => `<p>${inline(line)}</p>`).join("")}</div>${note}`;
+      }
+      if (frame.layout === "examples") {
+        return `<div class="knowledge-examples"><span class="example-lead">${inline(frame.lead)}</span><div class="example-lines">${frame.examples.map((line) => `<p>${inline(line)}</p>`).join("")}</div><span class="example-arrow" aria-hidden="true">↓</span><div class="example-result">${inline(frame.result)}</div></div>${note}`;
+      }
+      if (frame.layout === "compare") {
+        return `<div class="knowledge-comparison">${frame.groups.map((group) => `<section><h3>${inline(group.title)}</h3>${group.lines.map((line) => `<p>${inline(line)}</p>`).join("")}</section>`).join("")}</div>${note}`;
+      }
+      return `<div class="knowledge-prose">${frame.paragraphs.map((paragraph) => `<p>${inline(paragraph)}</p>`).join("")}</div>${note}`;
+    }
+
+    renderHistory(frames) {
+      const history = frames.slice(0, Math.min(this.stageIndex, frames.length)).slice(-3);
+      if (!history.length) return "";
+      return `<div class="knowledge-history" aria-label="已形成的知识">${history.map((frame, index) => {
+        const depth = history.length - index;
+        return `<p style="--history-depth:${depth};--history-order:${index}">${esc(frame.history_label)}</p>`;
+      }).join("")}</div>`;
+    }
+
+    renderKnowledge(motionClass = "") {
+      const item = getItem(this.itemId);
+      const frames = getFrames(this.itemId);
+      const isExtraction = item.extraction && this.stageIndex === frames.length;
+      if (isExtraction) return `<section class="knowledge-page stage-enter ${motionClass}"><p class="knowledge-path">${esc(item.path_label)}</p>${this.renderHistory(frames)}${this.renderQuestion(buildQuestion(item.extraction))}</section>`;
+      const frame = frames[Math.min(this.stageIndex, frames.length - 1)];
+      return `<section class="knowledge-page stage-enter ${motionClass}"><p class="knowledge-path">${esc(item.path_label)}</p>${this.renderHistory(frames)}
+        <article class="current-knowledge${frame.support ? " is-support" : ""}" data-course-scrollable data-frame-id="${esc(frame.id)}">
+          <small>${esc(frame.eyebrow || frame.template)}</small><h2>${esc(frame.title)}</h2>${this.renderFrameBody(frame)}
+        </article>
+      </section>`;
+    }
+
+    renderQuestion(question) {
+      const record = this.recordFor(question);
+      const values = [...record.values];
+      while (values.length < question.targets.length) values.push("");
+      const complete = values.length === question.targets.length && values.every(Boolean);
+      const correct = question.targets.every((target, index) => values[index] === target.answer);
+      let answerArea = "";
+      if (question.layout === "single") {
+        answerArea = `<div class="single-choice-list">${question.options.map((option, index) => {
+          const selected = values[0] === option;
+          const answer = question.targets[0].answer === option;
+          return `<button type="button" class="${selected ? "is-selected" : ""}${record.submitted && answer ? " is-answer" : ""}" data-action="choose-single" data-question-id="${esc(question.id)}" data-value="${esc(option)}">
+            <span>${String.fromCharCode(65 + index)}</span><strong>${esc(option)}</strong>${record.submitted && answer ? icon("check") : ""}
+          </button>`;
+        }).join("")}</div>`;
+      } else if (question.layout === "comparison") {
+        const groups = new Map();
+        question.targets.forEach((target, index) => {
+          const group = target.group || "";
+          if (!groups.has(group)) groups.set(group, []);
+          groups.get(group).push({ target, index });
+        });
+        answerArea = `<div class="comparison-answer-grid">${[...groups.entries()].map(([group, targets]) => `<article><h3>${esc(group)}</h3>${targets.map(({ target, index }) => this.renderQuestionTarget(question, target, index, values[index], record.submitted)).join("")}</article>`).join("")}</div>`;
+      } else {
+        answerArea = `<div class="question-target-list">${question.targets.map((target, index) => this.renderQuestionTarget(question, target, index, values[index], record.submitted)).join("")}</div>`;
+      }
+      const feedback = record.submitted ? `<div class="question-feedback ${correct ? "is-correct" : "is-review"}"><strong>${correct ? "关系已恢复" : "正确关系"}</strong>${correct ? "" : `<p class="answer-line">${esc(question.answerText)}</p>`}<p>${esc(question.feedback)}</p></div>` : "";
+      return `<section class="question-stage" data-course-scrollable>
+        <div class="question-heading"><small>主动提取 · 可暂时跳过</small><h2>${esc(question.prompt)}</h2></div>
+        ${answerArea}
+        <div class="question-actions">
+          <button type="button" class="question-submit" data-action="submit-question" data-question-id="${esc(question.id)}" ${complete ? "" : "disabled"}>${record.submitted ? "再次确认" : "提交答案"}</button>
+          ${(record.submitted || values.some(Boolean)) ? `<button type="button" class="question-reset" data-action="reset-question" data-question-id="${esc(question.id)}">${icon("reset")}重新作答</button>` : ""}
+        </div>${feedback}
+      </section>`;
+    }
+
+    renderQuestionTarget(question, target, index, value, submitted) {
+      const stateClass = value ? " is-filled" : "";
+      const reviewClass = submitted ? (value === target.answer ? " is-correct" : " is-review") : "";
+      return `<button type="button" class="question-target${stateClass}${reviewClass}" data-action="open-option" data-question-id="${esc(question.id)}" data-target-index="${index}">
+        <span>${esc(target.label)}</span><strong>${value ? esc(value) : "选择答案"}</strong>${icon("down")}
+      </button>`;
+    }
+
+    renderCompletion() {
+      const read = includedItemIds.filter((id) => this.readItems.has(id)).length;
+      const answered = extractionIds.filter((id) => this.practices[id]?.submitted).length;
+      return `<section class="completion-page stage-enter">
+        <div class="completion-orbit"><span></span></div><small>第一章</small><h1>本章内容已浏览</h1>
+        <p>目录学习与主动提取分别记录，你可以直接进入精选复习，也可以返回目录重看任一部分。</p>
+        <dl><div><dt>目录项</dt><dd>${read}/${includedItemIds.length}</dd></div><div><dt>即时提取</dt><dd>${answered}/${extractionIds.length}</dd></div></dl>
+        <button type="button" class="primary-course-button" data-action="start-review">开始精选复习${icon("down")}</button>
+        <button type="button" class="text-course-button" data-action="go-chapter">返回章目录</button>
+      </section>`;
+    }
+
+    renderReview() {
+      const question = reviewQuestions[this.reviewIndex];
+      return `<section class="knowledge-page review-page stage-enter"><p class="knowledge-path">第一章 · 章末精选复习</p>${this.renderQuestion(question)}</section>`;
+    }
+
+    renderReviewComplete() {
+      const answered = reviewQuestions.filter((question) => this.practices[question.id]?.submitted).length;
+      const stable = reviewQuestions.filter((question) => this.practices[question.id]?.submitted && this.practices[question.id]?.correct).length;
+      return `<section class="completion-page stage-enter">${icon("spark", "completion-spark")}<small>章末精选复习</small><h1>本章复习已浏览</h1>
+        <p>复习结果只记录作答状态，不改变正文的已浏览状态。</p>
+        <dl><div><dt>已作答</dt><dd>${answered}/${reviewQuestions.length}</dd></div><div><dt>较稳定</dt><dd>${stable}/${reviewQuestions.length}</dd></div></dl>
+        <button type="button" class="primary-course-button" data-action="go-chapter">返回章目录${icon("tree")}</button>
+        <button type="button" class="text-course-button" data-action="reset-review">重新复习</button>
+      </section>`;
+    }
+
+    renderSupportSheet() {
+      if (!this.supportOpen) return "";
+      const item = getItem(this.itemId);
+      return `<div class="course-sheet-layer" data-overlay="support"><button type="button" class="course-sheet-backdrop" data-action="close-overlay" aria-label="关闭补充内容"></button>
+        <section class="course-sheet support-sheet" role="dialog" aria-modal="true" aria-label="${esc(getItemTitle(this.itemId))}补充内容">
+          <header><div><small>${esc(getItemTitle(this.itemId))}</small><h3>补充理解</h3></div><button type="button" data-action="close-overlay" aria-label="关闭">${icon("close")}</button></header>
+          <div class="support-sheet-content" data-course-scrollable>${item.support_items.map((support) => `<article><h4>${esc(support.title)}</h4><p>${esc(support.body)}</p></article>`).join("")}</div>
+        </section></div>`;
+    }
+
+    renderOptionSheet() {
+      if (!this.activeOption) return "";
+      const question = this.findQuestion(this.activeOption.questionId);
+      if (!question) return "";
+      const target = question.targets[this.activeOption.targetIndex];
+      const selected = this.recordFor(question).values[this.activeOption.targetIndex] || "";
+      return `<div class="course-sheet-layer" data-overlay="option"><button type="button" class="course-sheet-backdrop" data-action="close-option" aria-label="关闭选项"></button>
+        <section class="course-sheet" role="dialog" aria-modal="true" aria-label="${esc(target.label)}">
+          <header><div><small>选择答案</small><h3>${esc(target.label)}</h3></div><button type="button" data-action="close-option" aria-label="关闭">${icon("close")}</button></header>
+          <div class="course-option-list" data-course-scrollable>${question.options.map((option) => `<button type="button" class="${selected === option ? "is-selected" : ""}" data-action="select-option" data-question-id="${esc(question.id)}" data-target-index="${this.activeOption.targetIndex}" data-value="${esc(option)}"><span>${esc(option)}</span>${selected === option ? icon("check") : ""}</button>`).join("")}</div>
+        </section></div>`;
+    }
+
+    renderSettingsSheet() {
+      if (!this.settingsOpen) return "";
+      const reviewMode = this.view === "review" || this.view === "reviewComplete";
+      const item = getItem(this.itemId);
+      return `<div class="course-sheet-layer settings-layer" data-overlay="settings"><button type="button" class="course-sheet-backdrop" data-action="close-overlay" aria-label="关闭设置"></button>
+        <section class="course-sheet settings-sheet" role="dialog" aria-modal="true" aria-label="学习设置">
+          <header><div><small>学习设置</small><h3>${reviewMode ? "章末精选复习" : esc(getItemTitle(this.itemId))}</h3></div><button type="button" data-action="close-overlay" aria-label="关闭">${icon("close")}</button></header>
+          <div class="settings-actions">
+            ${reviewMode ? `<button type="button" data-action="reset-review">${icon("reset")}<span><strong>重做章末复习</strong><small>只清除7道精选复习的作答记录</small></span></button>` : `
+              <button type="button" data-action="relearn-item">${icon("book")}<span><strong>从头重学本目录项</strong><small>保留已有作答记录</small></span></button>
+              ${item.extraction ? `<button type="button" data-action="redo-item-practice">${icon("reset")}<span><strong>重做本项提取</strong><small>只清除当前目录项的提取记录</small></span></button>` : ""}
+              <button type="button" data-action="reset-item">${icon("close")}<span><strong>重置本目录项</strong><small>清除阅读与作答状态</small></span></button>`}
+            <button type="button" class="is-destructive" data-action="reset-chapter">${icon("reset")}<span><strong>重置整个章节</strong><small>清除本章全部学习记录</small></span></button>
+          </div>
+        </section></div>`;
+    }
+
+    headerInfo() {
+      const item = getItem(this.itemId);
+      const total = getFrames(this.itemId).length + (item.extraction ? 1 : 0);
+      if (this.view === "chapter") return { title: "本章目录", index: "" };
+      if (this.view === "section") return { title: getFormalSection(this.sectionId).title, index: "目录" };
+      if (this.view === "knowledge") return { title: getItemTitle(this.itemId), index: `${Math.min(this.stageIndex + 1, total)}/${total}` };
+      if (this.view === "completion") return { title: "本章完成", index: "" };
+      if (this.view === "review") return { title: "章末精选复习", index: `${this.reviewIndex + 1}/${reviewQuestions.length}` };
+      return { title: "复习完成", index: "" };
+    }
+
+    footerCue() {
+      if (this.view === "chapter") return "点击目录，或上滑继续";
+      if (this.view === "section") return getSection(this.sectionId).items.every((entry) => this.readItems.has(entry.directory_item_id)) ? "上滑进入下一阶段" : "上滑进入当前目录项";
+      if (this.view === "knowledge") {
+        const item = getItem(this.itemId);
+        const frameCount = getFrames(this.itemId).length;
+        if (item.extraction && this.stageIndex === frameCount) return "可作答，也可上滑返回本节目录";
+        if (item.extraction && this.stageIndex === frameCount - 1) return "上滑进入核心提取";
+        return "上滑继续";
+      }
+      if (this.view === "review") return "作答后上滑进入下一题";
+      return "上滑继续";
+    }
+
+    renderMainView(motionClass = "") {
+      if (this.view === "chapter") return this.renderChapter().replace("stage-enter", `stage-enter ${motionClass}`);
+      if (this.view === "section") return this.renderSection().replace("stage-enter", `stage-enter ${motionClass}`);
+      if (this.view === "knowledge") return this.renderKnowledge(motionClass);
+      if (this.view === "completion") return this.renderCompletion().replace("stage-enter", `stage-enter ${motionClass}`);
+      if (this.view === "review") return this.renderReview().replace("stage-enter", `stage-enter ${motionClass}`);
+      return this.renderReviewComplete().replace("stage-enter", `stage-enter ${motionClass}`);
+    }
+
+    renderKey() {
+      if (this.view === "knowledge") return `knowledge:${this.itemId}:${this.stageIndex}`;
+      if (this.view === "section") return `section:${this.sectionId}`;
+      if (this.view === "review") return `review:${this.reviewIndex}`;
+      return this.view;
+    }
+
+    render() {
+      const header = this.headerInfo();
+      const nextKey = this.renderKey();
+      const shouldMove = Boolean(this.lastRenderKey && this.lastRenderKey !== nextKey);
+      const motionClass = shouldMove ? (this.motionDirection < 0 ? "motion-backward" : "motion-forward") : "";
+      const menuVisible = ["knowledge", "review", "reviewComplete"].includes(this.view);
+      this.root.innerHTML = `<main class="course-shell">
+        <aside class="course-desktop-intro"><p>病理学 · 第一章</p><h1>细胞和组织的<br>适应与损伤</h1><span>按教材目录逐层进入；内容直接展示，关键关系随滑动连续形成。</span>
+          <dl><div><dt>目录项</dt><dd>${content.counts.directory_items}</dd></div><div><dt>展示步骤</dt><dd>${presentation.counts.presentation_frames}</dd></div><div><dt>核心提取</dt><dd>${content.counts.extractions}</dd></div></dl>
+        </aside>
+        <article class="course-phone" aria-label="病理学第一章互动课程">
+          <header class="course-header"><button type="button" data-action="back" aria-label="返回上一级">${icon("left")}</button><div><small>病理学 · 第一章</small><strong>${esc(header.title)}</strong></div>
+            <div class="course-header-actions">${header.index ? `<span>${esc(header.index)}</span>` : ""}${menuVisible ? `<button type="button" data-action="open-settings" aria-label="学习设置">${icon("more")}</button>` : ""}</div></header>
+          <div class="course-viewport" tabindex="0">${this.renderMainView(motionClass)}${this.renderOptionSheet()}${this.renderSettingsSheet()}
+            ${!(this.supportOpen || this.settingsOpen || this.activeOption) ? `<nav class="course-step-controls" aria-label="学习导航"><button type="button" data-action="step-up" aria-label="上一项">${icon("up")}</button><button type="button" data-action="step-down" aria-label="下一项">${icon("down")}</button></nav>` : ""}
+          </div>
+          <footer class="course-footer"><span aria-hidden="true"></span><p>${esc(this.footerCue())}</p></footer>
+        </article>
+      </main>`;
+      this.lastRenderKey = nextKey;
+    }
+
+    handleClick(event) {
+      if (this.suppressClick) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.suppressClick = false;
+        return;
+      }
+      const actionEl = event.target.closest("[data-action]");
+      if (!actionEl || !this.root.contains(actionEl)) return;
+      const action = actionEl.dataset.action;
+      if (actionEl.disabled) return;
+      switch (action) {
+        case "back": return this.back();
+        case "step-up": return this.step(-1);
+        case "step-down": return this.step(1);
+        case "select-section": return this.openSection(actionEl.dataset.sectionId);
+        case "continue-course": return this.continueCourse();
+        case "start-review": this.reviewIndex = 0; this.view = "review"; return this.commit();
+        case "go-chapter": this.view = "chapter"; return this.commit();
+        case "select-item": return this.enterItem(actionEl.dataset.itemId);
+        case "continue-section": return this.advanceFromSection();
+        case "open-settings": this.settingsOpen = true; return this.commit();
+        case "close-overlay": this.closeOverlays(); return this.commit();
+        case "open-option": this.activeOption = { questionId: actionEl.dataset.questionId, targetIndex: Number(actionEl.dataset.targetIndex) }; return this.commit();
+        case "close-option": this.activeOption = null; return this.commit();
+        case "select-option": return this.selectQuestionValue(actionEl.dataset.questionId, Number(actionEl.dataset.targetIndex), actionEl.dataset.value);
+        case "choose-single": return this.selectQuestionValue(actionEl.dataset.questionId, 0, actionEl.dataset.value);
+        case "submit-question": return this.submitQuestion(actionEl.dataset.questionId);
+        case "reset-question": return this.resetQuestion(actionEl.dataset.questionId);
+        case "relearn-item": return this.enterItem(this.itemId, 0);
+        case "redo-item-practice": return this.resetItemPractice();
+        case "reset-item": return this.resetCurrentItem();
+        case "reset-review": return this.resetReview();
+        case "reset-chapter": return this.resetChapter();
+      }
+    }
+
+    handlePointerDown(event) {
+      const viewport = event.target.closest(".course-viewport");
+      if (!viewport || event.button !== 0 || event.target.closest(".course-sheet-layer")) return;
+      const scrollable = event.target.closest("[data-course-scrollable]");
+      this.drag = { pointerId: event.pointerId, startY: event.clientY, lastY: event.clientY, scrollable, scrolled: false, viewport, captured: false };
+    }
+
+    handlePointerMove(event) {
+      if (!this.drag || this.drag.pointerId !== event.pointerId) return;
+      const delta = event.clientY - this.drag.lastY;
+      this.drag.lastY = event.clientY;
+      const scrollable = this.drag.scrollable;
+      if (scrollable && scrollable.scrollHeight > scrollable.clientHeight + 2) {
+        const before = scrollable.scrollTop;
+        scrollable.scrollTop -= delta;
+        if (Math.abs(scrollable.scrollTop - before) > .5) this.drag.scrolled = true;
+      }
+      if (Math.abs(event.clientY - this.drag.startY) > 8) {
+        if (!this.drag.captured) {
+          try {
+            this.drag.viewport.setPointerCapture(event.pointerId);
+            this.drag.captured = true;
+          } catch { /* pointer capture is optional */ }
+        }
+        event.preventDefault();
+      }
+    }
+
+    handlePointerUp(event) {
+      if (!this.drag || this.drag.pointerId !== event.pointerId) return;
+      const distance = event.clientY - this.drag.startY;
+      if (Math.abs(distance) > 46) {
+        this.suppressClick = true;
+        setTimeout(() => { this.suppressClick = false; }, 90);
+        if (!this.drag.scrolled) this.step(distance < 0 ? 1 : -1);
+      }
+      if (this.drag.captured) {
+        try { this.drag.viewport.releasePointerCapture(event.pointerId); } catch { /* pointer capture is optional */ }
+      }
+      this.drag = null;
+    }
+
+    handleWheel(event) {
+      const viewport = event.target.closest(".course-viewport");
+      if (!viewport || event.target.closest(".course-sheet-layer")) return;
+      const now = event.timeStamp;
+      const isNew = now - this.wheel.lastAt > 260;
+      if (isNew) Object.assign(this.wheel, { amount: 0, stepped: false, scrolled: false });
+      this.wheel.lastAt = now;
+      clearTimeout(this.wheel.timer);
+      this.wheel.timer = setTimeout(() => Object.assign(this.wheel, { amount: 0, stepped: false, scrolled: false }), 300);
+      const scrollable = event.target.closest("[data-course-scrollable]");
+      if (scrollable && scrollable.scrollHeight > scrollable.clientHeight + 2) {
+        const canScroll = event.deltaY > 0
+          ? scrollable.scrollTop + scrollable.clientHeight < scrollable.scrollHeight - 2
+          : scrollable.scrollTop > 2;
+        if (canScroll) { this.wheel.scrolled = true; return; }
+        if (this.wheel.scrolled) return;
+      }
+      event.preventDefault();
+      if (this.wheel.stepped) return;
+      this.wheel.amount += event.deltaY;
+      if (Math.abs(this.wheel.amount) >= 48) {
+        this.wheel.stepped = true;
+        this.step(this.wheel.amount > 0 ? 1 : -1);
+      }
+    }
+
+    handleKeydown(event) {
+      if (!event.target.closest(".course-viewport") || event.target.closest("button, [role=dialog]")) return;
+      if (["ArrowDown", "PageDown", " "].includes(event.key)) { event.preventDefault(); this.step(1); }
+      if (["ArrowUp", "PageUp"].includes(event.key)) { event.preventDefault(); this.step(-1); }
+    }
+  }
+
+  window.__COURSE_APP__ = new CourseApp(document.getElementById("app"));
+})();
+
+</script>
+</body>
+</html>
