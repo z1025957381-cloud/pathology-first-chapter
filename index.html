@@ -265,7 +265,7 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
 .section-item-row:first-of-type::before,
 .chapter-section-row:last-of-type::after,
 .section-item-row:last-of-type::after { display: none; }
-.chapter-section-row:disabled { cursor: default; }
+.chapter-section-row:disabled { cursor: default; pointer-events: none; }
 .chapter-section-row:disabled > * { opacity: .42; }
 .chapter-section-row > span:nth-child(2),
 .section-item-row > span:nth-child(2) { min-width: 0; }
@@ -4775,7 +4775,10 @@ window.COURSE_PRESENTATION = {
     handlePointerDown(event) {
       const viewport = event.target.closest(".course-viewport");
       if (!viewport || event.button !== 0 || event.target.closest(".course-sheet-layer")) return;
-      const scrollable = event.target.closest("[data-course-scrollable]") || viewport.querySelector('.current-knowledge, .question-stage, .directory-page');
+      // A directory swipe enters the course immediately, even on short screens.
+      // Only lesson content consumes pointer movement as inner scrolling.
+      const directory = viewport.querySelector('.directory-page');
+      const scrollable = directory ? null : event.target.closest("[data-course-scrollable]") || viewport.querySelector('.current-knowledge, .question-stage');
       this.drag = { pointerId: event.pointerId, startY: event.clientY, lastY: event.clientY, scrollable, edgeDistance: 0, viewport, captured: false };
     }
 
