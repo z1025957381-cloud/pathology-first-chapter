@@ -1074,17 +1074,22 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
 .knowledge-group-lines.is-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .knowledge-group-lines p { margin: 0; font-size: 19px; line-height: 1.6; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif; }
 .knowledge-group-lines.is-pair p { font-size: 20px; }
-.current-knowledge[data-frame-id="AM-01"] .knowledge-groups { margin-inline: auto; max-width: 340px; gap: 34px; }
-.current-knowledge[data-frame-id="AM-01"] .knowledge-groups h3 {
+.current-knowledge .knowledge-groups,
+.current-knowledge .knowledge-comparison { margin-inline: auto; max-width: 340px; gap: 34px; }
+.current-knowledge .knowledge-groups h3,
+.current-knowledge .knowledge-comparison h3 {
   color: var(--ink);
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-size: 22px;
   font-weight: 650;
   line-height: 1.5;
   margin-bottom: 12px;
+  text-align: left;
 }
-.current-knowledge[data-frame-id="AM-01"] .knowledge-group-lines { margin-left: 2em; font-size: 20px; text-align: left; gap: 10px; }
-.current-knowledge[data-frame-id="AM-01"] .knowledge-group-lines p { font-size: 20px; line-height: 1.65; }
+.current-knowledge .knowledge-group-lines { margin-left: 2em; font-size: 20px; text-align: left; gap: 10px; }
+.current-knowledge .knowledge-group-lines p,
+.current-knowledge .knowledge-comparison p { font-size: 20px; line-height: 1.65; }
+.current-knowledge .knowledge-comparison p { margin: 10px 0 0 2em; text-align: left; }
 .medical-emphasis { font-weight: 750; }
 .knowledge-history p { font-size: 12px; font-weight: 450; opacity: .38; }
 @media (max-width: 370px) {
@@ -3787,18 +3792,17 @@ window.COURSE_PRESENTATION = {
         "source_ref": "NC-11",
         "title": "坏死的主要结局",
         "template": "结局分类",
-        "layout": "facts",
-        "lines": [
-          "**溶解吸收**",
-          "**分离排出**",
-          "**机化**",
-          "**包裹**",
-          "**钙化**"
+        "layout": "grouped",
+        "groups": [
+          { "title": "溶解吸收", "lines": [] },
+          { "title": "分离排出", "lines": [] },
+          { "title": "机化", "lines": ["肉芽组织取代坏死灶的过程称为**机化**。"] },
+          { "title": "包裹", "lines": [] },
+          { "title": "钙化", "lines": [] }
         ],
         "history_label": "坏死结局｜吸收、排出、机化、包裹、钙化",
         "eyebrow": "结局分类",
-        "support": false,
-        "note": "肉芽组织取代坏死灶的过程称为**机化**。"
+        "support": false
       },
       {
         "id": "NC-12A",
