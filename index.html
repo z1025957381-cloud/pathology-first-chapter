@@ -4861,8 +4861,8 @@ window.COURSE_PRESENTATION = {
     }
 
     footerCue() {
-      if (this.view === "chapter") return "点击目录，或上滑继续";
-      if (this.view === "section") return getSection(this.sectionId).items.every((entry) => this.readItems.has(entry.directory_item_id)) ? "上滑进入下一阶段" : "上滑进入当前目录项";
+      if (this.view === "chapter") return "滑动浏览目录 · 到底后上滑继续";
+      if (this.view === "section") return getSection(this.sectionId).items.every((entry) => this.readItems.has(entry.directory_item_id)) ? "滑动浏览目录 · 到底后上滑进入下一阶段" : "滑动浏览目录 · 到底后上滑进入当前项";
       if (this.view === "knowledge") {
         const item = getItem(this.itemId);
         const frameCount = getFrames(this.itemId).length;
@@ -4960,11 +4960,10 @@ window.COURSE_PRESENTATION = {
     handlePointerDown(event) {
       const viewport = event.target.closest(".course-viewport");
       if (!viewport || event.button !== 0 || event.target.closest(".course-sheet-layer")) return;
-      // A directory swipe enters the course immediately, even on short screens.
-      // Only lesson content consumes pointer movement as inner scrolling.
+      // Long directories scroll first; entering requires a fresh gesture at the edge.
       const directory = viewport.querySelector('.directory-page');
-      const scrollable = directory ? null : event.target.closest("[data-course-scrollable]") || viewport.querySelector('.current-knowledge, .question-stage');
-      this.drag = { pointerId: event.pointerId, startY: event.clientY, lastY: event.clientY, scrollable, edgeDistance: 0, viewport, captured: false };
+      const scrollable = directory || event.target.closest("[data-course-scrollable]") || viewport.querySelector('.current-knowledge, .question-stage');
+      this.drag = { pointerId: event.pointerId, startY: event.clientY, lastY: event.clientY, scrollable, directory: !!directory, scrolled: false, edgeDistance: 0, viewport, captured: false };
     }
 
     handlePointerMove(event) {
@@ -4978,7 +4977,10 @@ window.COURSE_PRESENTATION = {
         scrollable.scrollTop = Math.max(0, Math.min(scrollable.scrollHeight - scrollable.clientHeight, before - delta));
         const consumed = before - scrollable.scrollTop;
         remaining -= consumed;
-        if (Math.abs(consumed) > .5) this.drag.edgeDistance = 0;
+        if (Math.abs(consumed) > .5) {
+          this.drag.edgeDistance = 0;
+          this.drag.scrolled = true;
+        }
       }
       if (remaining * this.drag.edgeDistance < 0) this.drag.edgeDistance = 0;
       this.drag.edgeDistance += remaining;
@@ -5004,8 +5006,9 @@ window.COURSE_PRESENTATION = {
         try { this.drag.viewport.releasePointerCapture(event.pointerId); } catch { /* pointer capture is optional */ }
       }
       const edgeDistance = this.drag.edgeDistance;
+      const directoryScrolled = this.drag.directory && this.drag.scrolled;
       this.drag = null;
-      if (Math.abs(edgeDistance) > 46) this.step(edgeDistance < 0 ? 1 : -1);
+      if (!directoryScrolled && Math.abs(edgeDistance) > 46) this.step(edgeDistance < 0 ? 1 : -1);
     }
 
     handleWheel(event) {
@@ -5019,6 +5022,7 @@ window.COURSE_PRESENTATION = {
       this.wheel.timer = setTimeout(() => Object.assign(this.wheel, { amount: 0, stepped: false, scrolled: false }), 300);
       event.preventDefault();
       if (this.wheel.stepped) return;
+      const directory = viewport.querySelector('.directory-page');
       const scrollable = event.target.closest("[data-course-scrollable]") || viewport.querySelector('.current-knowledge, .question-stage, .directory-page');
       let remaining = event.deltaY;
       if (scrollable && scrollable.scrollHeight > scrollable.clientHeight + 2) {
@@ -5026,8 +5030,12 @@ window.COURSE_PRESENTATION = {
         scrollable.scrollTop = Math.max(0, Math.min(scrollable.scrollHeight - scrollable.clientHeight, before + remaining));
         const consumed = scrollable.scrollTop - before;
         remaining -= consumed;
-        if (Math.abs(consumed) > .5) this.wheel.amount = 0;
+        if (Math.abs(consumed) > .5) {
+          this.wheel.amount = 0;
+          this.wheel.scrolled = true;
+        }
       }
+      if (directory && this.wheel.scrolled) return;
       if (remaining * this.wheel.amount < 0) this.wheel.amount = 0;
       this.wheel.amount += remaining;
       if (Math.abs(this.wheel.amount) >= 48) {
