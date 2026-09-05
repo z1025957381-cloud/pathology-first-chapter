@@ -180,6 +180,8 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
   height: 100%;
   padding: 26px 30px 18px 34px;
   overflow-y: auto;
+  /* Declare on the scroll container itself so touch swipes reach our handler. */
+  touch-action: none;
   scrollbar-width: none;
 }
 .directory-page::-webkit-scrollbar { display: none; }
