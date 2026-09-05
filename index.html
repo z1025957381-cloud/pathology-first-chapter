@@ -142,6 +142,7 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
 }
 .course-header-actions { display: flex; align-items: center; gap: 3px; }
 .course-header-actions > span { color: var(--faint); font-family: Georgia, serif; font-size: 12px; }
+.course-header-actions .course-retry-entry { width: auto; min-width: 48px; padding: 0 6px; font-size: 13px; font-weight: 650; white-space: nowrap; }
 
 .course-viewport {
   position: relative;
@@ -570,15 +571,17 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  min-height: 40px;
-  padding: 0 7px;
-  border: 0;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
   background: transparent;
-  color: var(--muted);
-  font-size: 10px;
+  color: var(--green);
+  font-size: 13px;
   cursor: pointer;
 }
 .question-reset svg { width: 14px; }
+.question-reset:disabled { opacity: .45; cursor: default; }
 .question-feedback {
   margin-top: 14px;
   padding: 14px 15px;
@@ -4764,7 +4767,7 @@ window.COURSE_PRESENTATION = {
         ${answerArea}
         <div class="question-actions">
           <button type="button" class="question-submit" data-action="submit-question" data-question-id="${esc(question.id)}" ${complete ? "" : "disabled"}>${record.submitted ? "再次确认" : "提交答案"}</button>
-          ${(record.submitted || values.some(Boolean)) ? `<button type="button" class="question-reset" data-action="reset-question" data-question-id="${esc(question.id)}">${icon("reset")}重新作答</button>` : ""}
+          <button type="button" class="question-reset" data-action="reset-question" data-question-id="${esc(question.id)}" ${(record.submitted || values.some(Boolean)) ? "" : "disabled"}>${icon("reset")}重做本题</button>
         </div>${feedback}
       </section>`;
     }
@@ -4831,16 +4834,17 @@ window.COURSE_PRESENTATION = {
     renderSettingsSheet() {
       if (!this.settingsOpen) return "";
       const reviewMode = this.view === "review" || this.view === "reviewComplete";
+      const chapterMode = ["chapter", "section", "completion"].includes(this.view);
       const item = getItem(this.itemId);
       return `<div class="course-sheet-layer settings-layer" data-overlay="settings"><button type="button" class="course-sheet-backdrop" data-action="close-overlay" aria-label="关闭设置"></button>
         <section class="course-sheet settings-sheet" role="dialog" aria-modal="true" aria-label="学习设置">
-          <header><div><small>学习设置</small><h3>${reviewMode ? "章末精选复习" : esc(getItemTitle(this.itemId))}</h3></div><button type="button" data-action="close-overlay" aria-label="关闭">${icon("close")}</button></header>
+          <header><div><small>重做与重学</small><h3>${chapterMode ? "本章学习" : reviewMode ? "章末精选复习" : esc(getItemTitle(this.itemId))}</h3></div><button type="button" data-action="close-overlay" aria-label="关闭">${icon("close")}</button></header>
           <div class="settings-actions">
-            ${reviewMode ? `<button type="button" data-action="reset-review">${icon("reset")}<span><strong>重做章末复习</strong><small>只清除7道精选复习的作答记录</small></span></button>` : `
+            ${chapterMode ? `<button type="button" data-action="reset-chapter">${icon("reset")}<span><strong>从头重做本章</strong><small>清除本章阅读和作答记录，重新开始</small></span></button><button type="button" data-action="reset-review">${icon("reset")}<span><strong>重做章末复习</strong><small>只清除7道精选复习的作答记录</small></span></button>` : reviewMode ? `<button type="button" data-action="reset-review">${icon("reset")}<span><strong>重做章末复习</strong><small>只清除7道精选复习的作答记录</small></span></button>` : `
               <button type="button" data-action="relearn-item">${icon("book")}<span><strong>从头重学本目录项</strong><small>保留已有作答记录</small></span></button>
               ${item.extraction ? `<button type="button" data-action="redo-item-practice">${icon("reset")}<span><strong>重做本项提取</strong><small>只清除当前目录项的提取记录</small></span></button>` : ""}
               <button type="button" data-action="reset-item">${icon("close")}<span><strong>重置本目录项</strong><small>清除阅读与作答状态</small></span></button>`}
-            <button type="button" class="is-destructive" data-action="reset-chapter">${icon("reset")}<span><strong>重置整个章节</strong><small>清除本章全部学习记录</small></span></button>
+            ${chapterMode ? "" : `<button type="button" class="is-destructive" data-action="reset-chapter">${icon("reset")}<span><strong>重置整个章节</strong><small>清除本章全部学习记录</small></span></button>`}
           </div>
         </section></div>`;
     }
@@ -4891,14 +4895,13 @@ window.COURSE_PRESENTATION = {
       const nextKey = this.renderKey();
       const shouldMove = Boolean(this.lastRenderKey && this.lastRenderKey !== nextKey);
       const motionClass = shouldMove ? (this.motionDirection < 0 ? "motion-backward" : "motion-forward") : "";
-      const menuVisible = ["knowledge", "review", "reviewComplete"].includes(this.view);
       this.root.innerHTML = `<main class="course-shell">
         <aside class="course-desktop-intro"><p>病理学 · 第一章</p><h1>细胞和组织的<br>适应与损伤</h1><span>按教材目录逐层进入；内容直接展示，关键关系随滑动连续形成。</span>
           <dl><div><dt>目录项</dt><dd>${content.counts.directory_items}</dd></div><div><dt>展示步骤</dt><dd>${presentation.counts.presentation_frames}</dd></div><div><dt>核心提取</dt><dd>${content.counts.extractions}</dd></div></dl>
         </aside>
         <article class="course-phone" aria-label="病理学第一章互动课程">
           <header class="course-header"><button type="button" data-action="back" aria-label="返回上一级">${icon("left")}</button><div><small>病理学 · 第一章</small><strong>${esc(header.title)}</strong></div>
-            <div class="course-header-actions">${header.index ? `<span>${esc(header.index)}</span>` : ""}${menuVisible ? `<button type="button" data-action="open-settings" aria-label="学习设置">${icon("more")}</button>` : ""}</div></header>
+            <div class="course-header-actions">${header.index ? `<span>${esc(header.index)}</span>` : ""}<button type="button" class="course-retry-entry" data-action="open-settings" aria-label="重做与重学">重做</button></div></header>
           <div class="course-viewport" tabindex="0">${this.renderMainView(motionClass)}${this.renderOptionSheet()}${this.renderSettingsSheet()}
             ${!(this.supportOpen || this.settingsOpen || this.activeOption) ? `<nav class="course-step-controls" aria-label="学习导航"><button type="button" data-action="step-up" aria-label="上一项">${icon("up")}</button><button type="button" data-action="step-down" aria-label="下一项">${icon("down")}</button></nav>` : ""}
           </div>
