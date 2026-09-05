@@ -874,7 +874,7 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
 .medical-emphasis {
   color: var(--green);
   font-weight: 900;
-  text-decoration: underline;
+  text-decoration: none;
   text-decoration-color: rgba(39,91,75,.25);
   text-decoration-thickness: .12em;
   text-underline-offset: .16em;
@@ -1030,6 +1030,44 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
   .current-knowledge,
   .question-stage,
   .knowledge-history p { animation: none !important; }
+}
+
+/* Content hierarchy: centered focus, alignment follows the relationship. */
+.current-knowledge { left: 30px; right: 30px; padding: 8px 0 18px; }
+.current-knowledge h2 {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.5;
+  font-weight: 650;
+  text-align: center;
+  text-wrap: balance;
+}
+.knowledge-prose, .knowledge-relation, .knowledge-sequence,
+.knowledge-facts, .knowledge-examples, .knowledge-comparison { margin-top: 28px; }
+.knowledge-prose { width: fit-content; max-width: 100%; margin-inline: auto; }
+.knowledge-prose p { font-weight: 450; }
+.current-knowledge[data-alignment="center"] .knowledge-prose { text-align: center; }
+.knowledge-relation, .sequence-step { align-items: center; text-align: center; }
+.knowledge-sequence { justify-items: center; }
+.knowledge-relation > p, .sequence-step p { font-weight: 450; }
+.relation-step-arrow, .example-arrow, .sequence-step > span { margin-left: 0; }
+.knowledge-examples { justify-items: center; text-align: center; }
+.example-lines { width: fit-content; max-width: 100%; }
+.example-lines p { border: 0; font-weight: 450; }
+.knowledge-facts { width: fit-content; max-width: 100%; margin-inline: auto; }
+.knowledge-facts p { font-weight: 450; }
+.knowledge-comparison { gap: 26px; }
+.knowledge-comparison section { padding-bottom: 0; border: 0; text-align: center; }
+.knowledge-comparison h3 { font-size: 18px; font-weight: 650; margin-bottom: 12px; }
+.knowledge-comparison h3 .medical-emphasis { color: inherit; font-weight: inherit; }
+.knowledge-comparison p { font-weight: 450; line-height: 1.7; text-wrap: pretty; }
+.knowledge-note { text-align: left; }
+.medical-emphasis { font-weight: 750; }
+.knowledge-history p { font-size: 12px; font-weight: 450; opacity: .38; }
+@media (max-width: 370px) {
+  .current-knowledge { left: 24px; right: 24px; }
+  .current-knowledge h2 { font-size: 20px; }
+  .knowledge-comparison h3 { font-size: 18px; }
 }
 
 </style>
@@ -3339,19 +3377,27 @@ window.COURSE_PRESENTATION = {
       {
         "id": "AM-01",
         "source_ref": "AM-01",
-        "title": "淀粉样变的分布与疾病联系",
+        "title": "淀粉样变的分布",
         "template": "分布与联系",
-        "layout": "examples",
-        "examples": [
+        "layout": "prose",
+        "paragraphs": [
           "**全身性沉积**",
-          "**局灶性沉积**",
+          "**局灶性沉积**"
+        ],
+        "history_label": "全身性沉积 · 局灶性沉积",
+        "support": false
+      },
+      {
+        "id": "AM-02",
+        "source_ref": "AM-01",
+        "title": "淀粉样变的相关疾病",
+        "template": "分布与联系",
+        "layout": "prose",
+        "paragraphs": [
           "可见于**结核病**",
           "可见于**浆细胞相关疾病**"
         ],
-        "lead": "主要掌握以下范围",
-        "result": "**淀粉样物质沉积**",
-        "history_label": "淀粉样变｜全身性或局灶性，可见于结核病和浆细胞相关疾病",
-        "eyebrow": "分布与联系",
+        "history_label": "可见于结核病 · 可见于浆细胞相关疾病",
         "support": false
       }
     ],
@@ -3434,7 +3480,7 @@ window.COURSE_PRESENTATION = {
       {
         "id": "CA-04",
         "source_ref": "CA-04",
-        "title": "营养不良性钙化与转移性钙化",
+        "title": "两类钙化的比较",
         "template": "同维度比较",
         "layout": "compare",
         "groups": [
@@ -3937,7 +3983,7 @@ window.COURSE_PRESENTATION = {
     ]
   },
   "counts": {
-    "presentation_frames": 81,
+    "presentation_frames": 82,
     "items": 12
   }
 };
@@ -4529,7 +4575,7 @@ window.COURSE_PRESENTATION = {
     }
 
     renderHistory(frames) {
-      const history = frames.slice(0, Math.min(this.stageIndex, frames.length)).slice(-3);
+      const history = frames.slice(0, Math.min(this.stageIndex, frames.length)).slice(-1);
       if (!history.length) return "";
       return `<div class="knowledge-history" aria-label="已形成的知识">${history.map((frame, index) => {
         const depth = history.length - index;
@@ -4543,9 +4589,10 @@ window.COURSE_PRESENTATION = {
       const isExtraction = item.extraction && this.stageIndex === frames.length;
       if (isExtraction) return `<section class="knowledge-page stage-enter ${motionClass}"><p class="knowledge-path">${esc(item.path_label)}</p>${this.renderHistory(frames)}${this.renderQuestion(buildQuestion(item.extraction))}</section>`;
       const frame = frames[Math.min(this.stageIndex, frames.length - 1)];
+      const alignment = frame.layout === "prose" && frame.paragraphs.some((line) => line.replaceAll("**", "").length > 32) ? "left" : "center";
       return `<section class="knowledge-page stage-enter ${motionClass}"><p class="knowledge-path">${esc(item.path_label)}</p>${this.renderHistory(frames)}
-        <article class="current-knowledge${frame.support ? " is-support" : ""}" data-course-scrollable data-frame-id="${esc(frame.id)}">
-          <small>${esc(frame.eyebrow || frame.template)}</small><h2>${esc(frame.title)}</h2>${this.renderFrameBody(frame)}
+        <article class="current-knowledge${frame.support ? " is-support" : ""}" data-course-scrollable data-frame-id="${esc(frame.id)}" data-layout="${esc(frame.layout)}" data-alignment="${alignment}">
+          <h2>${esc(frame.title)}</h2>${this.renderFrameBody(frame)}
         </article>
       </section>`;
     }
