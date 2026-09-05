@@ -159,12 +159,12 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
   align-items: center;
   justify-content: center;
   gap: 9px;
-  min-height: 54px;
-  padding: 10px 20px 14px;
-  background: linear-gradient(0deg, rgba(251,248,240,.99), rgba(251,248,240,.86));
+  min-height: 26px;
+  padding: 4px 16px max(4px, env(safe-area-inset-bottom));
+  background: var(--paper);
 }
-.course-footer > span { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
-.course-footer p { margin: 0; color: var(--muted); font-size: 11px; }
+.course-footer > span { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+.course-footer p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.4; white-space: nowrap; }
 
 .stage-enter { animation: stage-enter .32s cubic-bezier(.2,.72,.24,1) both; }
 @keyframes stage-enter {
@@ -832,10 +832,20 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
 
 .knowledge-history {
   top: 34px;
-  max-height: 146px;
+  height: max(0px, calc(50% - var(--current-height, 100vh) * .47 - 50px));
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+  z-index: 0;
+  contain: paint;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22px);
+  mask-image: linear-gradient(to bottom, transparent, #000 22px);
   gap: 10px;
 }
 .knowledge-history p {
+  flex: 0 0 auto;
   overflow: hidden;
   color: #607169;
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
@@ -844,11 +854,16 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
   white-space: nowrap;
 }
 .current-knowledge {
-  top: 52%;
-  max-height: 68%;
+  top: 50%;
+  max-height: calc(100% - 120px);
   padding-right: 4px;
   transform: translateY(-47%);
 }
+.question-stage {
+  max-height: calc(100% - 120px);
+  transform: translateY(-47%);
+}
+.knowledge-page { isolation: isolate; }
 .current-knowledge.is-support > small {
   color: var(--amber);
 }
@@ -4709,6 +4724,15 @@ window.COURSE_PRESENTATION = {
         </article>
       </main>`;
       this.lastRenderKey = nextKey;
+      this.layoutObserver?.disconnect();
+      const page = this.root.querySelector('.knowledge-page');
+      const current = page?.querySelector('.current-knowledge, .question-stage');
+      if (current) {
+        const syncHistory = () => page.style.setProperty('--current-height', `${current.offsetHeight}px`);
+        syncHistory();
+        this.layoutObserver = new ResizeObserver(syncHistory);
+        this.layoutObserver.observe(current);
+      }
     }
 
     handleClick(event) {
@@ -4751,8 +4775,8 @@ window.COURSE_PRESENTATION = {
     handlePointerDown(event) {
       const viewport = event.target.closest(".course-viewport");
       if (!viewport || event.button !== 0 || event.target.closest(".course-sheet-layer")) return;
-      const scrollable = event.target.closest("[data-course-scrollable]");
-      this.drag = { pointerId: event.pointerId, startY: event.clientY, lastY: event.clientY, scrollable, scrolled: false, viewport, captured: false };
+      const scrollable = event.target.closest("[data-course-scrollable]") || viewport.querySelector('.current-knowledge, .question-stage, .directory-page');
+      this.drag = { pointerId: event.pointerId, startY: event.clientY, lastY: event.clientY, scrollable, edgeDistance: 0, viewport, captured: false };
     }
 
     handlePointerMove(event) {
@@ -4760,11 +4784,16 @@ window.COURSE_PRESENTATION = {
       const delta = event.clientY - this.drag.lastY;
       this.drag.lastY = event.clientY;
       const scrollable = this.drag.scrollable;
+      let remaining = delta;
       if (scrollable && scrollable.scrollHeight > scrollable.clientHeight + 2) {
         const before = scrollable.scrollTop;
-        scrollable.scrollTop -= delta;
-        if (Math.abs(scrollable.scrollTop - before) > .5) this.drag.scrolled = true;
+        scrollable.scrollTop = Math.max(0, Math.min(scrollable.scrollHeight - scrollable.clientHeight, before - delta));
+        const consumed = before - scrollable.scrollTop;
+        remaining -= consumed;
+        if (Math.abs(consumed) > .5) this.drag.edgeDistance = 0;
       }
+      if (remaining * this.drag.edgeDistance < 0) this.drag.edgeDistance = 0;
+      this.drag.edgeDistance += remaining;
       if (Math.abs(event.clientY - this.drag.startY) > 8) {
         if (!this.drag.captured) {
           try {
@@ -4779,15 +4808,16 @@ window.COURSE_PRESENTATION = {
     handlePointerUp(event) {
       if (!this.drag || this.drag.pointerId !== event.pointerId) return;
       const distance = event.clientY - this.drag.startY;
-      if (Math.abs(distance) > 46) {
+      if (Math.abs(distance) > 8 || this.drag.captured) {
         this.suppressClick = true;
         setTimeout(() => { this.suppressClick = false; }, 90);
-        if (!this.drag.scrolled) this.step(distance < 0 ? 1 : -1);
       }
       if (this.drag.captured) {
         try { this.drag.viewport.releasePointerCapture(event.pointerId); } catch { /* pointer capture is optional */ }
       }
+      const edgeDistance = this.drag.edgeDistance;
       this.drag = null;
+      if (Math.abs(edgeDistance) > 46) this.step(edgeDistance < 0 ? 1 : -1);
     }
 
     handleWheel(event) {
@@ -4799,17 +4829,19 @@ window.COURSE_PRESENTATION = {
       this.wheel.lastAt = now;
       clearTimeout(this.wheel.timer);
       this.wheel.timer = setTimeout(() => Object.assign(this.wheel, { amount: 0, stepped: false, scrolled: false }), 300);
-      const scrollable = event.target.closest("[data-course-scrollable]");
-      if (scrollable && scrollable.scrollHeight > scrollable.clientHeight + 2) {
-        const canScroll = event.deltaY > 0
-          ? scrollable.scrollTop + scrollable.clientHeight < scrollable.scrollHeight - 2
-          : scrollable.scrollTop > 2;
-        if (canScroll) { this.wheel.scrolled = true; return; }
-        if (this.wheel.scrolled) return;
-      }
       event.preventDefault();
       if (this.wheel.stepped) return;
-      this.wheel.amount += event.deltaY;
+      const scrollable = event.target.closest("[data-course-scrollable]") || viewport.querySelector('.current-knowledge, .question-stage, .directory-page');
+      let remaining = event.deltaY;
+      if (scrollable && scrollable.scrollHeight > scrollable.clientHeight + 2) {
+        const before = scrollable.scrollTop;
+        scrollable.scrollTop = Math.max(0, Math.min(scrollable.scrollHeight - scrollable.clientHeight, before + remaining));
+        const consumed = scrollable.scrollTop - before;
+        remaining -= consumed;
+        if (Math.abs(consumed) > .5) this.wheel.amount = 0;
+      }
+      if (remaining * this.wheel.amount < 0) this.wheel.amount = 0;
+      this.wheel.amount += remaining;
       if (Math.abs(this.wheel.amount) >= 48) {
         this.wheel.stepped = true;
         this.step(this.wheel.amount > 0 ? 1 : -1);
