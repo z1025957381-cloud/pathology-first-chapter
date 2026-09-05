@@ -1086,10 +1086,14 @@ button:focus-visible { outline: 2px solid rgba(39,91,75,.55); outline-offset: 3p
   margin-bottom: 12px;
   text-align: left;
 }
-.current-knowledge .knowledge-group-lines { margin-left: 2em; font-size: 20px; text-align: left; gap: 10px; }
+.current-knowledge .knowledge-group-lines { margin-left: 0; font-size: 20px; text-align: left; gap: 10px; }
 .current-knowledge .knowledge-group-lines p,
 .current-knowledge .knowledge-comparison p { font-size: 20px; line-height: 1.65; }
-.current-knowledge .knowledge-comparison p { margin: 10px 0 0 2em; text-align: left; }
+.current-knowledge .knowledge-group-lines p { text-indent: 2em; }
+.current-knowledge .knowledge-comparison p { margin: 10px 0 0; text-align: left; text-indent: 2em; }
+.knowledge-note { border: 0; padding-top: 0; font-size: 15px; line-height: 1.6; }
+.knowledge-note .medical-emphasis { color: inherit; font-weight: inherit; }
+.question-heading h2 { font-size: 22px; line-height: 1.45; }
 .medical-emphasis { font-weight: 750; }
 .knowledge-history p { font-size: 12px; font-weight: 450; opacity: .38; }
 @media (max-width: 370px) {
@@ -2677,20 +2681,11 @@ window.COURSE_PRESENTATION = {
         ],
         "history_label": "萎缩｜体积缩小、功能下降，细胞器减少",
         "eyebrow": "基础结论",
-        "support": false
-      },
-      {
-        "id": "AT-S03",
-        "source_ref": "AT-S03",
-        "title": "萎缩细胞的自噬",
-        "template": "基础结论",
-        "layout": "prose",
-        "paragraphs": [
-          "萎缩细胞**自噬增强**，自噬小体可增多。"
-        ],
-        "history_label": "萎缩｜自噬增强，自噬小体增多",
-        "eyebrow": "补充内容",
-        "support": true
+        "support": false,
+        "note": "萎缩细胞自噬增强，自噬小体可增多。",
+        "also_covers": [
+          "AT-S03"
+        ]
       },
       {
         "id": "AT-02A",
@@ -2757,31 +2752,28 @@ window.COURSE_PRESENTATION = {
         "source_ref": "AT-03",
         "title": "压迫性萎缩",
         "template": "原因—类型",
-        "layout": "relation",
-        "source_lines": [
-          "**持续压迫**",
-          "受压组织"
-        ],
-        "result": "**压迫性萎缩**",
+        "layout": "grouped",
         "history_label": "萎缩｜持续压迫 → 压迫性萎缩",
         "eyebrow": "原因—类型",
-        "support": false
-      },
-      {
-        "id": "AT-S01",
-        "source_ref": "AT-S01",
-        "title": "肾盂积水中的压迫性萎缩",
-        "template": "原因—类型",
-        "layout": "relation",
-        "source_lines": [
-          "**肾盂积水**",
-          "受压的肾实质"
+        "support": false,
+        "groups": [
+          {
+            "title": "发生原因",
+            "lines": [
+              "**持续压迫**使受压组织萎缩。"
+            ]
+          },
+          {
+            "title": "实例",
+            "lines": [
+              "**肾盂积水**压迫肾实质，引起肾实质萎缩。"
+            ]
+          }
         ],
-        "result": "**压迫性萎缩**",
-        "history_label": "萎缩｜肾盂积水 → 肾实质压迫性萎缩",
-        "eyebrow": "补充内容",
-        "support": true,
-        "note": "积水本身可使**肾脏总体积增大**。"
+        "note": "积水可使肾脏总体积增大。",
+        "also_covers": [
+          "AT-S01"
+        ]
       },
       {
         "id": "AT-04",
@@ -2849,33 +2841,30 @@ window.COURSE_PRESENTATION = {
       {
         "id": "HY-02A",
         "source_ref": "HY-02",
-        "title": "高血压性心肌肥大",
+        "title": "肥大的类型与实例",
         "template": "实例归类",
-        "layout": "relation",
-        "source_lines": [
-          "**高血压性心肌肥大**",
-          "实质细胞体积增大"
-        ],
-        "result": "**病理性适应**",
+        "layout": "grouped",
         "history_label": "肥大｜高血压性心肌肥大 → 病理性适应",
         "eyebrow": "实例归类",
-        "support": false
-      },
-      {
-        "id": "HY-02B",
-        "source_ref": "HY-02",
-        "title": "运动员骨骼肌肥大",
-        "template": "实例归类",
-        "layout": "relation",
-        "source_lines": [
-          "**运动员骨骼肌肥大**",
-          "实质细胞体积增大"
-        ],
-        "result": "**生理性适应**",
-        "history_label": "肥大｜运动员骨骼肌肥大 → 生理性适应",
-        "eyebrow": "实例归类",
         "support": false,
-        "note": "肥大也可与增生同时出现，相关实例在“增生”中直接展示。"
+        "groups": [
+          {
+            "title": "病理性肥大",
+            "lines": [
+              "高血压性心肌肥大。"
+            ]
+          },
+          {
+            "title": "生理性肥大",
+            "lines": [
+              "运动员骨骼肌肥大。"
+            ]
+          }
+        ],
+        "note": "肥大也可与增生同时出现。",
+        "also_covers": [
+          "HY-02B"
+        ]
       }
     ],
     "CH01-S01-I03": [
@@ -2904,8 +2893,6 @@ window.COURSE_PRESENTATION = {
           "**妊娠期子宫**",
           "**哺乳期乳腺**"
         ],
-        "lead": "以下生理状态中可同时发生",
-        "result": "**细胞肥大与增生并存**",
         "history_label": "增生｜妊娠期子宫、哺乳期乳腺：肥大与增生并存",
         "eyebrow": "典型实例",
         "support": false
@@ -2968,21 +2955,11 @@ window.COURSE_PRESENTATION = {
         ],
         "history_label": "化生｜已分化组织被另一种分化组织取代",
         "eyebrow": "基础结论",
-        "support": false
-      },
-      {
-        "id": "ME-S01",
-        "source_ref": "ME-S01",
-        "title": "化生的适应意义",
-        "template": "基础结论",
-        "layout": "prose",
-        "paragraphs": [
-          "化生通常发生于**同源细胞之间**。",
-          "化生可增强局部组织对持续刺激的**耐受性**。"
-        ],
-        "history_label": "化生｜同源细胞之间转变，可增强耐受性",
-        "eyebrow": "补充内容",
-        "support": true
+        "support": false,
+        "note": "化生通常发生于同源细胞之间，可增强局部组织对持续刺激的耐受性。",
+        "also_covers": [
+          "ME-S01"
+        ]
       },
       {
         "id": "ME-02",
@@ -3054,8 +3031,6 @@ window.COURSE_PRESENTATION = {
           "**膀胱鳞状化生** → 膀胱鳞状细胞癌风险增加",
           "**子宫内膜鳞状化生** → 子宫内膜鳞状细胞癌风险增加"
         ],
-        "lead": "以下对应关系应分别掌握",
-        "result": "**相应部位的鳞状细胞癌风险增加**",
         "history_label": "化生｜鳞状化生与相应鳞癌风险增加",
         "eyebrow": "风险对应",
         "support": false
@@ -3070,8 +3045,6 @@ window.COURSE_PRESENTATION = {
           "**Barrett食管** → 食管腺癌风险增加",
           "**胃肠上皮化生** → 肠型胃癌风险增加"
         ],
-        "lead": "以下对应关系应分别掌握",
-        "result": "**腺癌风险增加**",
         "history_label": "化生｜Barrett食管、胃肠上皮化生与腺癌风险",
         "eyebrow": "风险对应",
         "support": false
@@ -3126,32 +3099,28 @@ window.COURSE_PRESENTATION = {
         "source_ref": "FC-01",
         "title": "脂肪变的定义与发生部位",
         "template": "基础结论",
-        "layout": "prose",
-        "paragraphs": [
-          "脂肪变是**非脂肪细胞胞质内**出现**甘油三酯脂滴**。"
-        ],
+        "layout": "grouped",
         "history_label": "脂肪变｜非脂肪细胞胞质内出现甘油三酯脂滴",
         "eyebrow": "基础结论",
-        "support": false
-      },
-      {
-        "id": "FC-01B",
-        "source_ref": "FC-01",
-        "title": "脂肪变的常见细胞",
-        "template": "典型实例",
-        "layout": "examples",
-        "examples": [
-          "**肝细胞**",
-          "**肾近曲小管上皮细胞**",
-          "**心肌细胞**"
-        ],
-        "lead": "以下细胞均可发生",
-        "result": "**均可发生脂肪变**",
-        "history_label": "脂肪变｜肝细胞、近曲小管上皮、心肌细胞",
-        "eyebrow": "典型实例",
         "support": false,
+        "groups": [
+          {
+            "title": "定义",
+            "lines": [
+              "脂肪变是**非脂肪细胞胞质内**出现**甘油三酯脂滴**。"
+            ]
+          },
+          {
+            "title": "常见细胞",
+            "lines": [
+              "**肝细胞**",
+              "**肾近曲小管上皮细胞**",
+              "**心肌细胞**"
+            ]
+          }
+        ],
         "also_covers": [
-          "FC-S02"
+          "FC-01B"
         ]
       },
       {
@@ -3198,8 +3167,6 @@ window.COURSE_PRESENTATION = {
           "**化学毒物**",
           "**白喉外毒素**"
         ],
-        "lead": "以下因素可参与发生",
-        "result": "**肝脂肪变**",
         "history_label": "脂肪变｜其他常见病因",
         "eyebrow": "补充内容",
         "support": true
@@ -3242,7 +3209,7 @@ window.COURSE_PRESENTATION = {
         "template": "基础结论",
         "layout": "prose",
         "paragraphs": [
-          "心肌脂肪浸润表现为**脂肪细胞进入心肌间质**。",
+          "**脂肪细胞进入心肌间质**。",
           "常偏于**右心室和心尖**。"
         ],
         "history_label": "脂肪浸润｜脂肪细胞进入心肌间质，偏右心室和心尖",
@@ -3280,34 +3247,31 @@ window.COURSE_PRESENTATION = {
       {
         "id": "HG-01A",
         "source_ref": "HG-01",
-        "title": "玻璃样变的共同形态",
+        "title": "玻璃样变的形态与分类",
         "template": "共同形态",
-        "layout": "facts",
-        "lines": [
-          "**均质**",
-          "**红染**",
-          "**半透明样**"
-        ],
+        "layout": "grouped",
         "history_label": "玻璃样变｜均质、红染、半透明样",
         "eyebrow": "共同形态",
-        "support": false
-      },
-      {
-        "id": "HG-01B",
-        "source_ref": "HG-01",
-        "title": "玻璃样变的分类",
-        "template": "分类",
-        "layout": "examples",
-        "examples": [
-          "**细胞内玻璃样变**",
-          "**纤维结缔组织玻璃样变**",
-          "**细小动脉壁玻璃样变**"
+        "support": false,
+        "groups": [
+          {
+            "title": "共同形态",
+            "lines": [
+              "**均质、红染、半透明样**。"
+            ]
+          },
+          {
+            "title": "按发生部位分类",
+            "lines": [
+              "细胞内",
+              "纤维结缔组织",
+              "细小动脉壁"
+            ]
+          }
         ],
-        "lead": "按发生位置分为",
-        "result": "按发生位置分为三类",
-        "history_label": "玻璃样变｜细胞内、纤维结缔组织、细小动脉壁",
-        "eyebrow": "分类",
-        "support": false
+        "also_covers": [
+          "HG-01B"
+        ]
       },
       {
         "id": "HG-02",
@@ -3329,76 +3293,65 @@ window.COURSE_PRESENTATION = {
         "source_ref": "HG-03",
         "title": "纤维结缔组织玻璃样变",
         "template": "部位与形态",
-        "layout": "examples",
-        "examples": [
-          "**瘢痕**",
-          "**机化组织**",
-          "**动脉粥样硬化纤维帽**"
-        ],
-        "lead": "常见于",
-        "result": "**胶原纤维增粗、融合，并伴蛋白性物质蓄积**",
+        "layout": "grouped",
         "history_label": "玻璃样变｜纤维结缔组织：胶原增粗、融合",
         "eyebrow": "部位与形态",
-        "support": false
+        "support": false,
+        "groups": [
+          {
+            "title": "常见部位",
+            "lines": [
+              "**瘢痕**",
+              "**机化组织**",
+              "**动脉粥样硬化纤维帽**"
+            ]
+          },
+          {
+            "title": "形态",
+            "lines": [
+              "**胶原纤维增粗、融合，并伴蛋白性物质蓄积**"
+            ]
+          }
+        ]
       },
       {
         "id": "HG-04A",
         "source_ref": "HG-04",
-        "title": "玻璃样小滴",
+        "title": "细胞内玻璃样变的实例",
         "template": "实例对应",
-        "layout": "relation",
-        "source_lines": [
-          "**肾近曲小管上皮细胞内**",
-          "重吸收蛋白蓄积"
-        ],
-        "result": "**玻璃样小滴**",
+        "layout": "grouped",
         "history_label": "玻璃样变｜近曲小管上皮 → 玻璃样小滴",
         "eyebrow": "实例对应",
-        "support": false
-      },
-      {
-        "id": "HG-04B",
-        "source_ref": "HG-04",
-        "title": "Mallory小体",
-        "template": "实例对应",
-        "layout": "relation",
-        "source_lines": [
-          "**肝细胞内**",
-          "中间丝聚集"
+        "support": false,
+        "groups": [
+          {
+            "title": "玻璃样小滴",
+            "lines": [
+              "**肾近曲小管上皮细胞内**",
+              "重吸收蛋白蓄积"
+            ]
+          },
+          {
+            "title": "Mallory小体",
+            "lines": [
+              "**肝细胞内**",
+              "中间丝聚集"
+            ]
+          },
+          {
+            "title": "Russell小体",
+            "lines": [
+              "**浆细胞内**",
+              "粗面内质网内免疫球蛋白蓄积"
+            ]
+          }
         ],
-        "result": "**Mallory小体**",
-        "history_label": "玻璃样变｜肝细胞中间丝聚集 → Mallory小体",
-        "eyebrow": "实例对应",
-        "support": false
-      },
-      {
-        "id": "HG-05",
-        "source_ref": "HG-05",
-        "title": "Russell小体",
-        "template": "实例对应",
-        "layout": "relation",
-        "source_lines": [
-          "**浆细胞内**",
-          "粗面内质网内免疫球蛋白蓄积"
-        ],
-        "result": "**Russell小体**",
-        "history_label": "玻璃样变｜浆细胞免疫球蛋白蓄积 → Russell小体",
-        "eyebrow": "实例对应",
-        "support": false
-      },
-      {
-        "id": "HG-S01",
-        "source_ref": "HG-S01",
-        "title": "Negri小体",
-        "template": "基础结论",
-        "layout": "prose",
-        "paragraphs": [
-          "**Negri小体**属于细胞内玻璃样变性。",
-          "病毒包涵体的归类需落实到**具体类型**。"
-        ],
-        "history_label": "玻璃样变｜Negri小体属于细胞内玻璃样变性",
-        "eyebrow": "补充内容",
-        "support": true
+        "note": "Negri小体属于细胞内玻璃样变性。",
+        "also_covers": [
+          "HG-04B",
+          "HG-05",
+          "HG-S01"
+        ]
       }
     ],
     "CH01-S03-I04": [
@@ -3411,11 +3364,16 @@ window.COURSE_PRESENTATION = {
         "groups": [
           {
             "title": "全身性淀粉样变",
-            "lines": ["可见于**结核病**", "可见于**多发性骨髓瘤**"]
+            "lines": [
+              "可见于**结核病**",
+              "可见于**多发性骨髓瘤**"
+            ]
           },
           {
             "title": "局限性淀粉样变",
-            "lines": ["沉积局限于某一器官或组织"]
+            "lines": [
+              "沉积局限于某一器官或组织"
+            ]
           }
         ],
         "history_label": "全身性淀粉样变可见于结核病、多发性骨髓瘤；局限性淀粉样变局限于某一器官或组织",
@@ -3465,7 +3423,7 @@ window.COURSE_PRESENTATION = {
         "template": "基础结论",
         "layout": "prose",
         "paragraphs": [
-          "营养不良性钙化多发生于**血钙正常**的变性、坏死组织或坏死虫卵等局部病灶。"
+          "多发生于**血钙正常**的变性、坏死组织或坏死虫卵等局部病灶。"
         ],
         "history_label": "钙化｜血钙正常，沉积于变性或坏死组织",
         "eyebrow": "基础结论",
@@ -3478,7 +3436,7 @@ window.COURSE_PRESENTATION = {
         "template": "基础结论",
         "layout": "prose",
         "paragraphs": [
-          "转移性钙化与**高钙血症或钙磷代谢异常**有关。",
+          "与**高钙血症或钙磷代谢异常**有关。",
           "可沉积于**肾、肺和胃黏膜**等相对正常组织。"
         ],
         "history_label": "钙化｜高钙或钙磷代谢异常，沉积于相对正常组织",
@@ -3545,78 +3503,67 @@ window.COURSE_PRESENTATION = {
       {
         "id": "NC-02A",
         "source_ref": "NC-02",
-        "title": "凝固性坏死的主导机制",
+        "title": "凝固性坏死",
         "template": "主导机制",
-        "layout": "prose",
-        "paragraphs": [
-          "凝固性坏死以**蛋白质变性占优势**，溶酶体水解相对较弱。"
-        ],
+        "layout": "grouped",
         "history_label": "凝固性坏死｜蛋白质变性占优势",
         "eyebrow": "主导机制",
-        "support": false
-      },
-      {
-        "id": "NC-02B",
-        "source_ref": "NC-02",
-        "title": "凝固性坏死的形态",
-        "template": "形态",
-        "layout": "facts",
-        "lines": [
-          "**灰黄**",
-          "**干燥**",
-          "**质实**",
-          "原有组织轮廓可暂时保留"
+        "support": false,
+        "groups": [
+          {
+            "title": "机制",
+            "lines": [
+              "以**蛋白质变性占优势**，溶酶体水解相对较弱。"
+            ]
+          },
+          {
+            "title": "形态",
+            "lines": [
+              "**灰黄、干燥、质实**；原有组织轮廓可暂时保留。"
+            ]
+          },
+          {
+            "title": "典型实例",
+            "lines": [
+              "**心肌梗死**",
+              "**肾梗死**",
+              "**脾梗死**"
+            ]
+          }
         ],
-        "history_label": "凝固性坏死｜灰黄、干燥、质实，轮廓暂时保留",
-        "eyebrow": "形态",
-        "support": false
-      },
-      {
-        "id": "NC-02C",
-        "source_ref": "NC-02",
-        "title": "凝固性坏死的典型实例",
-        "template": "典型实例",
-        "layout": "examples",
-        "examples": [
-          "**心肌梗死**",
-          "**肾梗死**",
-          "**脾梗死**"
-        ],
-        "lead": "以下梗死通常属于",
-        "result": "**凝固性坏死**",
-        "history_label": "凝固性坏死｜心肌、肾、脾梗死",
-        "eyebrow": "典型实例",
-        "support": false
+        "also_covers": [
+          "NC-02B",
+          "NC-02C"
+        ]
       },
       {
         "id": "NC-03A",
         "source_ref": "NC-03",
-        "title": "液化性坏死的主导机制",
+        "title": "液化性坏死",
         "template": "主导机制",
-        "layout": "prose",
-        "paragraphs": [
-          "液化性坏死以**水解酶消化占优势**，组织被分解为液态物。"
-        ],
+        "layout": "grouped",
         "history_label": "液化性坏死｜水解酶消化占优势，组织液化",
         "eyebrow": "主导机制",
-        "support": false
-      },
-      {
-        "id": "NC-03B",
-        "source_ref": "NC-03",
-        "title": "液化性坏死的典型实例",
-        "template": "典型实例",
-        "layout": "examples",
-        "examples": [
-          "**脑组织坏死**",
-          "**化脓性脓肿**",
-          "**阿米巴肝脓肿**"
+        "support": false,
+        "groups": [
+          {
+            "title": "机制",
+            "lines": [
+              "以**水解酶消化占优势**，组织被分解为液态物。"
+            ]
+          },
+          {
+            "title": "典型实例",
+            "lines": [
+              "**脑组织坏死**",
+              "**化脓性脓肿**",
+              "**阿米巴肝脓肿**"
+            ]
+          }
         ],
-        "lead": "以下病变通常属于",
-        "result": "**液化性坏死**",
-        "history_label": "液化性坏死｜脑组织坏死、脓肿",
-        "eyebrow": "典型实例",
-        "support": false
+        "also_covers": [
+          "NC-03B"
+        ]
       },
       {
         "id": "NC-S01",
@@ -3628,8 +3575,6 @@ window.COURSE_PRESENTATION = {
           "**溶解性（液化性）坏死**",
           "**凝固性坏死**"
         ],
-        "lead": "病毒性肝炎可出现",
-        "result": "病毒性肝炎可出现以上类型",
         "history_label": "坏死｜病毒性肝炎可见液化性和凝固性坏死",
         "eyebrow": "补充内容",
         "support": true
@@ -3664,34 +3609,38 @@ window.COURSE_PRESENTATION = {
       {
         "id": "NC-05",
         "source_ref": "NC-05",
-        "title": "纤维素样坏死的部位与机制",
+        "title": "纤维素样坏死",
         "template": "基础结论",
-        "layout": "prose",
-        "paragraphs": [
-          "纤维素样坏死主要发生于**结缔组织和小血管壁**。",
-          "**免疫复合物沉积及补体激活**可参与血管壁损伤。"
-        ],
+        "layout": "grouped",
         "history_label": "纤维素样坏死｜结缔组织和小血管壁，免疫损伤参与",
         "eyebrow": "基础结论",
-        "support": false
-      },
-      {
-        "id": "NC-06",
-        "source_ref": "NC-06",
-        "title": "纤维素样坏死的典型实例",
-        "template": "典型实例",
-        "layout": "examples",
-        "examples": [
-          "**结节性多动脉炎**",
-          "**急进性高血压**",
-          "**系统性红斑狼疮**",
-          "**风湿性心肌炎**"
+        "support": false,
+        "groups": [
+          {
+            "title": "部位",
+            "lines": [
+              "**结缔组织和小血管壁**。"
+            ]
+          },
+          {
+            "title": "机制",
+            "lines": [
+              "**免疫复合物沉积及补体激活**可参与血管壁损伤。"
+            ]
+          },
+          {
+            "title": "典型实例",
+            "lines": [
+              "**结节性多动脉炎**",
+              "**急进性高血压**",
+              "**系统性红斑狼疮**",
+              "**风湿性心肌炎**"
+            ]
+          }
         ],
-        "lead": "以下病变中可见",
-        "result": "**纤维素样坏死**",
-        "history_label": "纤维素样坏死｜典型病变实例",
-        "eyebrow": "典型实例",
-        "support": false
+        "also_covers": [
+          "NC-06"
+        ]
       },
       {
         "id": "NC-07",
@@ -3794,11 +3743,28 @@ window.COURSE_PRESENTATION = {
         "template": "结局分类",
         "layout": "grouped",
         "groups": [
-          { "title": "溶解吸收", "lines": [] },
-          { "title": "分离排出", "lines": [] },
-          { "title": "机化", "lines": ["肉芽组织取代坏死灶的过程称为**机化**。"] },
-          { "title": "包裹", "lines": [] },
-          { "title": "钙化", "lines": [] }
+          {
+            "title": "溶解吸收",
+            "lines": []
+          },
+          {
+            "title": "分离排出",
+            "lines": []
+          },
+          {
+            "title": "机化",
+            "lines": [
+              "肉芽组织取代坏死灶的过程称为**机化**。"
+            ]
+          },
+          {
+            "title": "包裹",
+            "lines": []
+          },
+          {
+            "title": "钙化",
+            "lines": []
+          }
         ],
         "history_label": "坏死结局｜吸收、排出、机化、包裹、钙化",
         "eyebrow": "结局分类",
@@ -3881,20 +3847,11 @@ window.COURSE_PRESENTATION = {
         ],
         "history_label": "凋亡｜主动程序性死亡，受基因调控、依赖能量",
         "eyebrow": "基础结论",
-        "support": false
-      },
-      {
-        "id": "AP-S01",
-        "source_ref": "AP-S01",
-        "title": "凋亡的历史旧称",
-        "template": "基础结论",
-        "layout": "prose",
-        "paragraphs": [
-          "“**固缩坏死**”是凋亡的历史旧称。"
-        ],
-        "history_label": "凋亡｜历史旧称：固缩坏死",
-        "eyebrow": "补充内容",
-        "support": true
+        "support": false,
+        "note": "“固缩坏死”是凋亡的历史旧称。",
+        "also_covers": [
+          "AP-S01"
+        ]
       },
       {
         "id": "AP-02",
@@ -3917,27 +3874,28 @@ window.COURSE_PRESENTATION = {
         "source_ref": "AP-03",
         "title": "凋亡小体的组成与清除",
         "template": "组成与清除",
-        "layout": "prose",
-        "paragraphs": [
-          "凋亡小体可包含**核碎片、胞质和细胞器成分**。",
-          "凋亡小体由**巨噬细胞或邻近实质细胞**迅速吞噬。"
-        ],
+        "layout": "grouped",
         "history_label": "凋亡｜凋亡小体被巨噬细胞或邻近实质细胞吞噬",
         "eyebrow": "组成与清除",
-        "support": false
-      },
-      {
-        "id": "AP-03B",
-        "source_ref": "AP-03",
-        "title": "凋亡的组织反应",
-        "template": "组织反应",
-        "layout": "prose",
-        "paragraphs": [
-          "由于细胞内容物被包裹并迅速清除，周围组织反应通常**轻微**。"
+        "support": false,
+        "groups": [
+          {
+            "title": "组成",
+            "lines": [
+              "核碎片、胞质和细胞器成分。"
+            ]
+          },
+          {
+            "title": "清除",
+            "lines": [
+              "由**巨噬细胞或邻近实质细胞**迅速吞噬。"
+            ]
+          }
         ],
-        "history_label": "凋亡｜周围组织反应通常轻微",
-        "eyebrow": "组织反应",
-        "support": false
+        "note": "由于内容物被包裹并迅速清除，周围组织反应通常轻微。",
+        "also_covers": [
+          "AP-03B"
+        ]
       },
       {
         "id": "AP-04A",
@@ -4003,8 +3961,143 @@ window.COURSE_PRESENTATION = {
     ]
   },
   "counts": {
-    "presentation_frames": 81,
+    "presentation_frames": 66,
     "items": 12
+  },
+  "revision": "density-v1",
+  "legacy_frame_ids": {
+    "CH01-S01-I01": [
+      "AT-01",
+      "AT-S03",
+      "AT-02A",
+      "AT-02B",
+      "AT-03A",
+      "AT-03B",
+      "AT-03C",
+      "AT-S01",
+      "AT-04",
+      "AT-05",
+      "AT-S02"
+    ],
+    "CH01-S01-I02": [
+      "HY-01",
+      "HY-02A",
+      "HY-02B"
+    ],
+    "CH01-S01-I03": [
+      "HP-01",
+      "HP-02",
+      "HP-S01",
+      "HP-03"
+    ],
+    "CH01-S01-I04": [
+      "ME-01",
+      "ME-S01",
+      "ME-02",
+      "ME-03A",
+      "ME-03B",
+      "ME-04",
+      "ME-05",
+      "ME-06"
+    ],
+    "CH01-S03-I01": [
+      "CW-01",
+      "CW-02A",
+      "CW-02B"
+    ],
+    "CH01-S03-I02": [
+      "FC-01",
+      "FC-01B",
+      "FC-02A",
+      "FC-02B",
+      "FC-S01",
+      "FC-03",
+      "FC-04",
+      "FC-05",
+      "FC-06"
+    ],
+    "CH01-S03-I03": [
+      "HG-01A",
+      "HG-01B",
+      "HG-02",
+      "HG-03",
+      "HG-04A",
+      "HG-04B",
+      "HG-05",
+      "HG-S01"
+    ],
+    "CH01-S03-I04": [
+      "AM-01"
+    ],
+    "CH01-S03-I06": [
+      "PG-01",
+      "PG-02"
+    ],
+    "CH01-S03-I07": [
+      "CA-01",
+      "CA-02",
+      "CA-03",
+      "CA-04"
+    ],
+    "CH01-S04-I01": [
+      "NC-01",
+      "NC-02A",
+      "NC-02B",
+      "NC-02C",
+      "NC-03A",
+      "NC-03B",
+      "NC-S01",
+      "NC-04",
+      "NC-05",
+      "NC-06",
+      "NC-07",
+      "NC-08A",
+      "NC-08B",
+      "NC-09",
+      "NC-10A",
+      "NC-10B",
+      "NC-11",
+      "NC-12A",
+      "NC-12B",
+      "NC-12C"
+    ],
+    "CH01-S04-I02": [
+      "AP-01",
+      "AP-S01",
+      "AP-02",
+      "AP-03A",
+      "AP-03B",
+      "AP-04A",
+      "AP-04B",
+      "AP-05"
+    ]
+  },
+  "merged_frame_ids": {
+    "AT-S03": "AT-01",
+    "AT-S01": "AT-03C",
+    "HY-02B": "HY-02A",
+    "ME-S01": "ME-01",
+    "FC-01B": "FC-01",
+    "HG-01B": "HG-01A",
+    "HG-04B": "HG-04A",
+    "HG-05": "HG-04A",
+    "HG-S01": "HG-04A",
+    "NC-02B": "NC-02A",
+    "NC-02C": "NC-02A",
+    "NC-03B": "NC-03A",
+    "NC-06": "NC-05",
+    "AP-S01": "AP-01",
+    "AP-03B": "AP-03A"
+  },
+  "question_prompts": {
+    "EX-AT": "选择对应的萎缩类型",
+    "EX-ME": "选择对应的化生方向",
+    "EX-FC": "补全脂肪变与脂肪浸润的比较",
+    "EX-HG": "选择对应的主要蓄积物",
+    "EX-CA": "补全两类病理性钙化的比较",
+    "EX-NC": "补全凝固性坏死与液化性坏死的比较",
+    "CR-06": "选择对应的坏死类型",
+    "CR-07": "补全凋亡与坏死的比较"
   }
 };
 
@@ -4082,6 +4175,20 @@ window.COURSE_PRESENTATION = {
     if (!Array.isArray(frames) || !frames.length) throw new Error(`缺少展示编排：${itemId}`);
     return frames;
   };
+  const restoreStage = (itemId, stage, revision) => {
+    const frames = getFrames(itemId);
+    const extraction = !!getItem(itemId).extraction;
+    const index = Math.max(0, Number.isInteger(stage) ? stage : 0);
+    if (revision !== presentation.revision) {
+      const oldIds = presentation.legacy_frame_ids[itemId];
+      if (oldIds && extraction && index >= oldIds.length) return frames.length;
+      const oldId = oldIds?.[Math.min(index, oldIds.length - 1)];
+      const id = presentation.merged_frame_ids[oldId] || oldId;
+      const mapped = frames.findIndex((frame) => frame.id === id);
+      if (mapped >= 0) return mapped;
+    }
+    return Math.min(index, frames.length - (extraction ? 0 : 1));
+  };
   const getItemTitle = (itemId) => {
     for (const section of content.section_directories) {
       const item = section.items.find((entry) => entry.directory_item_id === itemId);
@@ -4100,7 +4207,7 @@ window.COURSE_PRESENTATION = {
     if (!blueprint) throw new Error(`缺少作答结构：${id}`);
     return {
       id,
-      prompt: extraction.prompt,
+      prompt: presentation.question_prompts[extraction.id] || extraction.prompt,
       options: extraction.options,
       answerText: extraction.answer,
       feedback: extraction.feedback,
@@ -4119,7 +4226,7 @@ window.COURSE_PRESENTATION = {
     if (!blueprint) throw new Error(`缺少章末题结构：${review.id}`);
     return {
       id: review.id,
-      prompt: review.prompt,
+      prompt: presentation.question_prompts[review.id] || review.prompt,
       options: review.options,
       answerText: review.answer,
       feedback: review.feedback,
@@ -4173,7 +4280,7 @@ window.COURSE_PRESENTATION = {
         if (sectionMap.has(saved.sectionId)) this.sectionId = saved.sectionId;
         if (itemMap.has(saved.itemId)) this.itemId = saved.itemId;
         if (["chapter", "section", "knowledge", "completion", "review", "reviewComplete"].includes(saved.view)) this.view = saved.view;
-        if (Number.isInteger(saved.stageIndex)) this.stageIndex = Math.max(0, Math.min(saved.stageIndex, getFrames(this.itemId).length - (getItem(this.itemId).extraction ? 0 : 1)));
+        this.stageIndex = restoreStage(this.itemId, saved.stageIndex, saved.presentationRevision);
         if (Number.isInteger(saved.reviewIndex)) this.reviewIndex = Math.min(reviewQuestions.length - 1, Math.max(0, saved.reviewIndex));
         this.startedItems = new Set((saved.startedItems || []).filter((id) => itemMap.has(id)));
         this.readItems = new Set((saved.readItems || []).filter((id) => itemMap.has(id)));
@@ -4181,7 +4288,7 @@ window.COURSE_PRESENTATION = {
         this.mastery = saved.mastery || {};
         if (saved.resume && itemMap.has(saved.resume.itemId) && sectionMap.has(saved.resume.sectionId)) {
           this.resume = saved.resume;
-          this.resume.stageIndex = Math.max(0, Math.min(Number(this.resume.stageIndex) || 0, getFrames(this.resume.itemId).length - (getItem(this.resume.itemId).extraction ? 0 : 1)));
+          this.resume.stageIndex = restoreStage(this.resume.itemId, this.resume.stageIndex, saved.presentationRevision);
         }
       } catch {
         // 设备端旧记录损坏时，从安全初始状态继续。
@@ -4191,6 +4298,7 @@ window.COURSE_PRESENTATION = {
     save() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          presentationRevision: presentation.revision,
           view: this.view,
           sectionId: this.sectionId,
           itemId: this.itemId,
@@ -4512,7 +4620,7 @@ window.COURSE_PRESENTATION = {
 
     renderChapter() {
       const readCount = includedItemIds.filter((id) => this.readItems.has(id)).length;
-      const rows = formalSections.map((section) => {
+      const rows = learningSections.map((section) => {
         const directory = sectionMap.get(section.section_id);
         const status = this.sectionStatus(section.section_id);
         const active = section.section_id === this.sectionId;
@@ -4561,7 +4669,6 @@ window.COURSE_PRESENTATION = {
       const buttonText = allRead ? (next ? `进入${next.number}` : "查看本章完成情况") : `进入「${getItemTitle(activeId)}」`;
       return `<section class="directory-page section-directory stage-enter" data-course-scrollable aria-label="${esc(directory.section_title)}目录">
         <div class="directory-heading">
-          ${directory.previous_section_note ? `<p class="previous-section-note">${esc(directory.previous_section_note)}</p>` : ""}
           <small>${esc(formal.number)}</small><h1>${esc(formal.title)}</h1><p>${allRead ? "本节目录已浏览" : "本节目录"}</p>
         </div>
         <div class="section-item-tree"><span class="directory-rail" aria-hidden="true"></span>${rows}</div>
@@ -4589,7 +4696,7 @@ window.COURSE_PRESENTATION = {
         return `<div class="knowledge-facts">${frame.lines.map((line) => `<p>${inline(line)}</p>`).join("")}</div>${note}`;
       }
       if (frame.layout === "examples") {
-        return `<div class="knowledge-examples"><span class="example-lead">${inline(frame.lead)}</span><div class="example-lines">${frame.examples.map((line) => `<p>${inline(line)}</p>`).join("")}</div><span class="example-arrow" aria-hidden="true">↓</span><div class="example-result">${inline(frame.result)}</div></div>${note}`;
+        return `<div class="knowledge-examples"><div class="example-lines">${frame.examples.map((line) => `<p>${inline(line)}</p>`).join("")}</div></div>${note}`;
       }
       if (frame.layout === "compare") {
         return `<div class="knowledge-comparison">${frame.groups.map((group) => `<section><h3>${inline(group.title)}</h3>${group.lines.map((line) => `<p>${inline(line)}</p>`).join("")}</section>`).join("")}</div>${note}`;
